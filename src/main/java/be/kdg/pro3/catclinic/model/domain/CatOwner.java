@@ -5,12 +5,12 @@ import be.kdg.pro3.catclinic.PreferredCommunicationLanguage;
 import java.time.LocalDate;
 import java.util.List;
 
-public class OwningFamily{
-    private String familyId;
+public class CatOwner{
+    private String ownerId;
     private double livingSpaceSquareMeters;
     private int amountOfKids;
     private String ownerPersonsPhone;
-    private String photoOfPersonsId;
+    private String photoOfOwnersIdCard;
     private LocalDate registrationDate;
     private boolean smokesAtHome;
     private PreferredCommunicationLanguage preferredCommunicationLanguage;
@@ -20,8 +20,8 @@ public class OwningFamily{
         return amountOfKids;
     }
 
-    public String getFamilyId(){
-        return familyId;
+    public String getOwnerId(){
+        return ownerId;
     }
 
     public double getLivingSpaceSquareMeters(){
@@ -32,8 +32,8 @@ public class OwningFamily{
         return ownerPersonsPhone;
     }
 
-    public String getPhotoOfPersonsId(){
-        return photoOfPersonsId;
+    public String getPhotoOfOwnersIdCard(){
+        return photoOfOwnersIdCard;
     }
 
     public PreferredCommunicationLanguage getPreferredCommunicationLanguage(){

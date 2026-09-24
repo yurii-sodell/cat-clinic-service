@@ -2,7 +2,7 @@ package be.kdg.pro3.catclinic;
 
 import be.kdg.pro3.catclinic.model.domain.Cat;
 import be.kdg.pro3.catclinic.model.domain.Medication;
-import be.kdg.pro3.catclinic.model.domain.OwningFamily;
+import be.kdg.pro3.catclinic.model.domain.CatOwner;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,10 +13,10 @@ public class DataFactory{
     public static List<Medication> prescriptionsThatWasPrescriptedToCat = new ArrayList<>();
 
     public static void seed(){
-        OwningFamily family1 = new OwningFamily();
-        OwningFamily family2 = new OwningFamily();
-        OwningFamily family3 = new OwningFamily();
-        OwningFamily family4 = new OwningFamily();
+        CatOwner catOwner1 = new CatOwner();
+        CatOwner catOwner2 = new CatOwner();
+        CatOwner catOwner3 = new CatOwner();
+        CatOwner catOwner4 = new CatOwner();
 
         Cat cat1 = new Cat("Whiskers", LocalDate.of(2020, 3, 14), Gender.FEMALE, "CAT-001",
                 8.5, 3, false, "whiskers.jpg", "FAM-101");
@@ -32,8 +32,8 @@ public class DataFactory{
         Cat cat5 = new Cat("MrPaw", LocalDate.of(2022, 5, 18), Gender.MALE, "CAT-005",
                 7.8, 2, true, "bella.jpg", "FAM-104");
 
-        family1.getCats().addAll(List.of(cat1, cat2, cat3, cat4, cat5));
-        family1.getCats().addAll(List.of(cat1, cat2, cat3, cat4, cat5));
+        catOwner1.getCats().addAll(List.of(cat1, cat2, cat3));
+        catOwner2.getCats().addAll(List.of(cat4, cat5));
 
         Medication Amoxicillin =
                 new Medication("Amoxicillin", 12.50, "MED-001",
@@ -58,18 +58,17 @@ public class DataFactory{
 
         prescriptionsThatWasPrescriptedToCat.addAll(List.of(Amoxicillin, FrontlinePlus, Metacam, Revolution, VitaminCatTreats));
 
-        cat1.addMedicationsThatWasAssignedToCat(Amoxicillin);
-        cat2.addMedicationsThatWasAssignedToCat(VitaminCatTreats);
-
-        cat1.addMedicationsThatWasAssignedToCat(FrontlinePlus);
-        cat2.addMedicationsThatWasAssignedToCat(Revolution);
-
-        cat3.addMedicationsThatWasAssignedToCat(Metacam);
-        cat4.addMedicationsThatWasAssignedToCat(VitaminCatTreats);
-
-        cat5.addMedicationsThatWasAssignedToCat(Amoxicillin);
-        cat5.addMedicationsThatWasAssignedToCat(Metacam);
+        prescribe(cat1, VitaminCatTreats);
+        prescribe(cat2, VitaminCatTreats);
+        prescribe(cat3, Metacam);
 
         catsThatMedicationPrescriptedTo.forEach(cat -> System.out.println(cat));
     }
+
+    private static void prescribe(Cat cat, Medication medication){
+        cat.addMedicationsThatWasAssignedToCat(medication);
+        medication.addCatsThatMedicationWasAssignedTo(cat);
+    }
 }
+
+

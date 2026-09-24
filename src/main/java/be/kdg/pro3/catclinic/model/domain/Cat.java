@@ -77,7 +77,6 @@ public class Cat{
 
     public void addMedicationsThatWasAssignedToCat(Medication medication){
         this.medicationsThatWasAssignedToCat.add(medication);
-        medication.getCatsThatMedicationWasAssignedTo().add(this);
     }
 
     @Override

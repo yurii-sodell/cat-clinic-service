@@ -80,6 +80,5 @@ public class Medication{
 
     public void addCatsThatMedicationWasAssignedTo(Cat cat){
         this.catsThatMedicationWasAssignedTo.add(cat);
-        cat.getMedicationsThatWasAssignedToCat().add(this);
     }
 }
