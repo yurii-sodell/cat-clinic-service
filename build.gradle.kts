@@ -2,12 +2,14 @@ plugins {
     id("application")
 }
 
-application{
+group = "be.kdg.pro3"
+version = "1.0-SNAPSHOT"
+
+application {
     mainClass = "be.kdg.pro3.catclinic.CatClinicApp"
 }
 
-group = "be.kdg:pro3"
-version = "1.0-SNAPSHOT"
+
 
 repositories {
     mavenCentral()

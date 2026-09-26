@@ -1,8 +1,7 @@
 package be.kdg.pro3.catclinic.model.domain;
 
-import be.kdg.pro3.catclinic.MedicationType;
-
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,5 +79,21 @@ public class Medication{
 
     public void addCatsThatMedicationWasAssignedTo(Cat cat){
         this.catsThatMedicationWasAssignedTo.add(cat);
+    }
+    @Override
+    public String toString() {
+        DateTimeFormatter releaseFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return String.format(
+                "\n%-20s| %-10s| %-8.2f| %-10s| %-6d| %-12s| %-13s| %-20s",
+                this.title,
+                this.productId,
+                this.price,
+                this.medicationType.toString(),
+                this.weeksAfterBirthToStartMedication,
+                releaseFormat.format(this.marketReleaseDate),
+                this.isPrescriptionNeeded ? "Prescription" : "No prescription",
+                this.canBeGiftedOnCatsBirthday ? "Giftable" : "Not giftable"
+        );
     }
 }

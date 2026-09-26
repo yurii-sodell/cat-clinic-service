@@ -1,7 +1,5 @@
 package be.kdg.pro3.catclinic.model.domain;
 
-import be.kdg.pro3.catclinic.Gender;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -79,17 +77,25 @@ public class Cat{
         this.medicationsThatWasAssignedToCat.add(medication);
     }
 
+    public int getAge(){
+        return LocalDate.now().getYear() - this.dateOfBirth.getYear();
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         DateTimeFormatter birthdayFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        return String.format("\nCat: %s" +
-                "\nid: %s" +
-                "\nGender: %s" +
-                "\nDate of birth: %s",
+        return String.format(
+                "\n%-20s| %-10s| %-7s| %-12s| %-8.2f| %-6d| %-13s| %-20s| %-15s",
                 this.name,
                 this.catId,
                 this.gender.toString(),
-                birthdayFormat.format(this.dateOfBirth));
+                birthdayFormat.format(this.dateOfBirth),
+                this.weightInKilos,
+                this.visits,
+                this.isHospitalized ? "Hospitalized" : "Not hospitalized",
+                this.photo,
+                this.belongingFamilyId
+        );
     }
 }
