@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.model.domain;
+package be.kdg.pro3.catclinic.domain;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

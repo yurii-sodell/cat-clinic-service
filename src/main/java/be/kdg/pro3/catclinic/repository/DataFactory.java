@@ -1,17 +1,25 @@
-package be.kdg.pro3.catclinic;
+package be.kdg.pro3.catclinic.repository;
 
-import be.kdg.pro3.catclinic.model.domain.*;
+import be.kdg.pro3.catclinic.domain.*;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class DataFactory{
-    public static List<Cat> cats = new ArrayList<>();
-    public static List<Medication> medications = new ArrayList<>();
-    public static List<CatOwner> catOwners = new ArrayList<>();
+    private final CatOwnerRepository catOwnerRepository;
+    private final MedicationRepository medicationRepository;
+    private final CatRepository catRepository;
 
-    public static void seed(){
+    public DataFactory(CatOwnerRepository catOwnerRepository, MedicationRepository medicationRepository,CatRepository catRepository){
+        this.catRepository = catRepository;
+        this.medicationRepository = medicationRepository;
+        this.catOwnerRepository = catOwnerRepository;
+        seed();
+    }
+
+    public void seed(){
         CatOwner catOwner1 = new CatOwner(2, "Johnson", 85.5, "Emma Johnson", "OWN-101",
                 "+32 470 123 456", "id_johnson.jpg",
                 PreferredCommunicationLanguage.EN, LocalDate.of(2019, 5, 12), false);
@@ -28,7 +36,7 @@ public class DataFactory{
                 "+32 478 456 789", "id_desmet.jpg",
                 PreferredCommunicationLanguage.FR, LocalDate.of(2018, 11, 9), false);
 
-        catOwners.addAll(List.of(catOwner1, catOwner2, catOwner3, catOwner4));
+        catOwnerRepository.saveOwners(List.of(catOwner1, catOwner2, catOwner3, catOwner4));
 
 // catOwner1 -> OWN-101
         Cat cat1 = new Cat("Whiskers", LocalDate.of(2020, 3, 14), Gender.FEMALE, "CAT-001",
@@ -100,11 +108,11 @@ public class DataFactory{
                 0, LocalDate.of(2020, 2, 17), MedicationType.POWDER,
                 false, true, "hillszd.jpg");
 
-        medications.addAll(List.of(
+        medicationRepository.saveMedications(List.of(
                 Amoxicillin, FrontlinePlus, Metacam, Revolution, VitaminCatTreats,
                 Panacur, ConvenIa, HillsZD));
 
-        cats.addAll(List.of(
+        catRepository.saveCats(List.of(
                 cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10, cat11));
 
         prescribe(cat1, VitaminCatTreats);
