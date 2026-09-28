@@ -1,5 +1,4 @@
 package be.kdg.pro3.catclinic;
-import be.kdg.pro3.catclinic.repository.DataFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,6 +1,7 @@
 package be.kdg.pro3.catclinic.repository;
 
 import be.kdg.pro3.catclinic.domain.*;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -16,9 +17,9 @@ public class DataFactory{
         this.catRepository = catRepository;
         this.medicationRepository = medicationRepository;
         this.catOwnerRepository = catOwnerRepository;
-        seed();
     }
 
+    @PostConstruct
     public void seed(){
         CatOwner catOwner1 = new CatOwner(2, "Johnson", 85.5, "Emma Johnson", "OWN-101",
                 "+32 470 123 456", "id_johnson.jpg",
@@ -41,33 +42,33 @@ public class DataFactory{
 // catOwner1 -> OWN-101
         Cat cat1 = new Cat("Whiskers", LocalDate.of(2020, 3, 14), Gender.FEMALE, "CAT-001",
                 8.5, 3, false, "whiskers.jpg", "OWN-101");
-        Cat cat2 = new Cat("Simba", LocalDate.of(2019, 7, 22), Gender.MALE, "CAT-002",
+        Cat cat2 = new Cat("Simba", LocalDate.of(2019, 7, 22), Gender.MALE, "CAT-003",
                 6.2, 7, true, "simba.jpg", "OWN-101");
-        Cat cat3 = new Cat("Tom", LocalDate.of(2021, 1, 5), Gender.FEMALE, "CAT-003",
+        Cat cat3 = new Cat("Tom", LocalDate.of(2021, 1, 5), Gender.FEMALE, "CAT-002",
                 9.1, 1, false, "Tom.jpg", "OWN-101");
 
 // catOwner2 -> OWN-102
-        Cat cat4 = new Cat("AsteroidDestroyer", LocalDate.of(2018, 11, 30), Gender.MALE, "CAT-004",
+        Cat cat4 = new Cat("AsteroidDestroyer", LocalDate.of(2018, 11, 30), Gender.MALE, "CAT-005",
                 5.7, 12, false, "AsteroidDestroyer.jpg", "OWN-102");
-        Cat cat5 = new Cat("MrPaw", LocalDate.of(2022, 5, 18), Gender.MALE, "CAT-005",
+        Cat cat5 = new Cat("MrPaw", LocalDate.of(2022, 5, 18), Gender.MALE, "CAT-006",
                 7.8, 2, true, "bella.jpg", "OWN-102");
 
 // catOwner3 -> OWN-103
-        Cat cat6 = new Cat("Luna", LocalDate.of(2025, 9, 2), Gender.FEMALE, "CAT-006",
+        Cat cat6 = new Cat("Luna", LocalDate.of(2025, 9, 2), Gender.FEMALE, "CAT-007",
                 4.9, 4, false, "luna.jpg", "OWN-103");
-        Cat cat7 = new Cat("Oliver", LocalDate.of(2017, 2, 11), Gender.MALE, "CAT-007",
+        Cat cat7 = new Cat("Oliver", LocalDate.of(2017, 2, 11), Gender.MALE, "CAT-004",
                 7.3, 9, true, "oliver.jpg", "OWN-103");
 
 // catOwner4 -> OWN-104
-        Cat cat8 = new Cat("Milo", LocalDate.of(2023, 6, 27), Gender.MALE, "CAT-008",
+        Cat cat8 = new Cat("Milo", LocalDate.of(2023, 6, 27), Gender.MALE, "CAT-010",
                 3.4, 0, false, "milo.jpg", "OWN-104");
-        Cat cat9 = new Cat("Nala", LocalDate.of(2020, 12, 19), Gender.FEMALE, "CAT-009",
+        Cat cat9 = new Cat("Nala", LocalDate.of(2020, 12, 19), Gender.FEMALE, "CAT-011",
                 6.8, 5, false, "nala.jpg", "OWN-104");
-        Cat cat10 = new Cat("Shadow", LocalDate.of(2016, 4, 8), Gender.MALE, "CAT-010",
+        Cat cat10 = new Cat("Shadow", LocalDate.of(2016, 4, 8), Gender.MALE, "CAT-009",
                 8.9, 11, true, "shadow.jpg", "OWN-104");
 
 // cat11 -> OWN-103, same name as cat10
-        Cat cat11 = new Cat("Shadow", LocalDate.of(2019, 4, 8), Gender.FEMALE, "CAT-011",
+        Cat cat11 = new Cat("Shadow", LocalDate.of(2019, 4, 8), Gender.FEMALE, "CAT-008",
                 8.9, 11, true, "shadow.jpg", "OWN-103");
 
         catOwner1.getCats().addAll(List.of(cat1, cat2, cat3));

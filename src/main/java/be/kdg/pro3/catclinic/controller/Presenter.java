@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -209,7 +210,10 @@ public class Presenter implements CommandLineRunner {
         Consumer<CatOwner> printOwnerWithCats = owner -> {
             show(owner);
             show("Cat list:\n");
-            owner.getCats().forEach(cat -> show(cat.getName() + " | " + cat.getCatId() + "\n"));
+            owner.getCats()
+                    .stream()
+                    .sorted(Comparator.comparing(Cat::getCatId))
+                    .forEach(cat -> show(cat.getName() + " | " + cat.getCatId() + "\n"));
         };
         filtered.forEach(printOwnerWithCats);
     }
