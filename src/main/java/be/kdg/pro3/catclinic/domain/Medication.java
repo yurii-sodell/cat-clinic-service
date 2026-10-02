@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Medication{
     private String title;
     private double price;
-    private String productId;
+    private UUID productId;
     private int weeksAfterBirthToStartMedication;
     private LocalDate marketReleaseDate;
     private MedicationType medicationType;
@@ -17,7 +18,7 @@ public class Medication{
     private String photo;
     private List<Cat> catsThatMedicationWasAssignedTo;
 
-    public Medication(String title, double price, String productId,
+    public Medication(String title, double price, UUID productId,
                       int weeksAfterBirthToStartMedication, LocalDate marketReleaseDate,
                       MedicationType medicationType, boolean isPrescriptionNeeded,
                       boolean canBeGiftedOnCatsBirthday, String photo) {
@@ -57,7 +58,7 @@ public class Medication{
         return price;
     }
 
-    public String getProductId(){
+    public UUID getProductId(){
         return productId;
     }
 
@@ -85,7 +86,7 @@ public class Medication{
         DateTimeFormatter releaseFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
-                "\n%-20s| %-10s| %-8.2f| %-10s| %-6d| %-12s| %-13s| %-20s",
+                "\n%-20s | %-10s | %-8.2f | %-10s | %-6d | %-12s | %-13s | %-20s",
                 this.title,
                 this.productId,
                 this.price,

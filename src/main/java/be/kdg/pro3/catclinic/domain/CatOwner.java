@@ -5,9 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class CatOwner{
-    private String ownerId;
+    private UUID ownerId;
     private String name;
     private String familyName;
     private double livingSpaceSquareMeters;
@@ -20,7 +21,7 @@ public class CatOwner{
     private List<Cat> cats;
 
     public CatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
-                    String ownerId, String ownerPersonsPhone, String photoOfOwnersIdCard,
+                    UUID ownerId, String ownerPersonsPhone, String photoOfOwnersIdCard,
                     PreferredCommunicationLanguage preferredCommunicationLanguage,
                     LocalDate registrationDate, boolean smokesAtHome){
         this.amountOfKids = amountOfKids;
@@ -52,7 +53,7 @@ public class CatOwner{
         return name;
     }
 
-    public String getOwnerId(){
+    public UUID getOwnerId(){
         return ownerId;
     }
 
@@ -89,7 +90,7 @@ public class CatOwner{
         DateTimeFormatter registrationFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
-                "\n%-20s| %-15s| %-10s| %-8.2f| %-6d| %-15s| %-10s| %-20s| %-15s",
+                "\n%-20s | %-15s | %-10s | %-8.2f | %-6d | %-15s | %-10s | %-20s | %-15s",
                 this.name,
                 this.familyName,
                 this.ownerId,

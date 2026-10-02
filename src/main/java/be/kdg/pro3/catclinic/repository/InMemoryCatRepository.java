@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Repository
 public class InMemoryCatRepository implements CatRepository{
@@ -25,4 +26,23 @@ public class InMemoryCatRepository implements CatRepository{
     public List<Cat> getCats(){
         return Collections.unmodifiableList(cats);
     }
+
+    @Override
+    public List<Cat> getCatsFilteredByAgeAndByWeight(int minAge, int maxAge, int minWeight, int maxWeight){
+        return cats.stream()
+                .filter(cat -> cat.getAge() >= minAge && cat.getAge() <= maxAge)
+                .filter(cat -> cat.getWeightInKilos() >= minWeight && cat.getWeightInKilos() <= maxWeight)
+                .toList();
+    }
+
+    @Override
+    public List<Cat> getCatsFilteredByMedicationName(String name){
+                Predicate<Cat> hasMedication = cat -> cat.getMedicationsThatWasAssignedToCat().stream()
+                .anyMatch(medication -> medication.getTitle().equalsIgnoreCase(name));
+
+        return cats.stream()
+                .filter(hasMedication)
+                .toList();
+    }
+
 }
