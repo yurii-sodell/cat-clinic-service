@@ -1,21 +1,14 @@
 package be.kdg.pro3.catclinic.service;
 
+import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatOwner;
-import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
-import org.springframework.stereotype.Service;
+import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 
 import java.util.List;
 
-@Service
-public class CatOwnerService{
-    private final CatOwnerRepository catOwnerRepository;
-
-    public CatOwnerService(CatOwnerRepository catOwnerRepository){
-        this.catOwnerRepository = catOwnerRepository;
-    }
-
-    public List<CatOwner> getAllOwners(){
-        return catOwnerRepository.getCatOwners();
-    }
-
+public interface CatOwnerService{
+    List<CatOwner> getAllOwners();
+    List<CatOwner> getCatOwnerByCatsName(String name);
+    List<CatOwner> getCatOwnerByItsName(String name);
+    List<CatOwner> getCatOwnerByItsLanguage(PreferredCommunicationLanguage language);
 }

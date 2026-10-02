@@ -26,4 +26,18 @@ public class InMemoryMedicationRepository implements MedicationRepository{
         return Collections.unmodifiableList(medications);
     }
 
+    @Override
+    public List<Medication> getMedicationFilteredByPrescriptionNeed(boolean isPrescriptionNeeded){
+        return  medications.stream()
+                .filter(medication -> medication.isPrescriptionNeeded() == isPrescriptionNeeded)
+                .toList();
+    }
+
+    @Override
+    public List<Medication> getMedicationFilteredByPrice(double minPrice, double maxPrice){
+        return medications.stream()
+                .filter(medication -> medication.getPrice() >= minPrice && medication.getPrice() <= maxPrice)
+                .toList();
+    }
+
 }

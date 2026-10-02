@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Cat{
     private String name;
     private LocalDate dateOfBirth;
     private Gender gender;
-    private String catId;
+    private UUID catId;
     private double weightInKilos;
     private int visits;
     private boolean isHospitalized;
@@ -17,7 +18,7 @@ public class Cat{
     private String belongingFamilyId;
     private List<Medication> medicationsThatWasAssignedToCat;
 
-    public Cat(String name, LocalDate dateOfBirth, Gender gender, String catId,
+    public Cat(String name, LocalDate dateOfBirth, Gender gender, UUID catId,
                double weightInKilos, int visits, boolean isHospitalized,
                String photo, String belongingFamilyId) {
         this.name = name;
@@ -37,7 +38,7 @@ public class Cat{
         return belongingFamilyId;
     }
 
-    public String getCatId(){
+    public UUID getCatId(){
         return catId;
     }
 
@@ -86,9 +87,9 @@ public class Cat{
         DateTimeFormatter birthdayFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
-                "\n%-20s| %-10s| %-7s| %-12s| %-8.2f| %-6d| %-13s| %-20s| %-15s",
+                "\n%-20s | %-10s | %-7s | %-12s | %-8.2f | %-6d | %-13s | %-20s | %-15s",
                 this.name,
-                this.catId,
+                this.catId.toString(),
                 this.gender.toString(),
                 birthdayFormat.format(this.dateOfBirth),
                 this.weightInKilos,
