@@ -4,9 +4,6 @@ import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatOwner;
 import be.kdg.pro3.catclinic.domain.Medication;
 import be.kdg.pro3.catclinic.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
@@ -14,7 +11,7 @@ import java.util.Scanner;
 
 @Component
 public class ConsoleView{
-    private Scanner sc;
+    private final Scanner sc;
     private static final String MAIN_MENU;
     private static final String CAT_MENU;
     private static final String MEDICATION_MENU;
@@ -30,7 +27,7 @@ public class ConsoleView{
         MAIN_MENU = "\n   What are we working with?\n1 - Cats\n2 - Owners\n3 - Medications\n4 - Exit\n";
         CAT_MENU = "\n   Cats\n1 - Show all cats\n2 - Filter by age and weight\n3 - Filter by prescripted medications\n4 - Back\n";
         MEDICATION_MENU = "\n   Medications\n1 - Show all medications\n2 - is prescription needed\n3 - Price\n4 - Register new medication\n5 - Back\n";
-        OWNER_MENU = "\n   Owners\n1 - Show all owners\n2 - Find owner by name\n3 - Language\n4 - Find by cats\n5 - Back\n";
+        OWNER_MENU = "\n   Owners\n1 - Show all owners\n2 - Find owner by name\n3 - Language\n4 - Find by cats\n5 - Find by registration date\n6 - Back\n";
         UNKNOWN_CHOICE_MESSAGE = "I don't get you\n";
         NO_RESULTS_MESSAGE = "None satisfied the provided filters\n";
     }

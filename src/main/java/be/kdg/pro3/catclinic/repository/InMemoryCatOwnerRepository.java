@@ -5,8 +5,10 @@ import be.kdg.pro3.catclinic.domain.CatOwner;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -36,6 +38,7 @@ public class InMemoryCatOwnerRepository implements CatOwnerRepository{
 
         return catOwners.stream()
                 .filter(hasCat)
+                .sorted(Comparator.comparing(CatOwner::getName, String.CASE_INSENSITIVE_ORDER))
                 .toList();
     }
 
@@ -43,6 +46,7 @@ public class InMemoryCatOwnerRepository implements CatOwnerRepository{
     public List<CatOwner> getCatOwnerByItsName(String name){
         return catOwners.stream()
                 .filter(owner -> owner.getFamilyName().toLowerCase().contains(name.toLowerCase()))
+                .sorted(Comparator.comparing(CatOwner::getName, String.CASE_INSENSITIVE_ORDER))
                 .toList();
     }
 
@@ -50,10 +54,17 @@ public class InMemoryCatOwnerRepository implements CatOwnerRepository{
     public List<CatOwner> getCatOwnerByItsLanguage(PreferredCommunicationLanguage language){
         return catOwners.stream()
                 .filter(owner -> owner.getPreferredCommunicationLanguage() == language)
+                .sorted(Comparator.comparing(CatOwner::getName, String.CASE_INSENSITIVE_ORDER))
                 .toList();
     }
 
-
+    @Override
+    public List<CatOwner> getOwnersByRegistrationDate(LocalDate registrationDate){
+        return catOwners.stream()
+                .filter(owner -> owner.getRegistrationDate().equals(registrationDate))
+                .sorted(Comparator.comparing(CatOwner::getName, String.CASE_INSENSITIVE_ORDER))
+                .toList();
+    }
 
 
 }

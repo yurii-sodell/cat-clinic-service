@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Service
 public class DefaultMedicationService implements MedicationService{
-    private MedicationRepository medicationRepository;
+    private final MedicationRepository medicationRepository;
 
     public DefaultMedicationService(MedicationRepository medicationRepository){
         this.medicationRepository = medicationRepository;
