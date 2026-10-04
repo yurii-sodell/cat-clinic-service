@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -30,6 +31,7 @@ public class InMemoryMedicationRepository implements MedicationRepository{
     public List<Medication> getMedicationFilteredByPrescriptionNeed(boolean isPrescriptionNeeded){
         return  medications.stream()
                 .filter(medication -> medication.isPrescriptionNeeded() == isPrescriptionNeeded)
+                .sorted(Comparator.comparingDouble(Medication::getPrice))
                 .toList();
     }
 
@@ -37,6 +39,7 @@ public class InMemoryMedicationRepository implements MedicationRepository{
     public List<Medication> getMedicationFilteredByPrice(double minPrice, double maxPrice){
         return medications.stream()
                 .filter(medication -> medication.getPrice() >= minPrice && medication.getPrice() <= maxPrice)
+                .sorted(Comparator.comparingDouble(Medication::getPrice))
                 .toList();
     }
 

@@ -90,10 +90,9 @@ public class CatOwner{
         DateTimeFormatter registrationFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
-                "\n%-20s | %-15s | %-10s | %-8.2f | %-6d | %-15s | %-10s | %-20s | %-15s",
+                "\n%-20s | %-15s | %-8.2f | %-6d | %-15s | %-10s | %-20s | %-15s",
                 this.name,
                 this.familyName,
-                this.ownerId,
                 this.livingSpaceSquareMeters,
                 this.amountOfKids,
                 this.ownerPersonsPhone,

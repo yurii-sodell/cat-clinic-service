@@ -8,12 +8,10 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.function.Consumer;
 
-//not a bean cause it will be created by Spring as a dependency of Spirng
 @Component
 public class Presenter implements CommandLineRunner{
     private final ConsoleView view;
@@ -23,7 +21,6 @@ public class Presenter implements CommandLineRunner{
 
     public Presenter(ConsoleView view, CatOwnerService catOwnerService, CatService catService, MedicationService medicationService){
         this.view = view;
-
         this.catOwnerService = catOwnerService;
         this.catService = catService;
         this.medicationService = medicationService;
@@ -47,6 +44,7 @@ public class Presenter implements CommandLineRunner{
                 default -> view.showUnknownChoiceMessage();
             }
         }
+        view.show("\nSee you next time!\n\n");
     }
 
 
@@ -72,7 +70,7 @@ public class Presenter implements CommandLineRunner{
     private void filterCatsByAgeAndWeight() {
         int ageMin, ageMax, weightMin, weightMax;
         try {
-            view.show("Provide filter (Leave empty to ignore the criteria)\n");
+            view.show("Provide filter (Leave empty to ignored the criteria)\n");
             view.show("Enter minimum and max age.\n");
             view.show("Min: ");
             ageMin = view.getIntInput(0);
@@ -94,6 +92,10 @@ public class Presenter implements CommandLineRunner{
         }
 
         List<Cat> cats = catService.getCatsFilteredByAgeAndByWeight(ageMin, ageMax, weightMin, weightMax);
+        if(cats.isEmpty()){
+            view.showNoResultsMessage();
+            return;
+        }
         cats.forEach(view::show);
     }
 
@@ -113,7 +115,8 @@ public class Presenter implements CommandLineRunner{
                 case "2" -> filterOwnersByFamilyName();
                 case "3" -> filterOwnersByLanguage();
                 case "4" -> filterOwnersByCatName();
-                case "5" -> keepRunning = false;
+                case "5" -> filterOwnersByRegistrationDate();
+                case "6" -> keepRunning = false;
                 default -> view.showUnknownChoiceMessage();
             }
         }
@@ -169,12 +172,28 @@ public class Presenter implements CommandLineRunner{
         Consumer<CatOwner> printOwnerWithCats = owner -> {
             view.show(owner);
             view.show("Cat list:\n");
-            owner.getCats()
-                    .stream()
-                    .sorted(Comparator.comparing(Cat::getCatId))
-                    .forEach(cat -> view.show(cat.getName() + " | " + cat.getCatId() + "\n"));
+            owner.getCats().forEach(cat -> view.show(cat.getName() + " | Photo: " + cat.getPhoto() + "\n"));
         };
         filtered.forEach(printOwnerWithCats);
+    }
+
+    private void filterOwnersByRegistrationDate(){
+        view.show("Enter registration date (yyyy-mm-dd): ");
+        String date = view.inputString();
+        DateTimeFormatter format =   DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate registrationDate;
+        try{
+            registrationDate = LocalDate.parse(date,format);
+        }catch (DateTimeParseException e){
+            view.show("Wrong date format provided\n");
+            return;
+        }
+        List<CatOwner> owners = catOwnerService.getOwnersByRegistrationDate(registrationDate);
+        if(owners.isEmpty()){
+            view.showNoResultsMessage();
+            return;
+        }
+        owners.forEach(view::show);
     }
 
     private void workWithMedication() {
@@ -207,7 +226,7 @@ public class Presenter implements CommandLineRunner{
         }
 
         if(price <= 0){
-            view.show("Price cannot be null");
+            view.show("Price must be above 0");
             return;
         }
 
@@ -232,7 +251,7 @@ public class Presenter implements CommandLineRunner{
         try{
             marketReleaseDate = LocalDate.parse(date,format);
         }catch (DateTimeParseException e){
-            view.show("Wrong date format provided");
+            view.show("Wrong date format provided\n");
             return;
         }
 
@@ -242,6 +261,7 @@ public class Presenter implements CommandLineRunner{
         for(int i = 0; i<types.length; i++){
             view.show("\n" + (i + 1) + " - " + types[i].name().toLowerCase());
         }
+        view.show("\n");
 
         int typeChoice;
         do {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -32,6 +33,7 @@ public class InMemoryCatRepository implements CatRepository{
         return cats.stream()
                 .filter(cat -> cat.getAge() >= minAge && cat.getAge() <= maxAge)
                 .filter(cat -> cat.getWeightInKilos() >= minWeight && cat.getWeightInKilos() <= maxWeight)
+                .sorted(Comparator.comparing(Cat::getName, String.CASE_INSENSITIVE_ORDER))
                 .toList();
     }
 
@@ -42,6 +44,7 @@ public class InMemoryCatRepository implements CatRepository{
 
         return cats.stream()
                 .filter(hasMedication)
+                .sorted(Comparator.comparing(Cat::getName, String.CASE_INSENSITIVE_ORDER))
                 .toList();
     }
 

@@ -5,8 +5,8 @@ import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-
 @Service
 public class DefaultCatOwnerService implements CatOwnerService{
     private final CatOwnerRepository catOwnerRepository;
@@ -32,5 +32,12 @@ public class DefaultCatOwnerService implements CatOwnerService{
     @Override
     public List<CatOwner> getCatOwnerByItsLanguage(PreferredCommunicationLanguage language){
         return catOwnerRepository.getCatOwnerByItsLanguage(language);
-    };
+    }
+
+    @Override
+    public List<CatOwner> getOwnersByRegistrationDate(LocalDate registrationDate){
+        return catOwnerRepository.getOwnersByRegistrationDate(registrationDate);
+    }
+
+    ;
 }
