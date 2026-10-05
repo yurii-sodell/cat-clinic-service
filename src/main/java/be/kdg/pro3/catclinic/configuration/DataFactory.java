@@ -2,13 +2,13 @@ package be.kdg.pro3.catclinic.repository;
 
 import be.kdg.pro3.catclinic.domain.*;
 import jakarta.annotation.PostConstruct;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+@Component
 public class DataFactory{
     private final CatOwnerRepository catOwnerRepository;
     private final MedicationRepository medicationRepository;
