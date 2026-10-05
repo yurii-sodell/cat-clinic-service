@@ -1,14 +1,15 @@
-package be.kdg.pro3.catclinic.repository;
+package be.kdg.pro3.catclinic.configuration;
 
 import be.kdg.pro3.catclinic.domain.*;
+import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
+import be.kdg.pro3.catclinic.repository.CatRepository;
+import be.kdg.pro3.catclinic.repository.MedicationRepository;
 import jakarta.annotation.PostConstruct;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Component
 public class DataFactory{
     private final CatOwnerRepository catOwnerRepository;
     private final MedicationRepository medicationRepository;

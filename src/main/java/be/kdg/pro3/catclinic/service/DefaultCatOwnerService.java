@@ -15,6 +15,7 @@ public class DefaultCatOwnerService implements CatOwnerService{
         this.catOwnerRepository = catOwnerRepository;
     }
 
+    @Override
     public List<CatOwner> getAllOwners(){
         return catOwnerRepository.getCatOwners();
     }

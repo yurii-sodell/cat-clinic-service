@@ -7,7 +7,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class CatClinicApp {
     static void main(String[] args){
-        ConfigurableApplicationContext context = SpringApplication.run(CatClinicApp.class);
+        ConfigurableApplicationContext context = SpringApplication.run(CatClinicApp.class, args);
         context.close();
     }
 }
