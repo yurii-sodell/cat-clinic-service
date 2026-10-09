@@ -18,7 +18,7 @@ public class CatOwnerController{
 
     @GetMapping
     public String showOwners(Model model){
-        model.addAttribute("ownersList", service.getAllOwners());
+        model.addAttribute("allOwners", service.getAllOwners());
         return "owners";
     }
 }
