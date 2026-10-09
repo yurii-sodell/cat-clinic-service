@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-@ConditionalOnProperty(name = "db.inmem", havingValue ="true")
+@ConditionalOnProperty(name = "db.autofill", havingValue ="true")
 public class DataFactory{
     private final CatOwnerRepository catOwnerRepository;
     private final MedicationRepository medicationRepository;
