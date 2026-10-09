@@ -1,4 +1,4 @@
-## Scheme description
+git p## Scheme description
 
 The schema models cats and their owners:
 The cats entity stores data about each cat (weight, name, date of birth, hospitalization status, etc.) and links directly to its owner via owner_that_cat_belongs_to -> cat_owner.cat_owner_id.
