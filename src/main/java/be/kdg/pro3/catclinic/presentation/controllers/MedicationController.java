@@ -20,7 +20,7 @@ public class MedicationController{
         this.service = service;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String showMedication(Model model){
         List<Medication> list = service.getAllMedications();
         System.out.println(list.stream().findFirst().get());
@@ -36,7 +36,6 @@ public class MedicationController{
 
     @PostMapping("/add")
     public String addMedication(
-            Model model,
             @ModelAttribute("medicationForm") MedicationForm medicationForm
     ){
         service.registerNewMedication(
@@ -49,6 +48,6 @@ public class MedicationController{
                 medicationForm.isCanBeGiftedOnCatsBirthday(),
                 medicationForm.getPhoto()
         );
-        return "redirect:/medications/";
+        return "redirect:/medications";
     }
 }

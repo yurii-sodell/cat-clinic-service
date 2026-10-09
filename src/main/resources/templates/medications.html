@@ -14,12 +14,14 @@
     <tr>
         <th>Title</th>
         <th>Price</th>
+        <th>Type</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="medication: ${allMedications}">
         <td th:text="${medication.title}">Medication</td>
         <td th:text="${medication.price}">0</td>
+        <td th:text="${medication.medicationType}">type</td>
     </tr>
     </tbody>
 </table>
