@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All cats</title>
+</head>
+<body>
+<h1>Registered cats</h1>
+
+<p th:if="${#lists.isEmpty(allCats)}">No cats found</p>
+
+<table th:unless="${#lists.isEmpty(allCats)}">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cat : ${allCats}">
+        <td th:text="${cat.name}">Cats name</td>
+        <td th:text="${cat.age}">0</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

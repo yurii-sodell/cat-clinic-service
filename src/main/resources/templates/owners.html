@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered owners</title>
+</head>
+<body>
+    <h1>Registered owners</h1>
+    <p th:if="${#lists.isEmpty(allOwners)}"></p>
+    <table th:unless="${#lists.isEmpty(allOwners)}">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Family Name</th>
+            <th>Cats</th>
+        </tr>
+        </thead>
+        <tbody th:each="owner : ${allOwners}">
+            <tr>
+                <td th:text="${owner.name}">Name</td>
+                <td th:text="${owner.familyName}">Family name</td>
+                <td>
+                    <ul th:each="cat : ${owner.cats}">
+                        <li th:text="${cat.name}">Cat name</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

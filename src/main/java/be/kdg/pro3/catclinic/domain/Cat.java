@@ -15,12 +15,12 @@ public class Cat{
     private int visits;
     private boolean isHospitalized;
     private String photo;
-    private String belongingFamilyId;
+    private String BelongingOwnerId;
     private List<Medication> medicationsThatWasAssignedToCat;
 
     public Cat(String name, LocalDate dateOfBirth, Gender gender, UUID catId,
                double weightInKilos, int visits, boolean isHospitalized,
-               String photo, String belongingFamilyId) {
+               String photo, String BelongingOwnerId) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -29,12 +29,12 @@ public class Cat{
         this.visits = visits;
         this.isHospitalized = isHospitalized;
         this.photo = photo;
-        this.belongingFamilyId = belongingFamilyId;
+        this.BelongingOwnerId = BelongingOwnerId;
         this.medicationsThatWasAssignedToCat = new ArrayList<>();
     }
 
-    public String getBelongingFamilyId(){
-        return belongingFamilyId;
+    public String getBelongingOwnerId(){
+        return BelongingOwnerId;
     }
 
     public UUID getCatId(){
@@ -94,7 +94,7 @@ public class Cat{
                 this.visits,
                 this.isHospitalized ? "Hospitalized" : "Not hospitalized",
                 this.photo,
-                this.belongingFamilyId
+                this.BelongingOwnerId
         );
     }
 }

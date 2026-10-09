@@ -1,14 +1,19 @@
-package be.kdg.pro3.catclinic.repository;
+package be.kdg.pro3.catclinic.configuration;
 
 import be.kdg.pro3.catclinic.domain.*;
+import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
+import be.kdg.pro3.catclinic.repository.CatRepository;
+import be.kdg.pro3.catclinic.repository.MedicationRepository;
 import jakarta.annotation.PostConstruct;
-import org.springframework.stereotype.Repository;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+@Component
+@ConditionalOnProperty(name = "db.autofill", havingValue ="true")
 public class DataFactory{
     private final CatOwnerRepository catOwnerRepository;
     private final MedicationRepository medicationRepository;
@@ -22,19 +27,19 @@ public class DataFactory{
 
     @PostConstruct
     public void seed(){
-        CatOwner catOwner1 = new CatOwner(2, "Johnson", 85.5, "Emma Johnson", UUID.randomUUID(),
+        CatOwner catOwner1 = new CatOwner(2, "Johnson", 85.5, "Emma", UUID.randomUUID(),
                 "+32 470 123 456", "id_johnson.jpg",
                 PreferredCommunicationLanguage.EN, LocalDate.of(2019, 5, 12), false);
 
-        CatOwner catOwner2 = new CatOwner(0, "Peeters", 62.0, "Lucas Peeters", UUID.randomUUID(),
+        CatOwner catOwner2 = new CatOwner(0, "Peeters", 62.0, "Lucas", UUID.randomUUID(),
                 "+32 486 234 567", "id_peeters.jpg",
                 PreferredCommunicationLanguage.DE, LocalDate.of(2020, 8, 3), true);
 
-        CatOwner catOwner3 = new CatOwner(1, "Martinez", 74.3, "Sofia Martinez", UUID.randomUUID(),
+        CatOwner catOwner3 = new CatOwner(1, "Martinez", 74.3, "Sofia", UUID.randomUUID(),
                 "+32 493 345 678", "id_martinez.jpg",
                 PreferredCommunicationLanguage.NL, LocalDate.of(2021, 2, 27), false);
 
-        CatOwner catOwner4 = new CatOwner(3, "De Smet", 110.8, "Noah De Smet", UUID.randomUUID(),
+        CatOwner catOwner4 = new CatOwner(3, "De Smet", 110.8, "Noah", UUID.randomUUID(),
                 "+32 478 456 789", "id_desmet.jpg",
                 PreferredCommunicationLanguage.FR, LocalDate.of(2018, 11, 9), false);
 

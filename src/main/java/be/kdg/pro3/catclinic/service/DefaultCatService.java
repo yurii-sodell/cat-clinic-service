@@ -27,4 +27,7 @@ public class DefaultCatService implements CatService{
     public List<Cat> getCatsFilteredByMedicationName(String medicationName){
         return catRepository.getCatsFilteredByMedicationName(medicationName);
     }
+
+/*    @Override
+    public List<Cat> register*/
 }
