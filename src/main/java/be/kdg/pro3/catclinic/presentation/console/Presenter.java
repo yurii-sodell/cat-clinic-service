@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.controller;
+package be.kdg.pro3.catclinic.presentation;
 
 import be.kdg.pro3.catclinic.domain.*;
 import be.kdg.pro3.catclinic.service.*;

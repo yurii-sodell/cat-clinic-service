@@ -1,9 +1,8 @@
-package be.kdg.pro3.catclinic.controller;
+package be.kdg.pro3.catclinic.presentation;
 
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatOwner;
 import be.kdg.pro3.catclinic.domain.Medication;
-import be.kdg.pro3.catclinic.service.*;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
