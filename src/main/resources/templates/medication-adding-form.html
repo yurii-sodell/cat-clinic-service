@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Medication adding form</title>
 </head>
 <body>
-$END$
+    <form th:action="@{/students/add}" th:object="medicationForm" method="post">
+        <lable>
+            <input type="text" th:field="*{medicationForm.title}" required>
+        </lable>
+        <label>
+
+        </label>
+    </form>
 </body>
 </html>
