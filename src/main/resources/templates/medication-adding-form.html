@@ -1,17 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Medication adding form</title>
 </head>
 <body>
-    <form th:action="@{/students/add}" th:object="medicationForm" method="post">
-        <lable>
-            <input type="text" th:field="*{medicationForm.title}" required>
-        </lable>
-        <label>
+<form th:action="@{/medications/add}" th:object="${medicationForm}" method="post" onsubmit="">
+    <lable for="title">Title</lable>
+    <input id="title" name="title" type="text" th:field="*{title}" required>
 
-        </label>
-    </form>
+    <lable>Price</lable>
+    <input type="number" th:field="*{price}" required>
+
+    <lable>Weeks after birth to start medication</lable>
+    <input type="number" th:field="*{weeksAfterBirthToStartMedication}" required>
+
+    <lable>Market release date</lable>
+    <input type="date" th:field="*{marketReleaseDate}" required>
+
+
+    <label for="medicationType">Choose a Medication Type:</label>
+    <select id="medicationType" name="medicationType">
+        <option value="PILLS">Pills</option>
+        <option value="OINTMENT">Ointment</option>
+        <option value="DROPS">Drops</option>
+        <option value="SYRUP">Syrup</option>
+        <option value="POWDER">Powder</option>
+        <option value="INJECTION">Injection</option>
+    </select>
+
+    <lable>Is prescription needed</lable>
+    <input type="checkbox" th:field="*{prescriptionNeeded}">
+
+    <lable>Can be gifted</lable>
+    <input type="checkbox" th:field="*{canBeGiftedOnCatsBirthday}">
+
+    <lable>Title (optional)</lable>
+    <input type="url" th:field="*{photo}">
+
+    <button type="submit">Add medication</button>
+</form>
 </body>
 </html>
