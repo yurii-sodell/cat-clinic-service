@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.presentation;
+package be.kdg.pro3.catclinic.presentation.console;
 
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatOwner;

@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.presentation;
+package be.kdg.pro3.catclinic.presentation.console;
 
 import be.kdg.pro3.catclinic.domain.*;
 import be.kdg.pro3.catclinic.service.*;
@@ -12,7 +12,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.function.Consumer;
 
-@Component
 public class Presenter implements CommandLineRunner{
     private final ConsoleView view;
     private final CatOwnerService catOwnerService;

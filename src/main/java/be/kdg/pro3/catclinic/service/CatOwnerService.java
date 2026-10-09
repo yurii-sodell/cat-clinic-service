@@ -1,6 +1,4 @@
 package be.kdg.pro3.catclinic.service;
-
-import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatOwner;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 

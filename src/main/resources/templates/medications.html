@@ -2,23 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All cats</title>
+    <title>Medication catalog</title>
 </head>
 <body>
-<h1>Registered cats</h1>
+<h1>Medications catalog</h1>
 
 <p th:if="${#lists.isEmpty(allMedications)}">No medications found</p>
 
 <table th:unless="${#lists.isEmpty(allMedications)}">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Age</th>
+        <th>Title</th>
+        <th>Price</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="medication: ${#allMedications}">
-        <td th:text="${medication.title}">Cats name</td>
+    <tr th:each="medication: ${allMedications}">
+        <td th:text="${medication.title}">Medication</td>
         <td th:text="${medication.price}">0</td>
     </tr>
     </tbody>

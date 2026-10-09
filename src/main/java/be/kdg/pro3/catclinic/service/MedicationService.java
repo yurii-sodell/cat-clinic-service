@@ -5,7 +5,6 @@ import be.kdg.pro3.catclinic.domain.MedicationType;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 public interface MedicationService{
     List<Medication> getAllMedications();
