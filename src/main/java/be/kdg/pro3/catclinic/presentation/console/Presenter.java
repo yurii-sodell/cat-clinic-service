@@ -3,6 +3,8 @@ package be.kdg.pro3.catclinic.presentation.console;
 import be.kdg.pro3.catclinic.domain.*;
 import be.kdg.pro3.catclinic.service.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -12,6 +14,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.function.Consumer;
 
+@Component
+@ConditionalOnProperty(name="control.cons", havingValue="true")
 public class Presenter implements CommandLineRunner{
     private final ConsoleView view;
     private final CatOwnerService catOwnerService;
