@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Welcome!</title>
 </head>
 <body>
+<header>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/cats}">Cats</a></li>
+        <li><a th:href="@{/owners}">Owners</a></li>
+        <li><a th:href="@{/medications}">Medications</a></li>
+    </ul>
+</header>
+
+
 <h1>Welcome to Cat Clinic!</h1>
 <p>Choose an option from menu!</p>
 </body>

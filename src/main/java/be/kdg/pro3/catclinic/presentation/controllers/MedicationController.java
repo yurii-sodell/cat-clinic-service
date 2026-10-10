@@ -48,6 +48,6 @@ public class MedicationController{
                 medicationForm.isCanBeGiftedOnCatsBirthday(),
                 medicationForm.getPhoto()
         );
-        return "redirect:/medications";
+        return "redirect:content/medications";
     }
 }

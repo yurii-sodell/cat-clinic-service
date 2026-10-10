@@ -5,6 +5,15 @@
     <title>All cats</title>
 </head>
 <body>
+<header>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/cats}">Cats</a></li>
+        <li><a th:href="@{/owners}">Owners</a></li>
+        <li><a th:href="@{/medications}">Medications</a></li>
+    </ul>
+</header>
+
 <h1>Registered cats</h1>
 
 <p th:if="${#lists.isEmpty(allCats)}">No cats found</p>
