@@ -6,16 +6,10 @@
 </head>
 <body>
 <header>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/cats}">Cats</a></li>
-        <li><a th:href="@{/owners}">Owners</a></li>
-        <li><a th:href="@{/medications}">Medications</a></li>
-    </ul>
+    <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
 
-
 <h1>Welcome to Cat Clinic!</h1>
-<p>Choose an option from menu!</p>
+<p>Choose an option from menu above!</p>
 </body>
 </html>

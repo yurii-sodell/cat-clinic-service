@@ -6,12 +6,7 @@
 </head>
 <body>
 <header>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/cats}">Cats</a></li>
-        <li><a th:href="@{/owners}">Owners</a></li>
-        <li><a th:href="@{/medications}">Medications</a></li>
-    </ul>
+    <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
 
     <h1>Registered owners</h1>
@@ -36,5 +31,6 @@
             </tr>
         </tbody>
     </table>
+    <a th:href="@{/owners/add}">Register new owner!</a>
 </body>
 </html>

@@ -11,4 +11,9 @@ public interface CatOwnerService{
     List<CatOwner> getCatOwnerByItsName(String name);
     List<CatOwner> getCatOwnerByItsLanguage(PreferredCommunicationLanguage language);
     List<CatOwner> getOwnersByRegistrationDate(LocalDate registrationDate);
+    void registerNewOwner(String name, String familyName,
+                          double livingSpaceSquareMeters, int amountOfKids,
+                          String ownerPersonsPhone, String photoOfOwnersIdCard,
+                          PreferredCommunicationLanguage preferredCommunicationLanguage,
+                          boolean smokesAtHome);
 }

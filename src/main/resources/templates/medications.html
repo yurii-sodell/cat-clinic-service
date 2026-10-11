@@ -6,12 +6,7 @@
 </head>
 <body>
 <header>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/cats}">Cats</a></li>
-        <li><a th:href="@{/owners}">Owners</a></li>
-        <li><a th:href="@{/medications}">Medications</a></li>
-    </ul>
+    <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
 
 <h1>Medications catalog</h1>
@@ -34,6 +29,6 @@
     </tr>
     </tbody>
 </table>
-<button th:action="@{medication-adding-form}">Add new medication!</button>
+<a th:href="@{/medications/add}">Add new medication!</a>
 </body>
 </html>
