@@ -3,7 +3,7 @@ package be.kdg.pro3.catclinic.presentation.controllers;
 import be.kdg.pro3.catclinic.domain.Medication;
 
 import be.kdg.pro3.catclinic.service.MedicationService;
-import be.kdg.pro3.catclinic.web.MedicationForm;
+import be.kdg.pro3.catclinic.web.MedicationRegistrationForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,20 +23,19 @@ public class MedicationController{
     @GetMapping
     public String showMedication(Model model){
         List<Medication> list = service.getAllMedications();
-        System.out.println(list.stream().findFirst().get());
         model.addAttribute("allMedications", list);
         return "medications";
     }
 
     @GetMapping("/add")
     public String addMedication(Model model){
-        model.addAttribute("medicationForm", new MedicationForm());
+        model.addAttribute("medicationForm", new MedicationRegistrationForm());
         return "medication-adding-form";
     }
 
     @PostMapping("/add")
     public String addMedication(
-            @ModelAttribute("medicationForm") MedicationForm medicationForm
+            @ModelAttribute("medicationForm") MedicationRegistrationForm medicationForm
     ){
         service.registerNewMedication(
                 medicationForm.getTitle(),
