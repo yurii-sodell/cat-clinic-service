@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
+
 @Service
 public class DefaultCatOwnerService implements CatOwnerService{
     private final CatOwnerRepository catOwnerRepository;
@@ -40,5 +42,22 @@ public class DefaultCatOwnerService implements CatOwnerService{
         return catOwnerRepository.getOwnersByRegistrationDate(registrationDate);
     }
 
+    @Override
+    public void registerNewOwner(String name, String familyName,
+                          double livingSpaceSquareMeters, int amountOfKids,
+                          String ownerPersonsPhone, String photoOfOwnersIdCard,
+                          PreferredCommunicationLanguage preferredCommunicationLanguage,
+                          boolean smokesAtHome){
+        catOwnerRepository.saveOwner(new CatOwner(amountOfKids,
+                familyName,
+                livingSpaceSquareMeters,
+                name,
+                UUID.randomUUID(),
+                ownerPersonsPhone,
+                photoOfOwnersIdCard,
+                preferredCommunicationLanguage,
+                LocalDate.now(),
+                smokesAtHome));
+    }
     ;
 }

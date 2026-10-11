@@ -5,6 +5,10 @@
     <title>Registered owners</title>
 </head>
 <body>
+<header>
+    <div th:replace="~{components/navigation :: navigation}"></div>
+</header>
+
     <h1>Registered owners</h1>
     <p th:if="${#lists.isEmpty(allOwners)}"></p>
     <table th:unless="${#lists.isEmpty(allOwners)}">
@@ -27,5 +31,6 @@
             </tr>
         </tbody>
     </table>
+    <a th:href="@{/owners/add}">Register new owner!</a>
 </body>
 </html>

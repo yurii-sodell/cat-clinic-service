@@ -5,6 +5,10 @@
     <title>Medication catalog</title>
 </head>
 <body>
+<header>
+    <div th:replace="~{components/navigation :: navigation}"></div>
+</header>
+
 <h1>Medications catalog</h1>
 
 <p th:if="${#lists.isEmpty(allMedications)}">No medications found</p>
@@ -25,5 +29,6 @@
     </tr>
     </tbody>
 </table>
+<a th:href="@{/medications/add}">Add new medication!</a>
 </body>
 </html>

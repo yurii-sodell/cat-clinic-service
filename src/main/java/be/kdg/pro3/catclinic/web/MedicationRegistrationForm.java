@@ -3,9 +3,8 @@ package be.kdg.pro3.catclinic.web;
 import be.kdg.pro3.catclinic.domain.MedicationType;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
-public class MedicationForm{
+public class MedicationRegistrationForm{
     private String title;
     private double price;
     private int weeksAfterBirthToStartMedication;
@@ -15,7 +14,7 @@ public class MedicationForm{
     private boolean canBeGiftedOnCatsBirthday;
     private String photo;
 
-    public MedicationForm(){
+    public MedicationRegistrationForm(){
 
     }
 

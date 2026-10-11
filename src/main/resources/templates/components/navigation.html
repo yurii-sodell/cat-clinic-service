@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <nav th:fragment="navigation">
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/cats}">Cats</a></li>
+            <li><a th:href="@{/owners}">Owners</a></li>
+            <li><a th:href="@{/medications}">Medications</a></li>
+        </ul>
+    </nav>
+
+</body>
+</html>
