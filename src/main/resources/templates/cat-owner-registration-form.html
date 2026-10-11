@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Owner registration form</title>
+</head>
+<body>
+<header>
+    <div th:replace="~{components/navigation :: navigation}"></div>
+</header>
+
+<form th:action="@{/owners/add}" th:object="${ownerRegistrationForm}" method="post" onsubmit="">
+    <label>Name</label>
+    <input type="text" th:field="*{name}" required>
+
+    <label>Family name</label>
+    <input type="text" th:field="*{familyName}" required>
+
+    <label>Living space (square meters)</label>
+    <input type="number" step="any" min="0" th:field="*{livingSpaceSquareMeters}" required>
+
+    <label>Amount of kids</label>
+    <input type="number" min="0" th:field="*{amountOfKids}" required>
+
+    <label>Phone</label>
+    <input type="tel" th:field="*{ownerPersonsPhone}" required>
+
+    <label>Photo of ID card</label>
+    <input type="url" th:field="*{photoOfOwnersIdCard}" required>
+
+
+    <label for="preferredCommunicationLanguage">Choose a preferred communication language:</label>
+    <select id="preferredCommunicationLanguage" name="preferredCommunicationLanguage">
+        <option value="NL">Dutch</option>
+        <option value="FR">French</option>
+        <option value="DE">German</option>
+        <option value="EN">English</option>
+        <option value="OTHER">Other</option>
+    </select>
+
+    <label>Smokes at home</label>
+    <input type="checkbox" th:field="*{smokesAtHome}">
+
+    <button type="submit">Add owner</button>
+</form>
+</body>
+</html>

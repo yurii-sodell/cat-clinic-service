@@ -5,6 +5,10 @@
     <title>Medication catalog</title>
 </head>
 <body>
+<header>
+    <div th:replace="~{components/navigation :: navigation}"></div>
+</header>
+
 <h1>Medications catalog</h1>
 
 <p th:if="${#lists.isEmpty(allMedications)}">No medications found</p>
@@ -14,14 +18,17 @@
     <tr>
         <th>Title</th>
         <th>Price</th>
+        <th>Type</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="medication: ${allMedications}">
         <td th:text="${medication.title}">Medication</td>
         <td th:text="${medication.price}">0</td>
+        <td th:text="${medication.medicationType}">type</td>
     </tr>
     </tbody>
 </table>
+<a th:href="@{/medications/add}">Add new medication!</a>
 </body>
 </html>

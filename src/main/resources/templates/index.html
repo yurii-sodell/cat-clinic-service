@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Welcome!</title>
 </head>
 <body>
+<header>
+    <div th:replace="~{components/navigation :: navigation}"></div>
+</header>
+
 <h1>Welcome to Cat Clinic!</h1>
-<p>Choose an option from menu!</p>
+<p>Choose an option from menu above!</p>
 </body>
 </html>
