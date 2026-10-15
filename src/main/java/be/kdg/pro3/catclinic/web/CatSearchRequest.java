@@ -7,9 +7,10 @@ public class CatSearchRequest{
     private Integer mixWeight;
     private Integer maxWeight;
 
-    public CatSearchRequest(String catName, Integer minAge, Integer maxAge, Integer minWeight, Integer maxWeight){
-        if(minAge != null && maxAge != null && minWeight >= maxAge) throw new IllegalArgumentException("Min age must be higher then max age");
+    public CatSearchRequest(String catName, Integer minAge, Integer maxAge, Integer minWeight, Integer maxWeight) throws IllegalArgumentException{
+        if(minAge != null && maxAge != null && minAge >= maxAge) throw new IllegalArgumentException("Min age must be higher then max age");
         if(minWeight != null && maxWeight != null && minWeight >= maxWeight) throw new IllegalArgumentException("Min weight must be higher then max weight");
+
         this.catName = catName;
         this.minAge = minAge;
         this.maxAge = maxAge;

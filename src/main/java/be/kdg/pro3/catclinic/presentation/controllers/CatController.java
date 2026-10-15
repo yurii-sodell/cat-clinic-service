@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +25,13 @@ public class CatController{
         this.catService = catService;
     }
 
-//    @GetMapping
-//    public String getCats(Model model){
-//        log.info("All cats request entered");
-//        model.addAttribute("cats", catService.getAllCats());
-//        log.info("All cats are successfully returned");
-//        return "cats";
-//    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleException(IllegalArgumentException e, Model model){
+        log.error(e.getMessage());
+        model.addAttribute("cats", List.of());
+        return "cats";
+    }
+
 
     @GetMapping
     public String getCats(
