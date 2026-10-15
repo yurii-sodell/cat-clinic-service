@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Medication catalog</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
 </head>
 <body>
 <header>
@@ -11,9 +12,9 @@
 
 <h1>Medications catalog</h1>
 
-<p th:if="${#lists.isEmpty(allMedications)}">No medications found</p>
+<p th:if="${#lists.isEmpty(medications)}">No medications found</p>
 
-<table th:unless="${#lists.isEmpty(allMedications)}">
+<table th:unless="${#lists.isEmpty(medications)}">
     <thead>
     <tr>
         <th>Title</th>
@@ -22,13 +23,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="medication: ${allMedications}">
+    <tr th:each="medication: ${medications}">
         <td th:text="${medication.title}">Medication</td>
         <td th:text="${medication.price}">0</td>
         <td th:text="${medication.medicationType}">type</td>
     </tr>
     </tbody>
 </table>
-<a th:href="@{/medications/add}">Add new medication!</a>
+<a th:href="@{/medications/new}">Add new medication!</a>
 </body>
 </html>

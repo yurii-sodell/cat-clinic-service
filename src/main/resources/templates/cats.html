@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>All cats</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{css/searchbar.css}">
 </head>
 <body>
 <header>
@@ -11,9 +13,28 @@
 
 <h1>Registered cats</h1>
 
-<p th:if="${#lists.isEmpty(allCats)}">No cats found</p>
+<p th:if="${#lists.isEmpty(cats)}">No cats found</p>
 
-<table th:unless="${#lists.isEmpty(allCats)}">
+<form th:action="@{/cats}" th:object="${catSearchRequest}" th:method="get" id="search-bar">
+    <label for="cat-search-name">Cats name</label>
+    <input id="cat-search-name" name="name" type="search"/>
+
+    <label for="cat-search-min-age">Min age</label>
+    <input id="cat-search-min-age" name="minAge" type="number" min="0" max="99"/>
+
+    <label for="cat-search-max-age">Max age</label>
+    <input id="cat-search-max-age" name="maxAge" type="number" min="0" max="99"/>
+
+    <label for="cat-search-min-weight">Min weight</label>
+    <input id="cat-search-min-weight" name="minWeight" type="number" min="0" max="99"/>
+
+    <label for="cat-search-max-weight">Max weight</label>
+    <input id="cat-search-max-weight" name="maxWeight" type="number" min="0" max="99"/>
+
+    <button type="submit">Send</button>
+</form>
+
+<table th:unless="${#lists.isEmpty(cats)}">
     <thead>
     <tr>
         <th>Name</th>
@@ -21,7 +42,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="cat : ${allCats}">
+    <tr th:each="cat : ${cats}">
         <td th:text="${cat.name}">Cats name</td>
         <td th:text="${cat.age}">0</td>
     </tr>

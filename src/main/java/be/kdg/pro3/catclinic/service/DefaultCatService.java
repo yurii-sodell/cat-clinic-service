@@ -28,6 +28,10 @@ public class DefaultCatService implements CatService{
         return catRepository.getCatsFilteredByMedicationName(medicationName);
     }
 
-/*    @Override
-    public List<Cat> register*/
+    @Override
+    public List<Cat> getCatBySearchRequest(String catName, Integer minAge, Integer maxAge, Integer minWeight, Integer maxWeight){
+        return catRepository.getCatsBySearchRequest(catName, minAge, maxAge, minWeight, maxWeight);
+    }
+
+
 }
