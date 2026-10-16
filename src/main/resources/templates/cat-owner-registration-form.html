@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Owner registration form</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
 </head>
 <body>
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
 
-<form th:action="@{/owners/add}" th:object="${ownerRegistrationForm}" method="post" onsubmit="">
+<form th:action="@{/owners/new}" th:object="${ownerRegistrationForm}" method="post" onsubmit="">
     <label>Name</label>
     <input type="text" th:field="*{name}" required>
 

@@ -48,4 +48,16 @@ public class InMemoryCatRepository implements CatRepository{
                 .toList();
     }
 
+    @Override
+    public List<Cat> getCatsBySearchRequest(String catName, Integer minAge, Integer maxAge, Integer minWeight, Integer maxWeight){
+        return cats.stream()
+                .filter(cat -> minAge == null || cat.getAge() >= minAge)
+                .filter(cat -> maxAge == null || cat.getAge() <= maxAge)
+                .filter(cat -> minWeight == null || cat.getWeightInKilos() >= minWeight)
+                .filter(cat -> maxWeight == null || cat.getWeightInKilos() <= maxWeight)
+                .filter(cat -> catName == null || catName.isEmpty() || cat.getName().equalsIgnoreCase(catName))
+                .sorted(Comparator.comparing(Cat::getName, String.CASE_INSENSITIVE_ORDER))
+                .toList();
+    }
+
 }

@@ -3,44 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Medication adding form</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
 </head>
 <body>
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
 
-<form th:action="@{/medications/add}" th:object="${medicationForm}" method="post" onsubmit="">
-    <label>Title</label>
-    <input type="text" th:field="*{title}" required>
+<form th:action="@{/medications/new}" th:object="${medicationForm}" method="post">
+    <label for="medication-form-title">Title</label>
+    <input id="medication-form-title" type="text" th:field="*{title}" required/>
 
-    <label>Price</label>
-    <input type="number" th:field="*{price}" required>
+    <label for="medication-form-price">Price</label>
+    <input id="medication-form-price" type="number" th:field="*{price}" required/>
 
-    <label>Weeks after birth to start medication</label>
-    <input type="number" th:field="*{weeksAfterBirthToStartMedication}" required>
+    <label for="medication-form-weeks-after-birth">Weeks after birth to start medication</label>
+    <input id="medication-form-weeks-after-birth" type="number" th:field="*{weeksAfterBirthToStartMedication}" required/>
 
-    <label>Market release date</label>
-    <input type="date" th:field="*{marketReleaseDate}" required>
+    <label for="medication-form-market-release-date">Market release date</label>
+    <input id="medication-form-market-release-date" type="number" th:field="*{marketReleaseDate}" required/>
 
-
-    <label for="medicationType">Choose a Medication Type:</label>
-    <select id="medicationType" name="medicationType">
-        <option value="PILLS">Pills</option>
-        <option value="OINTMENT">Ointment</option>
-        <option value="DROPS">Drops</option>
-        <option value="SYRUP">Syrup</option>
-        <option value="POWDER">Powder</option>
-        <option value="INJECTION">Injection</option>
+    <label for="medication-form-type">Choose a Medication Type:</label>
+    <select id="medication-form-type" name="medicationType">
+        <option th:each="type : ${medicationTypes}"
+                th:value="${type}"
+                th:text="${type.getDisplayName()}"></option>
     </select>
 
-    <label>Is prescription needed</label>
-    <input type="checkbox" th:field="*{prescriptionNeeded}">
+    <label for="medication-form-prescription-needed">Is prescription needed</label>
+    <input id="medication-form-prescription-needed" type="checkbox" th:field="*{prescriptionNeeded}"/>
 
-    <label>Can be gifted</label>
-    <input type="checkbox" th:field="*{canBeGiftedOnCatsBirthday}">
+    <label for="medication-form-can-be-gifted">Can be gifted</label>
+    <input id="medication-form-can-be-gifted" type="checkbox" th:field="*{canBeGiftedOnCatsBirthday}"/>
 
-    <label>Photo (optional)</label>
-    <input type="url" th:field="*{photo}">
+    <label for="medication-form-photo">Photo (optional)</label>
+    <input id="medication-form-photo" type="url" th:field="*{photo}"/>
 
     <button type="submit">Add medication</button>
 </form>

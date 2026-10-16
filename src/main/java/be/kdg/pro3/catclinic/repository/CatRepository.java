@@ -10,4 +10,5 @@ public interface CatRepository{
     List<Cat> getCats();
     List<Cat> getCatsFilteredByAgeAndByWeight(int minAge, int maxAge, int minWeight, int maxWeight);
     List<Cat> getCatsFilteredByMedicationName(String name);
+    List<Cat> getCatsBySearchRequest(String catName, Integer minAge, Integer maxAge, Integer minWeight, Integer maxWeight);
 }
