@@ -21,6 +21,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 tasks.test {
@@ -30,4 +31,7 @@ tasks.test {
     }
 }
 
-tasks.getByName("bootRun", JavaExec::class) { standardInput = System.`in` }
+tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
+    standardInput = System.`in`
+    sourceResources(sourceSets.main.get())
+}

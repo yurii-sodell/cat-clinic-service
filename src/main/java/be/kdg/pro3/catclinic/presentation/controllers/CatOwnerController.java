@@ -1,6 +1,7 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
 
+import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import be.kdg.pro3.catclinic.service.CatOwnerService;
 import be.kdg.pro3.catclinic.web.CatOwnerRegistrationForm;
 import org.slf4j.Logger;
@@ -34,6 +35,11 @@ public class CatOwnerController{
         model.addAttribute("ownerRegistrationForm", new CatOwnerRegistrationForm());
         log.info("Owner registration form is returned!");
         return "cat-owner-registration-form";
+    }
+
+    @ModelAttribute("preferredCommunicationLanguages")
+    public PreferredCommunicationLanguage[] preferredCommunicationLanguage(){
+        return PreferredCommunicationLanguage.values();
     }
 
     @PostMapping("/new")
