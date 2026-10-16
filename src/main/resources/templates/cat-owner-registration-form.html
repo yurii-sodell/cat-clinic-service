@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Owner registration form</title>
-    <link rel="stylesheet" th:href="@{css/style.css}">
+    <title th:text="#{cat-owner-registration-form.title}">Owner registration form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
 </head>
 <body>
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
+<main>
+    <form th:action="@{/owners/new}" th:object="${ownerRegistrationForm}" method="post">
+        <label th:text="#{cat-owner-registration-form.name}">Name</label>
+        <input type="text" th:field="*{name}" required>
 
-<form th:action="@{/owners/new}" th:object="${ownerRegistrationForm}" method="post" onsubmit="">
-    <label>Name</label>
-    <input type="text" th:field="*{name}" required>
+        <label th:text="#{cat-owner-registration-form.familyname}">Family name</label>
+        <input type="text" th:field="*{familyName}" required>
 
-    <label>Family name</label>
-    <input type="text" th:field="*{familyName}" required>
+        <label th:text="#{cat-owner-registration-form.livingspace}">Living space (square meters)</label>
+        <input type="number" step="any" min="0" th:field="*{livingSpaceSquareMeters}" required>
 
-    <label>Living space (square meters)</label>
-    <input type="number" step="any" min="0" th:field="*{livingSpaceSquareMeters}" required>
+        <label th:text="#{cat-owner-registration-form.kids}">Amount of kids</label>
+        <input type="number" min="0" th:field="*{amountOfKids}" required>
 
-    <label>Amount of kids</label>
-    <input type="number" min="0" th:field="*{amountOfKids}" required>
+        <label th:text="#{cat-owner-registration-form.phone}">Phone</label>
+        <input type="tel" th:field="*{ownerPersonsPhone}" required>
 
-    <label>Phone</label>
-    <input type="tel" th:field="*{ownerPersonsPhone}" required>
-
-    <label>Photo of ID card</label>
-    <input type="url" th:field="*{photoOfOwnersIdCard}" required>
+        <label th:text="#{cat-owner-registration-form.idphoto}">Photo of ID card</label>
+        <input type="url" th:field="*{photoOfOwnersIdCard}" required>
 
 
-    <label for="preferredCommunicationLanguage">Choose a preferred communication language:</label>
-    <select id="preferredCommunicationLanguage" name="preferredCommunicationLanguage">
-        <option value="NL">Dutch</option>
-        <option value="FR">French</option>
-        <option value="DE">German</option>
-        <option value="EN">English</option>
-        <option value="OTHER">Other</option>
-    </select>
+        <label for="preferredCommunicationLanguages" th:text="#{cat-owner-registration-form.language}">Choose a preferred communication language:</label>
+        <select id="preferredCommunicationLanguages" name="preferredCommunicationLanguages">
+            <option th:each="language : ${preferredCommunicationLanguages}"
+                    th:value="${language}"
+                    th:text="${language.getLanguageName()}">Language</option>
+        </select>
 
-    <label>Smokes at home</label>
-    <input type="checkbox" th:field="*{smokesAtHome}">
+        <label th:text="#{cat-owner-registration-form.smokes}">Smokes at home</label>
+        <input type="checkbox" th:field="*{smokesAtHome}">
 
-    <button type="submit">Add owner</button>
-</form>
+        <button type="submit" th:text="#{cat-owner-registration-form.submit}">Add owner</button>
+    </form>
+</main>
 </body>
 </html>

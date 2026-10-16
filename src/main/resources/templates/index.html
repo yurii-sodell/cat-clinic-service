@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome!</title>
+    <title th:text="#{index.title}">Welcome!</title>
     <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
 </head>
 <body>
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
-
-<h1>Welcome to Cat Clinic!</h1>
-<p>Choose an option from menu above!</p>
+<main>
+    <h1 th:text="#{index.heading}">Welcome to Cat Clinic!</h1>
+    <p th:text="#{index.hint}">Choose an option from the menu above!</p>
+</main>
 </body>
 </html>
