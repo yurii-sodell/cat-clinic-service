@@ -6,14 +6,14 @@
 </head>
 <body>
 
-    <nav th:fragment="navigation">
-        <ul>
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/cats}">Cats</a></li>
-            <li><a th:href="@{/owners}">Owners</a></li>
-            <li><a th:href="@{/medications}">Medications</a></li>
-        </ul>
-    </nav>
+<nav th:fragment="navigation" id="header-navigation">
+    <ul>
+        <li><a th:href="@{/}" th:text="#{navigation.homepage}">Home</a></li>
+        <li><a th:href="@{/cats}" th:text="#{navigation.catspage}">Cats</a></li>
+        <li><a th:href="@{/owners}" th:text="#{navigation.ownerspage}">Owners</a></li>
+        <li><a th:href="@{/medications}" th:text="#{navigation.medicationspage}">Medications</a></li>
+    </ul>
+</nav>
 
 </body>
 </html>

@@ -1,31 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All cats</title>
+    <title th:text="#{cats.title}">All cats</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{css/searchbar.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
 </head>
 <body>
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
 
-<h1>Registered cats</h1>
+<main>
+    <h1 th:text="#{cats.heading}">Registered cats</h1>
 
-<p th:if="${#lists.isEmpty(allCats)}">No cats found</p>
+    <p th:if="${#lists.isEmpty(cats)}" th:text="#{cats.empty}">No cats found</p>
 
-<table th:unless="${#lists.isEmpty(allCats)}">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Age</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="cat : ${allCats}">
-        <td th:text="${cat.name}">Cats name</td>
-        <td th:text="${cat.age}">0</td>
-    </tr>
-    </tbody>
-</table>
+    <form th:action="@{/cats}" th:object="${catSearchRequest}" th:method="get" id="search-bar">
+        <label for="cat-search-name" th:text="#{cats.searchname}">Cats name</label>
+        <input id="cat-search-name" name="name" type="search"/>
+
+        <label for="cat-search-min-age" th:text="#{cats.minage}">Min age</label>
+        <input id="cat-search-min-age" name="minAge" type="number" min="0" max="99"/>
+
+        <label for="cat-search-max-age" th:text="#{cats.maxage}">Max age</label>
+        <input id="cat-search-max-age" name="maxAge" type="number" min="0" max="99"/>
+
+        <label for="cat-search-min-weight" th:text="#{cats.minweight}">Min weight</label>
+        <input id="cat-search-min-weight" name="minWeight" type="number" min="0" max="99"/>
+
+        <label for="cat-search-max-weight" th:text="#{cats.maxweight}">Max weight</label>
+        <input id="cat-search-max-weight" name="maxWeight" type="number" min="0" max="99"/>
+
+        <button type="submit" th:text="#{cats.submit}">Send</button>
+    </form>
+
+    <table th:unless="${#lists.isEmpty(cats)}">
+        <thead>
+        <tr>
+            <th th:text="#{cats.tablename}">Name</th>
+            <th th:text="#{cats.tableage}">Age</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cat : ${cats}">
+            <td th:text="${cat.name}">Cats name</td>
+            <td th:text="${cat.age}">0</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

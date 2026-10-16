@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Medication catalog</title>
+    <title th:text="#{medications.title}">Medication catalog</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
 </head>
 <body>
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
+<main>
+    <h1 th:text="#{medications.heading}">Medications catalog</h1>
 
-<h1>Medications catalog</h1>
+    <p th:if="${#lists.isEmpty(medications)}" th:text="#{medications.empty}">No medications found</p>
 
-<p th:if="${#lists.isEmpty(allMedications)}">No medications found</p>
-
-<table th:unless="${#lists.isEmpty(allMedications)}">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Type</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="medication: ${allMedications}">
-        <td th:text="${medication.title}">Medication</td>
-        <td th:text="${medication.price}">0</td>
-        <td th:text="${medication.medicationType}">type</td>
-    </tr>
-    </tbody>
-</table>
-<a th:href="@{/medications/add}">Add new medication!</a>
+    <table th:unless="${#lists.isEmpty(medications)}">
+        <thead>
+        <tr>
+            <th th:text="#{medications.tabletitle}">Title</th>
+            <th th:text="#{medications.tableprice}">Price</th>
+            <th th:text="#{medications.tabletype}">Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="medication: ${medications}">
+            <td th:text="${medication.title}">Medication</td>
+            <td th:text="${medication.price}">0</td>
+            <td th:text="${medication.medicationType}">type</td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/medications/new}" th:text="#{medications.addnew}">Add new medication!</a>
+</main>
 </body>
 </html>

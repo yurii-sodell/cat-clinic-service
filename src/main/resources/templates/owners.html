@@ -1,36 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registered owners</title>
+    <title th:text="#{owners.title}">Registered owners</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
 </head>
 <body>
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
-
-    <h1>Registered owners</h1>
-    <p th:if="${#lists.isEmpty(allOwners)}"></p>
-    <table th:unless="${#lists.isEmpty(allOwners)}">
+<main>
+    <h1 th:text="#{owners.heading}">Registered owners</h1>
+    <p th:if="${#lists.isEmpty(owners)}" th:text="#{owners.empty}">No owners found</p>
+    <table th:unless="${#lists.isEmpty(owners)}">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Family Name</th>
-            <th>Cats</th>
+            <th th:text="#{owners.tablename}">Name</th>
+            <th th:text="#{owners.tablefamilyname}">Family Name</th>
+            <th th:text="#{owners.tablecats}">Cats</th>
         </tr>
         </thead>
-        <tbody th:each="owner : ${allOwners}">
-            <tr>
-                <td th:text="${owner.name}">Name</td>
-                <td th:text="${owner.familyName}">Family name</td>
-                <td>
-                    <ul th:each="cat : ${owner.cats}">
-                        <li th:text="${cat.name}">Cat name</li>
-                    </ul>
-                </td>
-            </tr>
+        <tbody th:each="owner : ${owners}">
+        <tr>
+            <td th:text="${owner.name}">Name</td>
+            <td th:text="${owner.familyName}">Family name</td>
+            <td>
+                <ul th:each="cat : ${owner.cats}">
+                    <li th:text="${cat.name}">Cat name</li>
+                </ul>
+            </td>
+        </tr>
         </tbody>
     </table>
-    <a th:href="@{/owners/add}">Register new owner!</a>
+    <a th:href="@{/owners/new}" th:text="#{owners.register}">Register new owner!</a>
+</main>
 </body>
 </html>
