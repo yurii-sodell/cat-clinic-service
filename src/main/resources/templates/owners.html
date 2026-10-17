@@ -26,9 +26,7 @@
             <td th:text="${owner.name}">Name</td>
             <td th:text="${owner.familyName}">Family name</td>
             <td>
-                <ul th:each="cat : ${owner.cats}">
-                    <li th:text="${cat.name}">Cat name</li>
-                </ul>
+                <button th:text="#{owners.enter}">Enter account</button>
             </td>
         </tr>
         </tbody>
