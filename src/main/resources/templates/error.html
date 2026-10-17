@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oops!</title>
+</head>
+<body>
+<header>
+
+</header>
+<main>
+    <section>
+        <h1>Oops!</h1>
+        <p>If you got there, then something went wrong!</p>
+        <p th:if="! ${#strings.isEmpty(errorMessage)}" th:text="${errorMessage}"></p>
+    </section>
+</main>
+</body>
+</html>

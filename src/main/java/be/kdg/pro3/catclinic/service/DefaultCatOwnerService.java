@@ -2,11 +2,13 @@ package be.kdg.pro3.catclinic.service;
 
 import be.kdg.pro3.catclinic.domain.CatOwner;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
+import be.kdg.pro3.catclinic.exceptions.NoOwnerFoundException;
 import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -59,5 +61,10 @@ public class DefaultCatOwnerService implements CatOwnerService{
                 LocalDate.now(),
                 smokesAtHome));
     }
-    ;
+
+    public CatOwner getCatOwnerById(UUID id) throws NoOwnerFoundException{
+        Optional<CatOwner> found = catOwnerRepository.getCatOwnerById(id);
+        if(found.isPresent()) return found.get();
+        throw new NoOwnerFoundException("Cannot find an owner with id" + id.toString());
+    }
 }
