@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{medication-adding-form.title}">Medication adding form</title>
-    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/navigation.css}">
 </head>
 <body>
@@ -12,6 +12,7 @@
 </header>
 <main>
     <form th:action="@{/medications/new}" th:object="${medicationForm}" method="post">
+
         <label for="medication-form-title" th:text="#{medication-adding-form.medicationtitle}">Title</label>
         <input id="medication-form-title" type="text" th:field="*{title}" required/>
 
@@ -22,7 +23,7 @@
         <input id="medication-form-weeks-after-birth" type="number" th:field="*{weeksAfterBirthToStartMedication}" required/>
 
         <label for="medication-form-market-release-date" th:text="#{medication-adding-form.releasedate}">Market release date</label>
-        <input id="medication-form-market-release-date" type="number" th:field="*{marketReleaseDate}" required/>
+        <input id="medication-form-market-release-date" type="date" th:field="*{marketReleaseDate}" required/>
 
         <label for="medication-form-type" th:text="#{medication-adding-form.type}">Choose a Medication Type:</label>
         <select id="medication-form-type" name="medicationType">
@@ -39,6 +40,10 @@
 
         <label for="medication-form-photo" th:text="#{medication-adding-form.photo}">Photo (optional)</label>
         <input id="medication-form-photo" type="url" th:field="*{photo}"/>
+
+        <ul th:if="${#fields.hasAnyErrors()}">
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+        </ul>
 
         <button type="submit" th:text="#{medication-adding-form.submit}">Add medication</button>
     </form>

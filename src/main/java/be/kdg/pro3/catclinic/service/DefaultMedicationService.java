@@ -5,6 +5,7 @@ import be.kdg.pro3.catclinic.domain.MedicationType;
 import be.kdg.pro3.catclinic.repository.MedicationRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -28,12 +29,12 @@ public class DefaultMedicationService implements MedicationService{
     }
 
     @Override
-    public List<Medication> getMedicationFilteredByPrice(double minPrice, double maxPrice){
+    public List<Medication> getMedicationFilteredByPrice(BigDecimal minPrice, BigDecimal maxPrice){
         return medicationRepository.getMedicationFilteredByPrice(minPrice, maxPrice);
     }
 
     @Override
-    public void registerNewMedication(String title, double price, int weeksAfterBirthToStartMedication, LocalDate marketReleaseDate, MedicationType medicationType, boolean isPrescriptionNeeded, boolean canBeGiftedOnCatsBirthday, String photo){
+    public void registerNewMedication(String title, BigDecimal price, int weeksAfterBirthToStartMedication, LocalDate marketReleaseDate, MedicationType medicationType, boolean isPrescriptionNeeded, boolean canBeGiftedOnCatsBirthday, String photo){
         Medication medication = new Medication(title, price, UUID.randomUUID(), weeksAfterBirthToStartMedication, marketReleaseDate, medicationType, isPrescriptionNeeded, canBeGiftedOnCatsBirthday, photo);
         medicationRepository.saveMedication(medication);
     }
