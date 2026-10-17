@@ -18,7 +18,7 @@
         <tr>
             <th th:text="#{owners.tablename}">Name</th>
             <th th:text="#{owners.tablefamilyname}">Family Name</th>
-            <th th:text="#{owners.tablecats}">Cats</th>
+            <th th:text="#{owners.tablecats}">Page</th>
         </tr>
         </thead>
         <tbody th:each="owner : ${owners}">
@@ -26,7 +26,7 @@
             <td th:text="${owner.name}">Name</td>
             <td th:text="${owner.familyName}">Family name</td>
             <td>
-                <button th:text="#{owners.enter}">Enter account</button>
+                <a th:action="g" th:href="@{/owners(ownerId=${owner.ownerId})}" th:text="#{owners.enter}">View</a>
             </td>
         </tr>
         </tbody>

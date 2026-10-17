@@ -6,10 +6,7 @@ import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 @Repository
@@ -66,5 +63,11 @@ public class InMemoryCatOwnerRepository implements CatOwnerRepository{
                 .toList();
     }
 
+    @Override
+    public Optional<CatOwner> getCatOwnerById(UUID id){
+        return catOwners.stream()
+                .filter(owner -> owner.getOwnerId().equals(id))
+                .findFirst();
+    }
 
 }

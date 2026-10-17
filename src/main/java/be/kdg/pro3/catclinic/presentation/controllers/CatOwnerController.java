@@ -2,6 +2,7 @@ package be.kdg.pro3.catclinic.presentation.controllers;
 
 
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
+import be.kdg.pro3.catclinic.exceptions.NoOwnerFoundException;
 import be.kdg.pro3.catclinic.service.CatOwnerService;
 import be.kdg.pro3.catclinic.web.CatOwnerRegistrationForm;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/owners")
@@ -27,6 +30,22 @@ public class CatOwnerController{
         model.addAttribute("owners", service.getAllOwners());
         log.info("All owners are returned!");
         return "owners";
+    }
+
+    @GetMapping(params = "ownerId")
+    public String getOwnerPage(
+            @RequestParam UUID ownerId,
+            Model model){
+        log.info("Received request to show certain owner page, id:  {}", ownerId.toString());
+        try{
+            model.addAttribute("ownerOnPage", service.getCatOwnerById(ownerId));
+        }catch (NoOwnerFoundException e){
+            log.error(e.getMessage());
+            model.addAttribute("errorMessage", e.getMessage());
+            return "/error";
+        }
+        log.info("Owner was found, returning its page");
+        return "owner-page";
     }
 
     @GetMapping("/new")
@@ -65,4 +84,6 @@ public class CatOwnerController{
         log.info("New owner is registered!");
         return "redirect:/owners";
     }
+
+
 }

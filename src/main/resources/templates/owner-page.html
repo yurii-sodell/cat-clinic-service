@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{owner-page.title}">Owner details</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<header>
+    <div th:replace="~{components/navigation :: navigation}"></div>
+</header>
+<main>
+    <section th:object="${ownerOnPage}">
+        <h1 th:text="*{name + ' ' + familyName}">Name Family</h1>
+
+        <table>
+            <tbody>
+            <tr>
+                <th th:text="#{owner-page.livingspace}">Living space (m²)</th>
+                <td th:text="*{livingSpaceSquareMeters}">0</td>
+            </tr>
+            <tr>
+                <th th:text="#{owner-page.kids}">Number of kids</th>
+                <td th:text="*{amountOfKids}">0</td>
+            </tr>
+            <tr>
+                <th th:text="#{owner-page.phone}">Phone</th>
+                <td th:text="*{ownerPersonsPhone}">+99999999999</td>
+            </tr>
+            <tr>
+                <th th:text="#{owner-page.idcard}">ID card photo</th>
+                <td>
+                    <img th:if="*{photoOfOwnersIdCard != null}"
+                         th:src="*{photoOfOwnersIdCard}"
+                         th:alt="#{owner-page.idcard}"
+                         width="200">
+                </td>
+            </tr>
+            <tr>
+                <th th:text="#{owner-page.registrationdate}">Registration date</th>
+                <td th:text="*{#temporals.format(registrationDate, 'dd.MM.yyyy')}">01.01.2026</td>
+            </tr>
+            <tr>
+                <th th:text="#{owner-page.smokes}">Smokes at home</th>
+                <td th:text="*{smokesAtHome} ? #{owner-page.yes} : #{owner-page.no}">No</td>
+            </tr>
+            <tr>
+                <th th:text="#{owner-page.language}">Preferred communication language</th>
+                <td th:text="*{preferredCommunicationLanguage}">Language</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2 th:text="#{owner-page.cats}">Cats</h2>
+        <p th:if="*{cats.isEmpty()}" th:text="#{owner-page.nocats}">No cats registered</p>
+
+        <table th:unless="*{cats.isEmpty()}">
+            <tr>
+                <td>Cat</td>
+                <td>Edit</td>
+            </tr>
+            <tr th:each="cat : *{cats}" >
+                <td th:text="${cat.name}">Name</td>
+                <td> <a th:href="@{/cats/edit(${cat.getCatId()})}"></a></td>
+            </tr>
+        </table>
+
+
+    </section>
+</main>
+</body>
+</html>
