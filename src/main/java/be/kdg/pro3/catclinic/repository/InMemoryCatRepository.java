@@ -1,20 +1,20 @@
 package be.kdg.pro3.catclinic.repository;
 
 import be.kdg.pro3.catclinic.domain.Cat;
+
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 @Repository
 public class InMemoryCatRepository implements CatRepository{
-    private static List<Cat> cats = new ArrayList<>();
+    //unique by UUID's
+    private static HashSet<Cat> cats = new HashSet<>();
 
     @Override
     public void saveCat(Cat cat){
+        cats.remove(cat);
         cats.add(cat);
     }
 
@@ -25,7 +25,7 @@ public class InMemoryCatRepository implements CatRepository{
 
     @Override
     public List<Cat> getCats(){
-        return Collections.unmodifiableList(cats);
+        return List.copyOf(cats);
     }
 
     @Override
@@ -58,6 +58,13 @@ public class InMemoryCatRepository implements CatRepository{
                 .filter(cat -> catName == null || catName.isEmpty() || cat.getName().equalsIgnoreCase(catName))
                 .sorted(Comparator.comparing(Cat::getName, String.CASE_INSENSITIVE_ORDER))
                 .toList();
+    }
+
+    @Override
+    public Optional<Cat> getCatById(UUID uuid){
+        return cats.stream()
+        .filter(cat -> cat.getCatId().equals(uuid))
+        .findAny();
     }
 
 }

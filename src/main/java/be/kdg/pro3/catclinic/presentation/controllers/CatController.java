@@ -1,8 +1,11 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
 import be.kdg.pro3.catclinic.domain.Cat;
+import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
 import be.kdg.pro3.catclinic.service.CatService;
+import be.kdg.pro3.catclinic.web.CatEditForm;
 import be.kdg.pro3.catclinic.web.CatSearchRequest;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/cats")
@@ -58,6 +62,44 @@ public class CatController{
 
         model.addAttribute("cats", cats);
 
+        return "cats";
+    }
+
+    @GetMapping("/edit/{catId}")
+    public String getCatEditingPage(
+            @PathVariable UUID catId,
+            Model model
+    ){
+        log.info("Editing request entered");
+        try{
+            model.addAttribute("catEditForm", new CatEditForm(catService.getCatById(catId)));
+        }catch (CatNotFoundException e){
+            return "/error";
+        }
+        return "cat-editing-page";
+    }
+
+    @PostMapping("/edit/{catId}")
+    public String getCatEditingPage(
+            @PathVariable UUID catId,
+            @Valid @ModelAttribute CatEditForm catEditForm,
+            BindingResult bindingResult,
+            Model model
+    ){
+        log.info("Cat edit request entered");
+        if(bindingResult.hasErrors()){
+            log.error("Cat editing form were corrupted");
+            return "/cat-editing-page";
+        }
+
+        try{
+            catService.updateCat(catId, catEditForm);
+        }catch (CatNotFoundException | IllegalArgumentException e){
+            log.error("Error occurred while editing cat" + e.getMessage());
+            return "/error";
+        }
+
+        log.info("Editing was done");
         return "cats";
     }
 }

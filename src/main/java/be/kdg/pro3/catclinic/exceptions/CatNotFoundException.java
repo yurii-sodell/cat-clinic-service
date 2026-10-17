@@ -1,7 +1,7 @@
 package be.kdg.pro3.catclinic.exceptions;
 
-public class CatNoFoundException extends RuntimeException {
-  public CatNoFoundException(String message) {
-    super(message);
-  }
+public class CatNotFoundException extends RuntimeException{
+    public CatNotFoundException(String message){
+        super(message);
+    }
 }

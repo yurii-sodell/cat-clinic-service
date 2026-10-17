@@ -1,7 +1,7 @@
 package be.kdg.pro3.catclinic.exceptions;
 
-public class NoOwnerFoundException extends RuntimeException{
-    public NoOwnerFoundException(String message){
+public class OwnerNotFoundException extends RuntimeException{
+    public OwnerNotFoundException(String message){
         super(message);
     }
 }
