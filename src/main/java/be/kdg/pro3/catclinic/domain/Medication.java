@@ -1,5 +1,6 @@
 package be.kdg.pro3.catclinic.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.UUID;
 
 public class Medication{
     private String title;
-    private double price;
+    private BigDecimal price;
     private UUID productId;
     private int weeksAfterBirthToStartMedication;
     private LocalDate marketReleaseDate;
@@ -18,7 +19,7 @@ public class Medication{
     private String photo;
     private List<Cat> catsThatMedicationWasAssignedTo;
 
-    public Medication(String title, double price, UUID productId,
+    public Medication(String title, BigDecimal price, UUID productId,
                       int weeksAfterBirthToStartMedication, LocalDate marketReleaseDate,
                       MedicationType medicationType, boolean isPrescriptionNeeded,
                       boolean canBeGiftedOnCatsBirthday, String photo) {
@@ -54,7 +55,7 @@ public class Medication{
         return photo;
     }
 
-    public double getPrice(){
+    public BigDecimal getPrice(){
         return price;
     }
 

@@ -3,6 +3,7 @@ package be.kdg.pro3.catclinic.repository;
 import be.kdg.pro3.catclinic.domain.Medication;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,15 +32,15 @@ public class InMemoryMedicationRepository implements MedicationRepository{
     public List<Medication> getMedicationFilteredByPrescriptionNeed(boolean isPrescriptionNeeded){
         return  medications.stream()
                 .filter(medication -> medication.isPrescriptionNeeded() == isPrescriptionNeeded)
-                .sorted(Comparator.comparingDouble(Medication::getPrice))
                 .toList();
     }
 
     @Override
-    public List<Medication> getMedicationFilteredByPrice(double minPrice, double maxPrice){
+    public List<Medication> getMedicationFilteredByPrice(BigDecimal minPrice, BigDecimal maxPrice) {
         return medications.stream()
-                .filter(medication -> medication.getPrice() >= minPrice && medication.getPrice() <= maxPrice)
-                .sorted(Comparator.comparingDouble(Medication::getPrice))
+                .filter(medication -> medication.getPrice().compareTo(minPrice) >= 0
+                        && medication.getPrice().compareTo(maxPrice) <= 0)
+                .sorted(Comparator.comparing(Medication::getPrice))
                 .toList();
     }
 

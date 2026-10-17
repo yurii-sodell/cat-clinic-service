@@ -8,6 +8,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -83,35 +84,35 @@ public class DataFactory{
         catOwner4.getCats().addAll(List.of(cat8, cat9, cat10));
 
         Medication Amoxicillin =
-                new Medication("Amoxicillin", 12.50, UUID.randomUUID(),
+                new Medication("Amoxicillin",  BigDecimal.valueOf(2.50), UUID.randomUUID(),
                         4, LocalDate.of(2015, 6, 1), MedicationType.PILLS,
                         true, false, "amoxicillin.jpg");
 
-        Medication FrontlinePlus = new Medication("Frontline Plus", 24.99, UUID.randomUUID(),
+        Medication FrontlinePlus = new Medication("Frontline Plus", BigDecimal.valueOf(24.99), UUID.randomUUID(),
                 8, LocalDate.of(2010, 3, 15), MedicationType.OINTMENT,
                 false, false, "frontline.jpg");
 
-        Medication Metacam = new Medication("Metacam", 18.75, UUID.randomUUID(),
+        Medication Metacam = new Medication("Metacam", BigDecimal.valueOf(18.75), UUID.randomUUID(),
                 6, LocalDate.of(2018, 9, 10), MedicationType.SYRUP,
                 true, false, "metacam.jpg");
 
-        Medication Revolution = new Medication("Revolution", 32.00, UUID.randomUUID(),
+        Medication Revolution = new Medication("Revolution", BigDecimal.valueOf(32.00), UUID.randomUUID(),
                 6, LocalDate.of(2012, 1, 20), MedicationType.INJECTION,
                 true, false, "revolution.jpg");
 
-        Medication VitaminCatTreats = new Medication("Vitamin Cat Treats", 9.99, UUID.randomUUID(),
+        Medication VitaminCatTreats = new Medication("Vitamin Cat Treats", BigDecimal.valueOf(9.99), UUID.randomUUID(),
                 0, LocalDate.of(2019, 4, 5), MedicationType.POWDER,
                 false, true, "vitamintreats.jpg");
 
-        Medication Panacur = new Medication("Panacur", 15.30, UUID.randomUUID(),
+        Medication Panacur = new Medication("Panacur", BigDecimal.valueOf(15.30), UUID.randomUUID(),
                 5, LocalDate.of(2016, 8, 12), MedicationType.PILLS,
                 true, false, "panacur.jpg");
 
-        Medication ConvenIa = new Medication("Convenia", 45.00, UUID.randomUUID(),
+        Medication ConvenIa = new Medication("Convenia", BigDecimal.valueOf(45.00), UUID.randomUUID(),
                 3, LocalDate.of(2013, 11, 2), MedicationType.INJECTION,
                 true, false, "convenia.jpg");
 
-        Medication HillsZD = new Medication("Hill's z/d Diet", 21.40, UUID.randomUUID(),
+        Medication HillsZD = new Medication("Hill's z/d Diet", BigDecimal.valueOf(21.40), UUID.randomUUID(),
                 0, LocalDate.of(2020, 2, 17), MedicationType.POWDER,
                 false, true, "hillszd.jpg");
 

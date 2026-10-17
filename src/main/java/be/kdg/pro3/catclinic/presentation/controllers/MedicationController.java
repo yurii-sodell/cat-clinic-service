@@ -5,6 +5,7 @@ import be.kdg.pro3.catclinic.domain.Medication;
 import be.kdg.pro3.catclinic.domain.MedicationType;
 import be.kdg.pro3.catclinic.service.MedicationService;
 import be.kdg.pro3.catclinic.web.MedicationRegistrationForm;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -36,9 +37,8 @@ public class MedicationController{
 
     @GetMapping("/new")
     public String showMedicationForm(Model model){
-        log.info("Medication adding form request entered");
+        log.info("Created new medication form");
         model.addAttribute("medicationForm", new MedicationRegistrationForm());
-        log.info("Medication adding form is successfully returned");
         return "medication-adding-form";
     }
 
@@ -49,7 +49,7 @@ public class MedicationController{
 
     @PostMapping("/new")
     public String addMedication(
-            @ModelAttribute("medicationForm") MedicationRegistrationForm medicationForm,
+            @Valid @ModelAttribute("medicationForm") MedicationRegistrationForm medicationForm,
             BindingResult bindingResult
     ){
         log.info("New medication request entered");
