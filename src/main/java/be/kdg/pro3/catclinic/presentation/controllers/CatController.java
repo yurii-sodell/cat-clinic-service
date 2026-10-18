@@ -1,6 +1,7 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
 import be.kdg.pro3.catclinic.domain.Cat;
+import be.kdg.pro3.catclinic.domain.Gender;
 import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
 import be.kdg.pro3.catclinic.service.CatService;
 import be.kdg.pro3.catclinic.web.CatEditForm;
@@ -31,6 +32,11 @@ public class CatController{
         log.error(e.getMessage());
         model.addAttribute("cats", List.of());
         return "cats";
+    }
+
+    @ModelAttribute("genders")
+    public Gender[] getGenders(){
+        return Gender.values();
     }
 
     @GetMapping
@@ -70,26 +76,37 @@ public class CatController{
             @PathVariable UUID catId,
             Model model
     ){
-        log.info("Editing request entered");
+        log.info("Get editing form page for ID: + {} \n", catId);
+        Cat cat;
         try{
-            model.addAttribute("catEditForm", new CatEditForm(catService.getCatById(catId)));
+            cat = catService.getCatById(catId);
         }catch (CatNotFoundException e){
+            log.error("Editing page: " + e.getMessage());
             return "/error";
         }
+
+        model.addAttribute("catEditForm",
+                new CatEditForm(cat.getName(),
+                        cat.getDateOfBirth(),
+                        cat.getGender(),
+                        cat.getWeightInKilos(),
+                        cat.getPhoto())
+        );
+        model.addAttribute("catBeingEdited", catId);
+        log.info("Form to update cat was created");
         return "cat-editing-page";
     }
 
     @PostMapping("/edit/{catId}")
     public String getCatEditingPage(
             @PathVariable UUID catId,
-            @Valid @ModelAttribute CatEditForm catEditForm,
-            BindingResult bindingResult,
-            Model model
+            @Valid @ModelAttribute("catEditForm") CatEditForm catEditForm,
+            BindingResult bindingResult
     ){
         log.info("Cat edit request entered");
         if(bindingResult.hasErrors()){
             log.error("Cat editing form were corrupted");
-            return "/cat-editing-page";
+            return "cat-editing-page";
         }
 
         try{
@@ -100,6 +117,6 @@ public class CatController{
         }
 
         log.info("Editing was done");
-        return "cats";
+        return "cat-editing-page";
     }
 }

@@ -12,7 +12,7 @@ public class Cat{
     private LocalDate dateOfBirth;
     private Gender gender;
     private UUID catId;
-    private double weightInKilos;
+    private Double weightInKilos;
     private int visits;
     private boolean isHospitalized;
     private String photo;
@@ -20,7 +20,7 @@ public class Cat{
     private List<Medication> medicationsThatWasAssignedToCat;
 
     public Cat(String name, LocalDate dateOfBirth, Gender gender, UUID catId,
-               double weightInKilos, int visits, boolean isHospitalized,
+               Double weightInKilos, int visits, boolean isHospitalized,
                String photo, String BelongingOwnerId) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -62,7 +62,7 @@ public class Cat{
         return photo;
     }
 
-    public double getWeightInKilos(){
+    public Double getWeightInKilos(){
         return weightInKilos;
     }
 
@@ -101,7 +101,7 @@ public class Cat{
         this.photo = photo;
     }
 
-    public void setWeightInKilos(double weightInKilos) throws IllegalArgumentException{
+    public void setWeightInKilos(Double weightInKilos) throws IllegalArgumentException{
         if(weightInKilos < 0) throw new IllegalArgumentException("Weight cannot be less then 0");
         this.weightInKilos = weightInKilos;
     }

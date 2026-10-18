@@ -3,72 +3,76 @@ package be.kdg.pro3.catclinic.web;
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.Gender;
 import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 public class CatEditForm{
 
-    @NotBlank
-    @NotNull
-    private String name;
+    @NotBlank(message = "Name cannot contains only blanks")
+    @NotNull(message = "Name cannot be empty")
+    private String keptName;
 
-    @NotNull
-    @PastOrPresent
-    private LocalDate dateOfBirth;
+    @NotNull(message = "Date cannot be empty")
+    @PastOrPresent(message = "Date must be in present or past")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate keptDateOfBirth;
 
-    @NotNull
-    private Gender gender;
+    @NotNull(message = "Name cannot be empty")
+    private Gender keptGender;
 
-    @DecimalMin(value = "0.0", inclusive = false)
-    private double weightInKilos;
+    @NotNull(message = "Wight cannot be empty")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Weight cannot be negative")
+    @DecimalMax(value="30.0", inclusive = false, message = "Weight cannot be more them 30")
+    private Double keptWeightInKilos;
 
-    private String photo;
+    private String keptPhoto;
 
-    public CatEditForm(Cat cat){
-        this.name = cat.getName();
-        this.dateOfBirth = cat.getDateOfBirth();
-        this.gender = cat.getGender();
-        this.weightInKilos = cat.getWeightInKilos();
-        this.photo = cat.getPhoto();
+    public CatEditForm(String name, LocalDate dateOfBirth, Gender gender, Double weight, String photo){
+        this.keptName = name;
+        this.keptDateOfBirth = dateOfBirth;
+        this.keptGender = gender;
+        this.keptWeightInKilos = weight;
+        this.keptPhoto = photo;
     }
 
-    public LocalDate getDateOfBirth(){
-        return dateOfBirth;
+    public LocalDate getKeptDateOfBirth(){
+        return keptDateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth){
-        this.dateOfBirth = dateOfBirth;
+    public void setKeptDateOfBirth(LocalDate keptDateOfBirth){
+        this.keptDateOfBirth = keptDateOfBirth;
     }
 
-    public Gender getGender(){
-        return gender;
+    public Gender getKeptGender(){
+        return keptGender;
     }
 
-    public void setGender(Gender gender){
-        this.gender = gender;
+    public void setKeptGender(Gender keptGender){
+        this.keptGender = keptGender;
     }
 
-    public String getName(){
-        return name;
+    public String getKeptName(){
+        return keptName;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setKeptName(String keptName){
+        this.keptName = keptName;
     }
 
-    public String getPhoto(){
-        return photo;
+    public String getKeptPhoto(){
+        return keptPhoto;
     }
 
-    public void setPhoto(String photo){
-        this.photo = photo;
+    public void setKeptPhoto(String keptPhoto){
+        this.keptPhoto = keptPhoto;
     }
 
-    public double getWeightInKilos(){
-        return weightInKilos;
+    public Double getKeptWeightInKilos(){
+        return keptWeightInKilos;
     }
 
-    public void setWeightInKilos(double weightInKilos){
-        this.weightInKilos = weightInKilos;
+    public void setKeptWeightInKilos(double keptWeightInKilos){
+        this.keptWeightInKilos = keptWeightInKilos;
     }
 }

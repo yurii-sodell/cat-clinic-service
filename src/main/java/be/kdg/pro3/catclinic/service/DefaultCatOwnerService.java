@@ -50,15 +50,13 @@ public class DefaultCatOwnerService implements CatOwnerService{
                           String ownerPersonsPhone, String photoOfOwnersIdCard,
                           PreferredCommunicationLanguage preferredCommunicationLanguage,
                           boolean smokesAtHome){
-        catOwnerRepository.saveOwner(new CatOwner(amountOfKids,
+        catOwnerRepository.saveOwner(CatOwner.registerCatOwner(amountOfKids,
                 familyName,
                 livingSpaceSquareMeters,
                 name,
-                UUID.randomUUID(),
                 ownerPersonsPhone,
                 photoOfOwnersIdCard,
                 preferredCommunicationLanguage,
-                LocalDate.now(),
                 smokesAtHome));
     }
 

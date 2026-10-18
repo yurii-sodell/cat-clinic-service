@@ -40,8 +40,8 @@ public class DefaultCatService implements CatService{
     @Override
     public Cat getCatById(UUID uuid) throws CatNotFoundException{
         Optional<Cat> found = catRepository.getCatById(uuid);
-        if(found.isPresent()) return found.get();
-        throw new CatNotFoundException("No cat found with id: " + uuid);
+        if(found.isEmpty()) throw new CatNotFoundException("No cat found with id: " + uuid);
+        return found.get();
     }
 
     @Override
@@ -51,11 +51,11 @@ public class DefaultCatService implements CatService{
 
         Cat theCat = found.get();
         try{
-            theCat.setGender(catEditForm.getGender());
-            theCat.setDateOfBirth(catEditForm.getDateOfBirth());
-            theCat.setName(catEditForm.getName());
-            theCat.setPhoto(catEditForm.getPhoto());
-            theCat.setWeightInKilos(catEditForm.getWeightInKilos());
+            theCat.setGender(catEditForm.getKeptGender());
+            theCat.setDateOfBirth(catEditForm.getKeptDateOfBirth());
+            theCat.setName(catEditForm.getKeptName());
+            theCat.setPhoto(catEditForm.getKeptPhoto());
+            theCat.setWeightInKilos(catEditForm.getKeptWeightInKilos());
         }catch (IllegalArgumentException e){
             throw e;
         }
