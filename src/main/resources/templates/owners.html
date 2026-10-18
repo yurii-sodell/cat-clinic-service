@@ -26,7 +26,7 @@
             <td th:text="${owner.name}">Name</td>
             <td th:text="${owner.familyName}">Family name</td>
             <td>
-                <a th:action="g" th:href="@{/owners(ownerId=${owner.ownerId})}" th:text="#{owners.enter}">View</a>
+                <a th:action="g" th:href="@{/owners/{ownerId}(ownerId=${owner.ownerId})}" th:text="#{owners.enter}">View</a>
             </td>
         </tr>
         </tbody>

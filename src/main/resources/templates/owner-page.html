@@ -31,8 +31,9 @@
             <tr>
                 <th th:text="#{owner-page.idcard}">ID card photo</th>
                 <td>
+                    <!--here should be th:src instead of th:text but it throws exception so I kept it comented for now-->
                     <img th:if="*{photoOfOwnersIdCard != null}"
-                         th:src="*{photoOfOwnersIdCard}"
+                         th:text="*{photoOfOwnersIdCard}"
                          th:alt="#{owner-page.idcard}"
                          width="200">
                 </td>
@@ -62,7 +63,7 @@
             </tr>
             <tr th:each="cat : *{cats}" >
                 <td th:text="${cat.name}">Name</td>
-                <td> <a th:href="@{/cats/edit(${cat.getCatId()})}"></a></td>
+                <td> <a th:href="@{/cats/edit/{catId}(catId=${cat.getCatId().toString()})}">Edit</a></td>
             </tr>
         </table>
 
