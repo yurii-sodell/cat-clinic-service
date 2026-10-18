@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{cat-owner-registration-form.title}">Owner registration form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+</head>
+<body>
+<header>
+    <div th:replace="~{components/navigation :: navigation}"></div>
+</header>
+<form th:action="@{/cats/edit/{catId}(catId=${catBeingEdited})}" th:object="${catEditForm}" method="post">
+    <label for="cats-name">Cats name</label>
+    <input id="cats-name" type="text"
+           th:value="*{keptName}"
+           th:field="*{keptName}" required>
+
+    <label for="date-of-birth">Date of birth</label>
+    <input id="date-of-birth" type="date"
+           th:value="*{keptDateOfBirth}"
+           th:field="*{keptDateOfBirth}" required>
+
+    <fieldset>
+        <legend>Gender</legend>
+        <div th:each="gender : ${genders}">
+            <input type="radio" th:value="${gender}" th:field="*{keptGender}" required>
+            <label th:for="${#ids.prev('keptGender')}" th:text="${gender}"></label>
+        </div>
+    </fieldset>
+
+    <label for="photo">Cats name</label>
+    <input id="photo" type="text"
+           th:value="*{keptPhoto}"
+           th:field="*{keptPhoto}" required>
+
+    <label for="weight-in-kilos">Weight in kilos</label>
+    <input id="weight-in-kilos" type="range" th:min="0.1" th:max="30"
+           th:value="*{keptWeightInKilos}"
+           th:field="*{keptWeightInKilos}" required>
+
+    <ul th:if="${#fields.hasAnyErrors()}">
+        <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+    </ul>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

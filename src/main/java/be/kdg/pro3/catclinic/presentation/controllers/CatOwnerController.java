@@ -2,7 +2,7 @@ package be.kdg.pro3.catclinic.presentation.controllers;
 
 
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
-import be.kdg.pro3.catclinic.exceptions.NoOwnerFoundException;
+import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
 import be.kdg.pro3.catclinic.service.CatOwnerService;
 import be.kdg.pro3.catclinic.web.CatOwnerRegistrationForm;
 import org.slf4j.Logger;
@@ -32,14 +32,14 @@ public class CatOwnerController{
         return "owners";
     }
 
-    @GetMapping(params = "ownerId")
+    @GetMapping("/{ownerId}")
     public String getOwnerPage(
-            @RequestParam UUID ownerId,
+            @PathVariable UUID ownerId,
             Model model){
         log.info("Received request to show certain owner page, id:  {}", ownerId.toString());
         try{
             model.addAttribute("ownerOnPage", service.getCatOwnerById(ownerId));
-        }catch (NoOwnerFoundException e){
+        }catch (OwnerNotFoundException e){
             log.error(e.getMessage());
             model.addAttribute("errorMessage", e.getMessage());
             return "/error";
