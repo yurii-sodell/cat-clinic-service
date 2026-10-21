@@ -6,6 +6,7 @@ import be.kdg.pro3.catclinic.domain.MedicationType;
 import be.kdg.pro3.catclinic.service.MedicationService;
 import be.kdg.pro3.catclinic.web.MedicationRegistrationForm;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,8 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/medications")
+@Slf4j
 public class MedicationController{
-    private static Logger log = LoggerFactory.getLogger(MedicationController.class);
     private MedicationService service;
 
     public MedicationController(MedicationService service){
@@ -54,7 +55,7 @@ public class MedicationController{
     ){
         log.info("New medication request entered");
 
-        if(bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()){
             log.error("The data in medication form where corrupted");
             return "medication-adding-form";
         }

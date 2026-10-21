@@ -39,7 +39,7 @@ public class InMemoryCatRepository implements CatRepository{
 
     @Override
     public List<Cat> getCatsFilteredByMedicationName(String name){
-                Predicate<Cat> hasMedication = cat -> cat.getMedicationsThatWasAssignedToCat().stream()
+        Predicate<Cat> hasMedication = cat -> cat.getMedicationsThatWasAssignedToCat().stream()
                 .anyMatch(medication -> medication.getTitle().equalsIgnoreCase(name));
 
         return cats.stream()
@@ -63,8 +63,8 @@ public class InMemoryCatRepository implements CatRepository{
     @Override
     public Optional<Cat> getCatById(UUID uuid){
         return cats.stream()
-        .filter(cat -> cat.getCatId().equals(uuid))
-        .findAny();
+                .filter(cat -> cat.getCatId().equals(uuid))
+                .findAny();
     }
 
 }

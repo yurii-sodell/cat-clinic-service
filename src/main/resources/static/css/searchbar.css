@@ -1,13 +1,13 @@
-#search-bar {
-    display: flex;
-    align-items: center;
+/*#search-bar {*/
+/*    display: flex;*/
+/*    align-items: center;*/
 
-    label{
-        color: red;
-        display: flex;
-    }
-    input{
-        margin-left: 1vh;
-        margin-right: 1vh;
-    }
-}
+/*    label{*/
+/*        color: red;*/
+/*        display: flex;*/
+/*    }*/
+/*    input{*/
+/*        margin-left: 1vh;*/
+/*        margin-right: 1vh;*/
+/*    }*/
+/*}*/
