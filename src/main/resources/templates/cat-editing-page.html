@@ -3,44 +3,78 @@
 <head>
     <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}" />
 </head>
-<body>
+<body class="bg-milk d-flex flex-column min-vh-100">
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
-<form th:action="@{/cats/edit/{catId}(catId=${catBeingEdited})}" th:object="${catEditForm}" method="post">
-    <label for="cats-name">Cats name</label>
-    <input id="cats-name" type="text"
-           th:value="*{keptName}"
-           th:field="*{keptName}" required>
 
-    <label for="date-of-birth">Date of birth</label>
-    <input id="date-of-birth" type="date"
-           th:value="*{keptDateOfBirth}"
-           th:field="*{keptDateOfBirth}" required>
+<main class="container flex-grow-1 py-5">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="display-6 fw-bold text-indigo-dark mb-4">Edit cat</h1>
 
-    <fieldset>
-        <legend>Gender</legend>
-        <div th:each="gender : ${genders}">
-            <input type="radio" th:value="${gender}" th:field="*{keptGender}" required>
-            <label th:for="${#ids.prev('keptGender')}" th:text="${gender}"></label>
-        </div>
-    </fieldset>
+        <form th:action="@{/cats/edit/{catId}(catId=${catBeingEdited})}" th:object="${catEditForm}" method="post"
+              class="card border-0 shadow rounded-4">
+            <div class="card-body p-4">
 
-    <label for="photo">Cats name</label>
-    <input id="photo" type="text"
-           th:value="*{keptPhoto}"
-           th:field="*{keptPhoto}" required>
+                <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger rounded-3" role="alert">
+                    <ul class="mb-0">
+                        <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+                    </ul>
+                </div>
 
-    <label for="weight-in-kilos">Weight in kilos</label>
-    <input id="weight-in-kilos" type="range" th:min="0.1" th:max="30"
-           th:value="*{keptWeightInKilos}"
-           th:field="*{keptWeightInKilos}" required>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="cats-name" class="form-label fw-bold text-indigo-dark">Cats name</label>
+                        <input id="cats-name" type="text" th:field="*{keptName}"
+                               class="form-control" required>
+                    </div>
 
-    <ul th:if="${#fields.hasAnyErrors()}">
-        <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
-    </ul>
+                    <div class="col-md-6">
+                        <label for="date-of-birth" class="form-label fw-bold text-indigo-dark">Date of birth</label>
+                        <input id="date-of-birth" type="date" th:field="*{keptDateOfBirth}"
+                               class="form-control" required>
+                    </div>
 
-    <button type="submit">Save</button>
-</form>
+                    <div class="col-12">
+                        <label for="photo" class="form-label fw-bold text-indigo-dark">Photo</label>
+                        <input id="photo" type="text" th:field="*{keptPhoto}"
+                               class="form-control" required>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="weight-in-kilos" class="form-label fw-bold text-indigo-dark">
+                            Weight in kilos
+                            <span class="badge bg-soft-yellow text-indigo-dark fs-6 px-3 py-2 rounded-pill ms-2">
+                                <output id="weight-output" th:text="*{keptWeightInKilos}">0</output> kg
+                            </span>
+                        </label>
+                        <input id="weight-in-kilos" type="range" min="0.1" max="30" step="0.1"
+                               th:field="*{keptWeightInKilos}" class="form-range" required
+                               oninput="document.getElementById('weight-output').textContent = this.value">
+                    </div>
+
+                    <div class="col-12">
+                        <fieldset class="rounded-4 bg-soft-yellow p-3">
+                            <legend class="fs-6 fw-bold text-indigo-dark mb-2 float-none w-auto">Gender</legend>
+                            <div class="d-flex flex-wrap gap-4">
+                                <div th:each="gender : ${genders}" class="form-check">
+                                    <input type="radio" th:value="${gender}" th:field="*{keptGender}"
+                                           class="form-check-input" required>
+                                    <label th:for="${#ids.prev('keptGender')}" th:text="${gender}"
+                                           class="form-check-label fw-bold text-indigo-dark"></label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-12 text-end">
+                        <button type="submit"
+                                class="btn bg-soft-yellow text-indigo-dark fw-bold px-5 rounded-3 shadow-sm">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
 </body>
 </html>
