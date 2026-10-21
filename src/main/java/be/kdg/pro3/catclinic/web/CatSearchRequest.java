@@ -1,61 +1,38 @@
 package be.kdg.pro3.catclinic.web;
 
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class CatSearchRequest{
+
+    @Size(max = 100, message = "Cat name cannot be longer than 100 characters")
     private String catName;
+
+    @PositiveOrZero(message = "Min age cannot be negative")
     private Integer minAge;
+
+    @PositiveOrZero(message = "Max age cannot be negative")
     private Integer maxAge;
-    private Integer mixWeight;
+
+    @PositiveOrZero(message = "Min weight cannot be negative")
+    private Integer minWeight;
+
+    @PositiveOrZero(message = "Max weight cannot be negative")
     private Integer maxWeight;
 
     public CatSearchRequest(String catName, Integer minAge, Integer maxAge, Integer minWeight, Integer maxWeight) throws IllegalArgumentException{
-        if(minAge != null && maxAge != null && minAge >= maxAge) throw new IllegalArgumentException("Min age must be higher then max age");
-        if(minWeight != null && maxWeight != null && minWeight >= maxWeight) throw new IllegalArgumentException("Min weight must be higher then max weight");
+        if(minAge != null && maxAge != null && minAge >= maxAge) throw new IllegalArgumentException("Min age must be lower than max age");
+        if(minWeight != null && maxWeight != null && minWeight >= maxWeight) throw new IllegalArgumentException("Min weight must be lower than max weight");
 
         this.catName = catName;
         this.minAge = minAge;
         this.maxAge = maxAge;
-        this.mixWeight = minWeight;
+        this.minWeight = minWeight;
         this.maxWeight = maxWeight;
-    }
-
-    public Integer getMaxWeight(){
-        return maxWeight;
-    }
-
-    public void getMaxWeight(Integer maxWeight){
-        this.maxWeight = maxWeight;
-    }
-
-    public Integer getMaxAge(){
-        return maxAge;
-    }
-
-    public void setMaxAge(Integer maxAge){
-        this.maxAge = maxAge;
-    }
-
-    public Integer getMinAge(){
-        return minAge;
-    }
-
-    public void setMinAge(Integer minAge){
-        this.minAge = minAge;
-    }
-
-    public Integer getMinWeight(){
-        return mixWeight;
-    }
-
-    public void setMixWeight(Integer mixWeight){
-        this.mixWeight = mixWeight;
-    }
-
-    public String getCatName(){
-        return catName;
-    }
-
-    public void setName(String catName){
-        this.catName = catName;
     }
 
     @Override
@@ -64,7 +41,7 @@ public class CatSearchRequest{
                 "catName=" + catName +
                 ", minAge=" + minAge +
                 ", maxAge=" + maxAge +
-                ", mixWeight=" + mixWeight +
+                ", minWeight=" + minWeight +
                 ", maxWeight=" + maxWeight +
                 '}';
     }

@@ -5,6 +5,7 @@ import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
 import be.kdg.pro3.catclinic.service.CatOwnerService;
 import be.kdg.pro3.catclinic.web.CatOwnerRegistrationForm;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,14 +64,16 @@ public class CatOwnerController{
 
     @PostMapping("/new")
     public String addOwner(
-            @ModelAttribute("ownerRegistrationForm") CatOwnerRegistrationForm form,
+            @Valid @ModelAttribute("ownerRegistrationForm") CatOwnerRegistrationForm form,
             BindingResult bindingResult
     ){
-        log.info("Received request for new owner!");
+        log.info("Received request for new owner with following values: " + form.toString());
         if(bindingResult.hasErrors()){
             log.error("The data in owner form where corrupted");
             return "cat-owner-registration-form";
         }
+
+
 
         service.registerNewOwner(
                 form.getName(),

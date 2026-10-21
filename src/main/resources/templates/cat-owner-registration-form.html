@@ -61,9 +61,9 @@
                     <div class="col-md-6">
                         <label for="owner-form-language" class="form-label fw-bold text-indigo-dark"
                                th:text="#{cat-owner-registration-form.language}">Choose a preferred communication language:</label>
-                        <select id="owner-form-language" name="preferredCommunicationLanguages" class="form-select">
+                        <select id="owner-form-language" th:field="*{preferredCommunicationLanguage}" class="form-select">
                             <option th:each="language : ${preferredCommunicationLanguages}"
-                                    th:value="${language}"
+                                    th:value="${language.name()}"
                                     th:text="${language.getLanguageName()}">Language</option>
                         </select>
                     </div>
