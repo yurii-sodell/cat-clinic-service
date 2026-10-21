@@ -3,32 +3,46 @@
 <head>
     <th:block th:replace="~{components/general-imports :: head-common(#{medications.title})}" />
 </head>
-<body>
+<body class="bg-milk d-flex flex-column min-vh-100">
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
-<main>
-    <h1 th:text="#{medications.heading}">Medications catalog</h1>
 
-    <p th:if="${#lists.isEmpty(medications)}" th:text="#{medications.empty}">No medications found</p>
+<main class="container flex-grow-1 py-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <h1 th:text="#{medications.heading}" class="display-6 fw-bold text-indigo-dark mb-0">Medications catalog</h1>
+        <a th:href="@{/medications/new}" th:text="#{medications.addnew}"
+           class="btn bg-soft-yellow text-indigo-dark fw-bold px-4 rounded-3 shadow-sm">Add new medication!</a>
+    </div>
 
-    <table th:unless="${#lists.isEmpty(medications)}">
-        <thead>
-        <tr>
-            <th th:text="#{medications.tabletitle}">Title</th>
-            <th th:text="#{medications.tableprice}">Price</th>
-            <th th:text="#{medications.tabletype}">Type</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="medication: ${medications}">
-            <td th:text="${medication.title}">Medication</td>
-            <td th:text="${medication.price}">0</td>
-            <td th:text="${medication.medicationType}">type</td>
-        </tr>
-        </tbody>
-    </table>
-    <a th:href="@{/medications/new}" th:text="#{medications.addnew}">Add new medication!</a>
+    <div th:if="${#lists.isEmpty(medications)}"
+         class="card border-0 rounded-4 bg-soft-yellow text-indigo-dark text-center">
+        <div class="card-body py-4">
+            <p class="h5 mb-0" th:text="#{medications.empty}">No medications found</p>
+        </div>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(medications)}" class="card border-0 shadow rounded-4 overflow-hidden">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4" th:text="#{medications.tabletitle}">Title</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4" th:text="#{medications.tableprice}">Price</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4 text-end" th:text="#{medications.tabletype}">Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="medication : ${medications}">
+                <td class="py-3 px-4 fw-semibold text-indigo-dark" th:text="${medication.title}">Medication</td>
+                <td class="py-3 px-4" th:text="${medication.price}">0</td>
+                <td class="py-3 px-4 text-end">
+                    <span class="badge bg-soft-yellow text-indigo-dark fs-6 px-3 py-2 rounded-pill"
+                          th:text="${medication.medicationType}">type</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
 </html>

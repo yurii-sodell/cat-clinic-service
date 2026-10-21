@@ -1,17 +1,18 @@
-<nav th:fragment="navigation" id="header-navigation" class="navbar navbar-expand bg-indigo navbar-text-neutral">
+<nav th:fragment="navigation" id="header-navigation"
+     class="navbar navbar-expand bg-indigo navbar-text-neutral py-0 border-bottom border-5 border-deep-green">
     <div class="container">
-        <ul class="navbar-nav w-100 flex-wrap justify-content-evenly">
+        <ul class="navbar-nav w-100 flex-wrap justify-content-evenly" style="--bs-nav-link-font-size: 3rem">
             <li class="nav-item">
-                <a class="nav-link fs-5 px-2 py-2" th:href="@{/}" th:text="#{navigation.homepage}">Home</a>
+                <a class="nav-link display-5 fw-bold px-3 py-4" th:href="@{/}" th:text="#{navigation.homepage}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fs-5 px-2 py-2" th:href="@{/cats}" th:text="#{navigation.catspage}">Cats</a>
+                <a class="nav-link display-5 fw-bold px-3 py-4" th:href="@{/cats}" th:text="#{navigation.catspage}">Cats</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fs-5 px-2 py-2" th:href="@{/owners}" th:text="#{navigation.ownerspage}">Owners</a>
+                <a class="nav-link display-5 fw-bold px-3 py-4" th:href="@{/owners}" th:text="#{navigation.ownerspage}">Owners</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fs-5 px-2 py-2" th:href="@{/medications}" th:text="#{navigation.medicationspage}">Medications</a>
+                <a class="nav-link display-5 fw-bold px-3 py-4" th:href="@{/medications}" th:text="#{navigation.medicationspage}">Medications</a>
             </li>
         </ul>
     </div>
