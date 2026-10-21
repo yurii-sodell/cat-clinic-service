@@ -6,18 +6,16 @@ import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 @Repository
 public class InMemoryCatOwnerRepository implements CatOwnerRepository{
-    private static List<CatOwner> catOwners = new ArrayList<>();
+    private static HashSet<CatOwner> catOwners = new HashSet<>();
 
     @Override
     public void saveOwner(CatOwner catOwner){
+        catOwners.remove(catOwner);
         catOwners.add(catOwner);
     }
 
@@ -28,7 +26,7 @@ public class InMemoryCatOwnerRepository implements CatOwnerRepository{
 
     @Override
     public List<CatOwner> getCatOwners(){
-        return Collections.unmodifiableList(catOwners);
+        return List.copyOf(catOwners);
     }
 
     @Override
@@ -66,5 +64,11 @@ public class InMemoryCatOwnerRepository implements CatOwnerRepository{
                 .toList();
     }
 
+    @Override
+    public Optional<CatOwner> getCatOwnerById(UUID id){
+        return catOwners.stream()
+                .filter(owner -> owner.getOwnerId().equals(id))
+                .findFirst();
+    }
 
 }

@@ -1,0 +1,112 @@
+:root {
+    --cc-indigo: #4f46e5;
+    --cc-indigo-dark: #312e81;
+
+    --cc-soft-yellow: #ffe58a;
+    --cc-soft-yellow-dark: #e6c65c;
+
+    --cc-deep-green: #2e7a4d;
+    --cc-deep-green-dark: #1e5a3a;
+
+    --cc-neutral: #ffffff;
+}
+
+/* background */
+.bg-indigo {
+    background-color: var(--cc-indigo) !important;
+}
+
+.bg-indigo-dark {
+    background-color: var(--cc-indigo-dark) !important;
+}
+
+.bg-soft-yellow {
+    background-color: var(--cc-soft-yellow) !important;
+}
+
+.bg-soft-yellow-dark {
+    background-color: var(--cc-soft-yellow-dark) !important;
+}
+
+.bg-deep-green {
+    background-color: var(--cc-deep-green) !important;
+}
+
+.bg-deep-green-dark {
+    background-color: var(--cc-deep-green-dark) !important;
+}
+
+/* border */
+.border-indigo {
+    border-color: var(--cc-indigo) !important;
+}
+
+.border-indigo-dark {
+    border-color: var(--cc-indigo-dark) !important;
+}
+
+.border-soft-yellow {
+    border-color: var(--cc-soft-yellow) !important;
+}
+
+.border-soft-yellow-dark {
+    border-color: var(--cc-soft-yellow-dark) !important;
+}
+
+.border-deep-green {
+    border-color: var(--cc-deep-green) !important;
+}
+
+.border-deep-green-dark {
+    border-color: var(--cc-deep-green-dark) !important;
+}
+
+/* text */
+.text-indigo {
+    color: var(--cc-indigo) !important;
+}
+
+.text-indigo-dark {
+    color: var(--cc-indigo-dark) !important;
+}
+
+.text-soft-yellow {
+    color: var(--cc-soft-yellow) !important;
+}
+
+.text-soft-yellow-dark {
+    color: var(--cc-soft-yellow-dark) !important;
+}
+
+.text-deep-green {
+    color: var(--cc-deep-green) !important;
+}
+
+.text-deep-green-dark {
+    color: var(--cc-deep-green-dark) !important;
+}
+
+.text-neutral {
+    color: var(--cc-neutral) !important;
+}
+
+.navbar-text-neutral {
+    --bs-navbar-color: var(--cc-neutral);
+    --bs-navbar-hover-color: var(--cc-neutral);
+    --bs-navbar-active-color: var(--cc-neutral);
+    --bs-navbar-brand-color: var(--cc-neutral);
+    --bs-navbar-brand-hover-color: var(--cc-neutral);
+}
+
+:root {
+    --cc-milk: #fdfaf3;
+    --cc-milk-dark: #f1ebdc;
+}
+
+.bg-milk {
+    background-color: var(--cc-milk) !important;
+}
+
+.bg-milk-dark {
+    background-color: var(--cc-milk-dark) !important;
+}

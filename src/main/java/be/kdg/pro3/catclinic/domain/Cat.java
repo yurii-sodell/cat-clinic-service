@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Cat{
@@ -11,7 +12,7 @@ public class Cat{
     private LocalDate dateOfBirth;
     private Gender gender;
     private UUID catId;
-    private double weightInKilos;
+    private Double weightInKilos;
     private int visits;
     private boolean isHospitalized;
     private String photo;
@@ -19,8 +20,8 @@ public class Cat{
     private List<Medication> medicationsThatWasAssignedToCat;
 
     public Cat(String name, LocalDate dateOfBirth, Gender gender, UUID catId,
-               double weightInKilos, int visits, boolean isHospitalized,
-               String photo, String BelongingOwnerId) {
+               Double weightInKilos, int visits, boolean isHospitalized,
+               String photo, String BelongingOwnerId){
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -45,8 +46,19 @@ public class Cat{
         return dateOfBirth;
     }
 
+    public void setDateOfBirth(LocalDate dateOfBirth){
+        if(dateOfBirth.isAfter(LocalDate.now()))
+            throw new IllegalArgumentException("Date of birth must be in the past");
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public Gender getGender(){
         return gender;
+    }
+
+    public void setGender(Gender gender){
+        if(gender == null) throw new IllegalArgumentException("Gender is not provided");
+        this.gender = gender;
     }
 
     public boolean isHospitalized(){
@@ -57,12 +69,26 @@ public class Cat{
         return name;
     }
 
+    public void setName(String name){
+        if(name == null || name.isEmpty()) throw new IllegalArgumentException("name cannot be empty");
+        this.name = name;
+    }
+
     public String getPhoto(){
         return photo;
     }
 
-    public double getWeightInKilos(){
+    public void setPhoto(String photo){
+        this.photo = photo;
+    }
+
+    public Double getWeightInKilos(){
         return weightInKilos;
+    }
+
+    public void setWeightInKilos(Double weightInKilos) throws IllegalArgumentException{
+        if(weightInKilos < 0) throw new IllegalArgumentException("Weight cannot be less then 0");
+        this.weightInKilos = weightInKilos;
     }
 
     public int getVisits(){
@@ -82,7 +108,19 @@ public class Cat{
     }
 
     @Override
-    public String toString() {
+    public boolean equals(Object o){
+        if(o == null || getClass() != o.getClass()) return false;
+        Cat cat = (Cat) o;
+        return Objects.equals(catId, cat.catId);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hashCode(catId);
+    }
+
+    @Override
+    public String toString(){
         DateTimeFormatter birthdayFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
@@ -96,5 +134,6 @@ public class Cat{
                 this.photo,
                 this.BelongingOwnerId
         );
+
     }
 }

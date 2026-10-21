@@ -1,14 +1,16 @@
 package be.kdg.pro3.catclinic.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Medication{
     private String title;
-    private double price;
+    private BigDecimal price;
     private UUID productId;
     private int weeksAfterBirthToStartMedication;
     private LocalDate marketReleaseDate;
@@ -18,10 +20,10 @@ public class Medication{
     private String photo;
     private List<Cat> catsThatMedicationWasAssignedTo;
 
-    public Medication(String title, double price, UUID productId,
+    public Medication(String title, BigDecimal price, UUID productId,
                       int weeksAfterBirthToStartMedication, LocalDate marketReleaseDate,
                       MedicationType medicationType, boolean isPrescriptionNeeded,
-                      boolean canBeGiftedOnCatsBirthday, String photo) {
+                      boolean canBeGiftedOnCatsBirthday, String photo){
         this.title = title;
         this.price = price;
         this.productId = productId;
@@ -54,7 +56,7 @@ public class Medication{
         return photo;
     }
 
-    public double getPrice(){
+    public BigDecimal getPrice(){
         return price;
     }
 
@@ -81,8 +83,9 @@ public class Medication{
     public void addCatsThatMedicationWasAssignedTo(Cat cat){
         this.catsThatMedicationWasAssignedTo.add(cat);
     }
+
     @Override
-    public String toString() {
+    public String toString(){
         DateTimeFormatter releaseFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
@@ -96,5 +99,17 @@ public class Medication{
                 this.isPrescriptionNeeded ? "Prescription" : "No prescription",
                 this.canBeGiftedOnCatsBirthday ? "Giftable" : "Not giftable"
         );
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == null || getClass() != o.getClass()) return false;
+        Medication that = (Medication) o;
+        return Objects.equals(productId, that.productId);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hashCode(productId);
     }
 }

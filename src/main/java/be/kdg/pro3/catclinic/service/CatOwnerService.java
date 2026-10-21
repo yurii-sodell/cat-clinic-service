@@ -4,6 +4,7 @@ import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public interface CatOwnerService{
     List<CatOwner> getAllOwners();
@@ -11,4 +12,10 @@ public interface CatOwnerService{
     List<CatOwner> getCatOwnerByItsName(String name);
     List<CatOwner> getCatOwnerByItsLanguage(PreferredCommunicationLanguage language);
     List<CatOwner> getOwnersByRegistrationDate(LocalDate registrationDate);
+    void registerNewOwner(String name, String familyName,
+                          double livingSpaceSquareMeters, int amountOfKids,
+                          String ownerPersonsPhone, String photoOfOwnersIdCard,
+                          PreferredCommunicationLanguage preferredCommunicationLanguage,
+                          boolean smokesAtHome);
+    CatOwner getCatOwnerById(UUID id);
 }
