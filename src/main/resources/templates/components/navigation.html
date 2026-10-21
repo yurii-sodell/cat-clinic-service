@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-<nav th:fragment="navigation" id="header-navigation">
-    <ul>
-        <li><a th:href="@{/}" th:text="#{navigation.homepage}">Home</a></li>
-        <li><a th:href="@{/cats}" th:text="#{navigation.catspage}">Cats</a></li>
-        <li><a th:href="@{/owners}" th:text="#{navigation.ownerspage}">Owners</a></li>
-        <li><a th:href="@{/medications}" th:text="#{navigation.medicationspage}">Medications</a></li>
-    </ul>
+<nav th:fragment="navigation" id="header-navigation" class="navbar navbar-expand bg-indigo navbar-text-neutral">
+    <div class="container">
+        <ul class="navbar-nav w-100 flex-wrap justify-content-evenly">
+            <li class="nav-item">
+                <a class="nav-link fs-5 px-2 py-2" th:href="@{/}" th:text="#{navigation.homepage}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fs-5 px-2 py-2" th:href="@{/cats}" th:text="#{navigation.catspage}">Cats</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fs-5 px-2 py-2" th:href="@{/owners}" th:text="#{navigation.ownerspage}">Owners</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fs-5 px-2 py-2" th:href="@{/medications}" th:text="#{navigation.medicationspage}">Medications</a>
+            </li>
+        </ul>
+    </div>
 </nav>
-
-</body>
-</html>

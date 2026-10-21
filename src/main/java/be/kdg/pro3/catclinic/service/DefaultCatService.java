@@ -56,7 +56,7 @@ public class DefaultCatService implements CatService{
             theCat.setName(catEditForm.getKeptName());
             theCat.setPhoto(catEditForm.getKeptPhoto());
             theCat.setWeightInKilos(catEditForm.getKeptWeightInKilos());
-        }catch (IllegalArgumentException e){
+        }catch (IllegalArgumentException e) {
             throw e;
         }
         catRepository.saveCat(theCat);

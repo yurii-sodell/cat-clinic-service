@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title th:text="#{owner-page.title}">Owner details</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/navigation.css}">
+    <th:block th:replace="~{components/general-imports :: head-common(#{owner-page.title})}" />
 </head>
 <body>
 <header>

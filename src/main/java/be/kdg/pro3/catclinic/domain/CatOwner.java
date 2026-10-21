@@ -25,9 +25,9 @@ public class CatOwner{
     }
 
     public static CatOwner registerCatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
-                                     String ownerPersonsPhone, String photoOfOwnersIdCard,
-                                     PreferredCommunicationLanguage preferredCommunicationLanguage,
-                                     boolean smokesAtHome){
+                                            String ownerPersonsPhone, String photoOfOwnersIdCard,
+                                            PreferredCommunicationLanguage preferredCommunicationLanguage,
+                                            boolean smokesAtHome){
         CatOwner catOwner = new CatOwner();
         catOwner.amountOfKids = amountOfKids;
         catOwner.familyName = familyName;
@@ -44,9 +44,9 @@ public class CatOwner{
     }
 
     public static CatOwner retrievedCatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
-                                      UUID ownerId, String ownerPersonsPhone, String photoOfOwnersIdCard,
-                                      PreferredCommunicationLanguage preferredCommunicationLanguage,
-                                      LocalDate registrationDate, boolean smokesAtHome){
+                                             UUID ownerId, String ownerPersonsPhone, String photoOfOwnersIdCard,
+                                             PreferredCommunicationLanguage preferredCommunicationLanguage,
+                                             LocalDate registrationDate, boolean smokesAtHome){
         CatOwner catOwner = new CatOwner();
         catOwner.amountOfKids = amountOfKids;
         catOwner.familyName = familyName;
@@ -111,7 +111,7 @@ public class CatOwner{
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         DateTimeFormatter registrationFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
@@ -131,11 +131,11 @@ public class CatOwner{
     public boolean equals(Object o){
         if(o == null || getClass() != o.getClass()) return false;
         CatOwner catOwner = (CatOwner) o;
-        return Double.compare(livingSpaceSquareMeters, catOwner.livingSpaceSquareMeters) == 0 && amountOfKids == catOwner.amountOfKids && smokesAtHome == catOwner.smokesAtHome && Objects.equals(ownerId, catOwner.ownerId) && Objects.equals(name, catOwner.name) && Objects.equals(familyName, catOwner.familyName) && Objects.equals(ownerPersonsPhone, catOwner.ownerPersonsPhone) && Objects.equals(photoOfOwnersIdCard, catOwner.photoOfOwnersIdCard) && Objects.equals(registrationDate, catOwner.registrationDate) && preferredCommunicationLanguage == catOwner.preferredCommunicationLanguage;
+        return Objects.equals(ownerId, catOwner.ownerId);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(ownerId, name, familyName, livingSpaceSquareMeters, amountOfKids, ownerPersonsPhone, photoOfOwnersIdCard, registrationDate, smokesAtHome, preferredCommunicationLanguage);
+        return Objects.hashCode(ownerId);
     }
 }

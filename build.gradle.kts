@@ -24,6 +24,12 @@ dependencies {
     //implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation("org.webjars:bootstrap:5.3.8")
+    implementation ( "org.webjars:webjars-locator-lite:1.1.5" )
+    implementation("org.slf4j:slf4j-api:2.0.17")
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    implementation("org.webjars:font-awesome:7.2.0")
 }
 
 tasks.test {

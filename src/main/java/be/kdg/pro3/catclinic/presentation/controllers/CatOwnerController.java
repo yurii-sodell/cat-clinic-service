@@ -5,19 +5,19 @@ import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
 import be.kdg.pro3.catclinic.service.CatOwnerService;
 import be.kdg.pro3.catclinic.web.CatOwnerRegistrationForm;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/owners")
+@Slf4j
 public class CatOwnerController{
-    private static Logger log = LoggerFactory.getLogger(CatOwnerController.class);
     private CatOwnerService service;
 
     public CatOwnerController(CatOwnerService service){
@@ -39,7 +39,7 @@ public class CatOwnerController{
         log.info("Received request to show certain owner page, id:  {}", ownerId.toString());
         try{
             model.addAttribute("ownerOnPage", service.getCatOwnerById(ownerId));
-        }catch (OwnerNotFoundException e){
+        }catch (OwnerNotFoundException e) {
             log.error(e.getMessage());
             model.addAttribute("errorMessage", e.getMessage());
             return "/error";
@@ -67,7 +67,7 @@ public class CatOwnerController{
             BindingResult bindingResult
     ){
         log.info("Received request for new owner!");
-        if(bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()){
             log.error("The data in owner form where corrupted");
             return "cat-owner-registration-form";
         }
