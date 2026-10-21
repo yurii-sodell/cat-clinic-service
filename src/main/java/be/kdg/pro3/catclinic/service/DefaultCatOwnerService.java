@@ -46,10 +46,10 @@ public class DefaultCatOwnerService implements CatOwnerService{
 
     @Override
     public void registerNewOwner(String name, String familyName,
-                          double livingSpaceSquareMeters, int amountOfKids,
-                          String ownerPersonsPhone, String photoOfOwnersIdCard,
-                          PreferredCommunicationLanguage preferredCommunicationLanguage,
-                          boolean smokesAtHome){
+                                 double livingSpaceSquareMeters, int amountOfKids,
+                                 String ownerPersonsPhone, String photoOfOwnersIdCard,
+                                 PreferredCommunicationLanguage preferredCommunicationLanguage,
+                                 boolean smokesAtHome){
         catOwnerRepository.saveOwner(CatOwner.registerCatOwner(amountOfKids,
                 familyName,
                 livingSpaceSquareMeters,

@@ -80,7 +80,7 @@ public class CatController{
         Cat cat;
         try{
             cat = catService.getCatById(catId);
-        }catch (CatNotFoundException e){
+        }catch (CatNotFoundException e) {
             log.error("Editing page: " + e.getMessage());
             return "/error";
         }
@@ -111,7 +111,7 @@ public class CatController{
 
         try{
             catService.updateCat(catId, catEditForm);
-        }catch (CatNotFoundException | IllegalArgumentException e){
+        }catch (CatNotFoundException | IllegalArgumentException e) {
             log.error("Error occurred while editing cat" + e.getMessage());
             return "/error";
         }

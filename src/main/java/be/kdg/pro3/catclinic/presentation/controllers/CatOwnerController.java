@@ -39,7 +39,7 @@ public class CatOwnerController{
         log.info("Received request to show certain owner page, id:  {}", ownerId.toString());
         try{
             model.addAttribute("ownerOnPage", service.getCatOwnerById(ownerId));
-        }catch (OwnerNotFoundException e){
+        }catch (OwnerNotFoundException e) {
             log.error(e.getMessage());
             model.addAttribute("errorMessage", e.getMessage());
             return "/error";
@@ -67,7 +67,7 @@ public class CatOwnerController{
             BindingResult bindingResult
     ){
         log.info("Received request for new owner!");
-        if(bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()){
             log.error("The data in owner form where corrupted");
             return "cat-owner-registration-form";
         }

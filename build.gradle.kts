@@ -24,6 +24,8 @@ dependencies {
     //implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation("org.webjars:bootstrap:5.3.8")
+    implementation ( "org.webjars:webjars-locator-lite:1.1.5" )
 }
 
 tasks.test {

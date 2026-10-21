@@ -14,16 +14,21 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-@ConditionalOnProperty(name = "db.autofill", havingValue ="true")
+@ConditionalOnProperty(name = "db.autofill", havingValue = "true")
 public class DataFactory{
     private final CatOwnerRepository catOwnerRepository;
     private final MedicationRepository medicationRepository;
     private final CatRepository catRepository;
 
-    public DataFactory(CatOwnerRepository catOwnerRepository, MedicationRepository medicationRepository,CatRepository catRepository){
+    public DataFactory(CatOwnerRepository catOwnerRepository, MedicationRepository medicationRepository, CatRepository catRepository){
         this.catRepository = catRepository;
         this.medicationRepository = medicationRepository;
         this.catOwnerRepository = catOwnerRepository;
+    }
+
+    private static void prescribe(Cat cat, Medication medication){
+        cat.addMedicationsThatWasAssignedToCat(medication);
+        medication.addCatsThatMedicationWasAssignedTo(cat);
     }
 
     @PostConstruct
@@ -84,7 +89,7 @@ public class DataFactory{
         catOwner4.getCats().addAll(List.of(cat8, cat9, cat10));
 
         Medication Amoxicillin =
-                new Medication("Amoxicillin",  BigDecimal.valueOf(2.50), UUID.randomUUID(),
+                new Medication("Amoxicillin", BigDecimal.valueOf(2.50), UUID.randomUUID(),
                         4, LocalDate.of(2015, 6, 1), MedicationType.PILLS,
                         true, false, "amoxicillin.jpg");
 
@@ -135,11 +140,6 @@ public class DataFactory{
         prescribe(cat9, VitaminCatTreats);
         prescribe(cat10, Metacam);
         prescribe(cat10, Panacur);
-    }
-
-    private static void prescribe(Cat cat, Medication medication){
-        cat.addMedicationsThatWasAssignedToCat(medication);
-        medication.addCatsThatMedicationWasAssignedTo(cat);
     }
 
 }

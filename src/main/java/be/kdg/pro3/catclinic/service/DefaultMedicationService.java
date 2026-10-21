@@ -25,7 +25,7 @@ public class DefaultMedicationService implements MedicationService{
 
     @Override
     public List<Medication> getMedicationFilteredByPrescriptionNeed(boolean isPrescriptionNeeded){
-        return  medicationRepository.getMedicationFilteredByPrescriptionNeed(isPrescriptionNeeded);
+        return medicationRepository.getMedicationFilteredByPrescriptionNeed(isPrescriptionNeeded);
     }
 
     @Override

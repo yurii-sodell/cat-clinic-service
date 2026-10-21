@@ -54,7 +54,7 @@ public class MedicationController{
     ){
         log.info("New medication request entered");
 
-        if(bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()){
             log.error("The data in medication form where corrupted");
             return "medication-adding-form";
         }
