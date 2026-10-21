@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -291,7 +292,7 @@ public class Presenter implements CommandLineRunner{
         view.show("Enter photo path or URL (can be ignore): ");
         String photo = view.inputString();
 
-        medicationService.registerNewMedication(title, price, weeksAfterBirthToStartMedication,
+        medicationService.registerNewMedication(title, BigDecimal.valueOf(price), weeksAfterBirthToStartMedication,
                 marketReleaseDate, medicationType, needsPrescription,
                 canBeGiftedOnCatsBirthday, photo);
         view.show("Medication registered successfully!");
@@ -331,7 +332,7 @@ public class Presenter implements CommandLineRunner{
         }
 
         view.show("Medications :\n");
-        List<Medication> found = medicationService.getMedicationFilteredByPrice(priceMin, priceMax);
+        List<Medication> found = medicationService.getMedicationFilteredByPrice(BigDecimal.valueOf(priceMin), BigDecimal.valueOf(priceMax));
         if(found.isEmpty()){
             view.showNoResultsMessage();
             return;

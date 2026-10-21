@@ -8,38 +8,44 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 @Component
-@ConditionalOnProperty(name = "db.autofill", havingValue ="true")
+@ConditionalOnProperty(name = "db.autofill", havingValue = "true")
 public class DataFactory{
     private final CatOwnerRepository catOwnerRepository;
     private final MedicationRepository medicationRepository;
     private final CatRepository catRepository;
 
-    public DataFactory(CatOwnerRepository catOwnerRepository, MedicationRepository medicationRepository,CatRepository catRepository){
+    public DataFactory(CatOwnerRepository catOwnerRepository, MedicationRepository medicationRepository, CatRepository catRepository){
         this.catRepository = catRepository;
         this.medicationRepository = medicationRepository;
         this.catOwnerRepository = catOwnerRepository;
     }
 
+    private static void prescribe(Cat cat, Medication medication){
+        cat.addMedicationsThatWasAssignedToCat(medication);
+        medication.addCatsThatMedicationWasAssignedTo(cat);
+    }
+
     @PostConstruct
     public void seed(){
-        CatOwner catOwner1 = new CatOwner(2, "Johnson", 85.5, "Emma", UUID.randomUUID(),
+        CatOwner catOwner1 = CatOwner.retrievedCatOwner(2, "Johnson", 85.5, "Emma", UUID.randomUUID(),
                 "+32 470 123 456", "id_johnson.jpg",
                 PreferredCommunicationLanguage.EN, LocalDate.of(2019, 5, 12), false);
 
-        CatOwner catOwner2 = new CatOwner(0, "Peeters", 62.0, "Lucas", UUID.randomUUID(),
+        CatOwner catOwner2 = CatOwner.retrievedCatOwner(0, "Peeters", 62.0, "Lucas", UUID.randomUUID(),
                 "+32 486 234 567", "id_peeters.jpg",
                 PreferredCommunicationLanguage.DE, LocalDate.of(2020, 8, 3), true);
 
-        CatOwner catOwner3 = new CatOwner(1, "Martinez", 74.3, "Sofia", UUID.randomUUID(),
+        CatOwner catOwner3 = CatOwner.retrievedCatOwner(1, "Martinez", 74.3, "Sofia", UUID.randomUUID(),
                 "+32 493 345 678", "id_martinez.jpg",
                 PreferredCommunicationLanguage.NL, LocalDate.of(2021, 2, 27), false);
 
-        CatOwner catOwner4 = new CatOwner(3, "De Smet", 110.8, "Noah", UUID.randomUUID(),
+        CatOwner catOwner4 = CatOwner.retrievedCatOwner(3, "De Smet", 110.8, "Noah", UUID.randomUUID(),
                 "+32 478 456 789", "id_desmet.jpg",
                 PreferredCommunicationLanguage.FR, LocalDate.of(2018, 11, 9), false);
 
@@ -83,35 +89,35 @@ public class DataFactory{
         catOwner4.getCats().addAll(List.of(cat8, cat9, cat10));
 
         Medication Amoxicillin =
-                new Medication("Amoxicillin", 12.50, UUID.randomUUID(),
+                new Medication("Amoxicillin", BigDecimal.valueOf(2.50), UUID.randomUUID(),
                         4, LocalDate.of(2015, 6, 1), MedicationType.PILLS,
                         true, false, "amoxicillin.jpg");
 
-        Medication FrontlinePlus = new Medication("Frontline Plus", 24.99, UUID.randomUUID(),
+        Medication FrontlinePlus = new Medication("Frontline Plus", BigDecimal.valueOf(24.99), UUID.randomUUID(),
                 8, LocalDate.of(2010, 3, 15), MedicationType.OINTMENT,
                 false, false, "frontline.jpg");
 
-        Medication Metacam = new Medication("Metacam", 18.75, UUID.randomUUID(),
+        Medication Metacam = new Medication("Metacam", BigDecimal.valueOf(18.75), UUID.randomUUID(),
                 6, LocalDate.of(2018, 9, 10), MedicationType.SYRUP,
                 true, false, "metacam.jpg");
 
-        Medication Revolution = new Medication("Revolution", 32.00, UUID.randomUUID(),
+        Medication Revolution = new Medication("Revolution", BigDecimal.valueOf(32.00), UUID.randomUUID(),
                 6, LocalDate.of(2012, 1, 20), MedicationType.INJECTION,
                 true, false, "revolution.jpg");
 
-        Medication VitaminCatTreats = new Medication("Vitamin Cat Treats", 9.99, UUID.randomUUID(),
+        Medication VitaminCatTreats = new Medication("Vitamin Cat Treats", BigDecimal.valueOf(9.99), UUID.randomUUID(),
                 0, LocalDate.of(2019, 4, 5), MedicationType.POWDER,
                 false, true, "vitamintreats.jpg");
 
-        Medication Panacur = new Medication("Panacur", 15.30, UUID.randomUUID(),
+        Medication Panacur = new Medication("Panacur", BigDecimal.valueOf(15.30), UUID.randomUUID(),
                 5, LocalDate.of(2016, 8, 12), MedicationType.PILLS,
                 true, false, "panacur.jpg");
 
-        Medication ConvenIa = new Medication("Convenia", 45.00, UUID.randomUUID(),
+        Medication ConvenIa = new Medication("Convenia", BigDecimal.valueOf(45.00), UUID.randomUUID(),
                 3, LocalDate.of(2013, 11, 2), MedicationType.INJECTION,
                 true, false, "convenia.jpg");
 
-        Medication HillsZD = new Medication("Hill's z/d Diet", 21.40, UUID.randomUUID(),
+        Medication HillsZD = new Medication("Hill's z/d Diet", BigDecimal.valueOf(21.40), UUID.randomUUID(),
                 0, LocalDate.of(2020, 2, 17), MedicationType.POWDER,
                 false, true, "hillszd.jpg");
 
@@ -134,11 +140,6 @@ public class DataFactory{
         prescribe(cat9, VitaminCatTreats);
         prescribe(cat10, Metacam);
         prescribe(cat10, Panacur);
-    }
-
-    private static void prescribe(Cat cat, Medication medication){
-        cat.addMedicationsThatWasAssignedToCat(medication);
-        medication.addCatsThatMedicationWasAssignedTo(cat);
     }
 
 }

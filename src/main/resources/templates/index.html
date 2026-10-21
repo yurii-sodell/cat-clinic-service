@@ -1,15 +1,71 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome!</title>
+    <th:block th:replace="~{components/general-imports :: head-common(#{index.title})}" />
 </head>
-<body>
+<body class="bg-milk d-flex flex-column min-vh-100">
 <header>
-    <div th:replace="~{components/navigation :: navigation}"></div>
+    <h1 th:text="#{index.heading}"
+        class="display-5 fw-bold text-center py-4 mb-0 bg-indigo text-neutral border-bottom border-5 border-deep-green">
+        Welcome to Cat Clinic!
+    </h1>
 </header>
 
-<h1>Welcome to Cat Clinic!</h1>
-<p>Choose an option from menu above!</p>
+<main class="container flex-grow-1 d-flex align-items-center py-5">
+    <nav class="row row-cols-1 row-cols-md-3 g-4 w-100">
+
+        <div class="col">
+            <div class="card h-100 border-0 shadow rounded-4 text-center">
+                <div class="card-body py-5">
+                    <div class="ratio ratio-1x1 w-50 mx-auto mb-4">
+                        <div class="rounded-circle bg-soft-yellow text-indigo-dark d-flex flex-column align-items-center justify-content-center gap-2">
+                            <i class="fa-solid fa-cat fs-1"></i>
+                            <span class="fs-5 fw-bold lh-1">C</span>
+                        </div>
+                    </div>
+                    <h2 class="h3 mb-0">
+                        <a class="stretched-link text-decoration-none text-indigo-dark"
+                           th:href="@{/cats}" th:text="#{navigation.catspage}">Cats</a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 border-0 shadow rounded-4 text-center">
+                <div class="card-body py-5">
+                    <div class="ratio ratio-1x1 w-50 mx-auto mb-4">
+                        <div class="rounded-circle bg-deep-green text-neutral d-flex flex-column align-items-center justify-content-center gap-2">
+                            <i class="fa-solid fa-user fs-1"></i>
+                            <span class="fs-5 fw-bold lh-1">A</span>
+                        </div>
+                    </div>
+                    <h2 class="h3 mb-0">
+                        <a class="stretched-link text-decoration-none text-indigo-dark"
+                           th:href="@{/owners}" th:text="#{navigation.ownerspage}">Owners</a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 border-0 shadow rounded-4 text-center">
+                <div class="card-body py-5">
+                    <div class="ratio ratio-1x1 w-50 mx-auto mb-4">
+                        <div class="rounded-circle bg-indigo text-neutral d-flex flex-column align-items-center justify-content-center gap-2">
+                            <i class="fa-solid fa-pills fs-1"></i>
+                            <span class="fs-5 fw-bold lh-1">T</span>
+                        </div>
+                    </div>
+                    <h2 class="h3 mb-0">
+                        <a class="stretched-link text-decoration-none text-indigo-dark"
+                           th:href="@{/medications}" th:text="#{navigation.medicationspage}">Medications</a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+</main>
 </body>
 </html>

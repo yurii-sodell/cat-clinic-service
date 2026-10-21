@@ -20,21 +20,46 @@ public class CatOwner{
     private PreferredCommunicationLanguage preferredCommunicationLanguage;
     private List<Cat> cats;
 
-    public CatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
-                    UUID ownerId, String ownerPersonsPhone, String photoOfOwnersIdCard,
-                    PreferredCommunicationLanguage preferredCommunicationLanguage,
-                    LocalDate registrationDate, boolean smokesAtHome){
-        this.amountOfKids = amountOfKids;
-        this.familyName = familyName;
-        this.livingSpaceSquareMeters = livingSpaceSquareMeters;
-        this.name = name;
-        this.ownerId = ownerId;
-        this.ownerPersonsPhone = ownerPersonsPhone;
-        this.photoOfOwnersIdCard = photoOfOwnersIdCard;
-        this.preferredCommunicationLanguage = preferredCommunicationLanguage;
-        this.registrationDate = registrationDate;
-        this.smokesAtHome = smokesAtHome;
-        this.cats = new ArrayList<>();
+    private CatOwner(){
+
+    }
+
+    public static CatOwner registerCatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
+                                            String ownerPersonsPhone, String photoOfOwnersIdCard,
+                                            PreferredCommunicationLanguage preferredCommunicationLanguage,
+                                            boolean smokesAtHome){
+        CatOwner catOwner = new CatOwner();
+        catOwner.amountOfKids = amountOfKids;
+        catOwner.familyName = familyName;
+        catOwner.livingSpaceSquareMeters = livingSpaceSquareMeters;
+        catOwner.name = name;
+        catOwner.ownerId = UUID.randomUUID();
+        catOwner.ownerPersonsPhone = ownerPersonsPhone;
+        catOwner.photoOfOwnersIdCard = photoOfOwnersIdCard;
+        catOwner.preferredCommunicationLanguage = preferredCommunicationLanguage;
+        catOwner.registrationDate = LocalDate.now();
+        catOwner.smokesAtHome = smokesAtHome;
+        catOwner.cats = new ArrayList<>();
+        return catOwner;
+    }
+
+    public static CatOwner retrievedCatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
+                                             UUID ownerId, String ownerPersonsPhone, String photoOfOwnersIdCard,
+                                             PreferredCommunicationLanguage preferredCommunicationLanguage,
+                                             LocalDate registrationDate, boolean smokesAtHome){
+        CatOwner catOwner = new CatOwner();
+        catOwner.amountOfKids = amountOfKids;
+        catOwner.familyName = familyName;
+        catOwner.livingSpaceSquareMeters = livingSpaceSquareMeters;
+        catOwner.name = name;
+        catOwner.ownerId = ownerId;
+        catOwner.ownerPersonsPhone = ownerPersonsPhone;
+        catOwner.photoOfOwnersIdCard = photoOfOwnersIdCard;
+        catOwner.preferredCommunicationLanguage = preferredCommunicationLanguage;
+        catOwner.registrationDate = registrationDate;
+        catOwner.smokesAtHome = smokesAtHome;
+        catOwner.cats = new ArrayList<>();
+        return catOwner;
     }
 
     public int getAmountOfKids(){
@@ -86,7 +111,7 @@ public class CatOwner{
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         DateTimeFormatter registrationFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
@@ -106,11 +131,11 @@ public class CatOwner{
     public boolean equals(Object o){
         if(o == null || getClass() != o.getClass()) return false;
         CatOwner catOwner = (CatOwner) o;
-        return Double.compare(livingSpaceSquareMeters, catOwner.livingSpaceSquareMeters) == 0 && amountOfKids == catOwner.amountOfKids && smokesAtHome == catOwner.smokesAtHome && Objects.equals(ownerId, catOwner.ownerId) && Objects.equals(name, catOwner.name) && Objects.equals(familyName, catOwner.familyName) && Objects.equals(ownerPersonsPhone, catOwner.ownerPersonsPhone) && Objects.equals(photoOfOwnersIdCard, catOwner.photoOfOwnersIdCard) && Objects.equals(registrationDate, catOwner.registrationDate) && preferredCommunicationLanguage == catOwner.preferredCommunicationLanguage;
+        return Objects.equals(ownerId, catOwner.ownerId);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(ownerId, name, familyName, livingSpaceSquareMeters, amountOfKids, ownerPersonsPhone, photoOfOwnersIdCard, registrationDate, smokesAtHome, preferredCommunicationLanguage);
+        return Objects.hashCode(ownerId);
     }
 }

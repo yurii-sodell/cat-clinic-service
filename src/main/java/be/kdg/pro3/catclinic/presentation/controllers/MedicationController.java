@@ -2,10 +2,14 @@ package be.kdg.pro3.catclinic.presentation.controllers;
 
 import be.kdg.pro3.catclinic.domain.Medication;
 
+import be.kdg.pro3.catclinic.domain.MedicationType;
 import be.kdg.pro3.catclinic.service.MedicationService;
 import be.kdg.pro3.catclinic.web.MedicationRegistrationForm;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -13,6 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/medications")
+@Slf4j
 public class MedicationController{
     private MedicationService service;
 
@@ -22,21 +27,37 @@ public class MedicationController{
 
     @GetMapping
     public String showMedication(Model model){
+        log.info("All medications request entered");
         List<Medication> list = service.getAllMedications();
-        model.addAttribute("allMedications", list);
+        model.addAttribute("medications", list);
+        log.info("All medications are successfully returned");
         return "medications";
     }
 
-    @GetMapping("/add")
-    public String addMedication(Model model){
+    @GetMapping("/new")
+    public String showMedicationForm(Model model){
+        log.info("Created new medication form");
         model.addAttribute("medicationForm", new MedicationRegistrationForm());
         return "medication-adding-form";
     }
 
-    @PostMapping("/add")
+    @ModelAttribute("medicationTypes")
+    public MedicationType[] medicationTypes(){
+        return MedicationType.values();
+    }
+
+    @PostMapping("/new")
     public String addMedication(
-            @ModelAttribute("medicationForm") MedicationRegistrationForm medicationForm
+            @Valid @ModelAttribute("medicationForm") MedicationRegistrationForm medicationForm,
+            BindingResult bindingResult
     ){
+        log.info("New medication request entered");
+
+        if(bindingResult.hasErrors()){
+            log.error("The data in medication form where corrupted");
+            return "medication-adding-form";
+        }
+
         service.registerNewMedication(
                 medicationForm.getTitle(),
                 medicationForm.getPrice(),
@@ -47,6 +68,8 @@ public class MedicationController{
                 medicationForm.isCanBeGiftedOnCatsBirthday(),
                 medicationForm.getPhoto()
         );
+
+        log.info("New medication is successfully registered");
         return "redirect:/medications";
     }
 }

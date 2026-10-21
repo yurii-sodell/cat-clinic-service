@@ -1,14 +1,21 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
 
+import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
+import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
 import be.kdg.pro3.catclinic.service.CatOwnerService;
 import be.kdg.pro3.catclinic.web.CatOwnerRegistrationForm;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/owners")
+@Slf4j
 public class CatOwnerController{
     private CatOwnerService service;
 
@@ -18,21 +25,52 @@ public class CatOwnerController{
 
     @GetMapping
     public String showOwners(Model model){
-        model.addAttribute("allOwners", service.getAllOwners());
+        log.info("Received request for all owners!");
+        model.addAttribute("owners", service.getAllOwners());
+        log.info("All owners are returned!");
         return "owners";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/{ownerId}")
+    public String getOwnerPage(
+            @PathVariable UUID ownerId,
+            Model model){
+        log.info("Received request to show certain owner page, id:  {}", ownerId.toString());
+        try{
+            model.addAttribute("ownerOnPage", service.getCatOwnerById(ownerId));
+        }catch (OwnerNotFoundException e) {
+            log.error(e.getMessage());
+            model.addAttribute("errorMessage", e.getMessage());
+            return "/error";
+        }
+        log.info("Owner was found, returning its page");
+        return "owner-page";
+    }
+
+    @GetMapping("/new")
     public String getOwnerAdding(Model model){
-        System.out.println("I got there");
+        log.info("Received request for owner registration form!");
         model.addAttribute("ownerRegistrationForm", new CatOwnerRegistrationForm());
+        log.info("Owner registration form is returned!");
         return "cat-owner-registration-form";
     }
 
-    @PostMapping("/add")
+    @ModelAttribute("preferredCommunicationLanguages")
+    public PreferredCommunicationLanguage[] preferredCommunicationLanguage(){
+        return PreferredCommunicationLanguage.values();
+    }
+
+    @PostMapping("/new")
     public String addOwner(
-            @ModelAttribute("ownerRegistrationForm") CatOwnerRegistrationForm form
-            ){
+            @Valid @ModelAttribute("ownerRegistrationForm") CatOwnerRegistrationForm form,
+            BindingResult bindingResult
+    ){
+        log.info("Received request for new owner with following values: " + form.toString());
+        if(bindingResult.hasErrors()){
+            log.error("The data in owner form where corrupted");
+            return "cat-owner-registration-form";
+        }
+
         service.registerNewOwner(
                 form.getName(),
                 form.getFamilyName(),
@@ -42,6 +80,9 @@ public class CatOwnerController{
                 form.getPhotoOfOwnersIdCard(),
                 form.getPreferredCommunicationLanguage(),
                 form.isSmokesAtHome());
+        log.info("New owner is registered!");
         return "redirect:/owners";
     }
+
+
 }

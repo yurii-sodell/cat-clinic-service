@@ -1,82 +1,57 @@
 package be.kdg.pro3.catclinic.web;
 
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
+import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class CatOwnerRegistrationForm{
+
+    @NotBlank(message = "Name cannot contain only blanks")
+    @NotNull(message = "Name cannot be empty")
     private String name;
+
+    @NotBlank(message = "Family name cannot contain only blanks")
+    @NotNull(message = "Family name cannot be empty")
     private String familyName;
-    private double livingSpaceSquareMeters;
-    private int amountOfKids;
+
+    @NotNull(message = "Living space cannot be empty")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Living space must be greater than 0")
+    private Double livingSpaceSquareMeters;
+
+    @NotNull(message = "Amount of kids cannot be empty")
+    @PositiveOrZero(message = "Amount of kids cannot be negative")
+    private Integer amountOfKids;
+
+    @NotBlank(message = "Phone cannot be empty")
+    @Pattern(regexp = "^\\+?[0-9 /.-]{8,15}$", message = "Phone number is not valid")
     private String ownerPersonsPhone;
+
+    @NotBlank(message = "Photo of ID card is required")
     private String photoOfOwnersIdCard;
+
     private boolean smokesAtHome;
+
+    @NotNull(message = "Preferred communication language cannot be empty")
     private PreferredCommunicationLanguage preferredCommunicationLanguage;
 
     public CatOwnerRegistrationForm(){
 
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getFamilyName(){
-        return familyName;
-    }
-
-    public void setFamilyName(String familyName){
-        this.familyName = familyName;
-    }
-
-    public double getLivingSpaceSquareMeters(){
-        return livingSpaceSquareMeters;
-    }
-
-    public void setLivingSpaceSquareMeters(double livingSpaceSquareMeters){
-        this.livingSpaceSquareMeters = livingSpaceSquareMeters;
-    }
-
-    public int getAmountOfKids(){
-        return amountOfKids;
-    }
-
-    public void setAmountOfKids(int amountOfKids){
-        this.amountOfKids = amountOfKids;
-    }
-
-    public String getOwnerPersonsPhone(){
-        return ownerPersonsPhone;
-    }
-
-    public void setOwnerPersonsPhone(String ownerPersonsPhone){
-        this.ownerPersonsPhone = ownerPersonsPhone;
-    }
-
-    public String getPhotoOfOwnersIdCard(){
-        return photoOfOwnersIdCard;
-    }
-
-    public void setPhotoOfOwnersIdCard(String photoOfOwnersIdCard){
-        this.photoOfOwnersIdCard = photoOfOwnersIdCard;
-    }
-
-    public boolean isSmokesAtHome(){
-        return smokesAtHome;
-    }
-
-    public void smokesAtHome(boolean smokesAtHome){
-        this.smokesAtHome = smokesAtHome;
-    }
-
-    public PreferredCommunicationLanguage getPreferredCommunicationLanguage(){
-        return preferredCommunicationLanguage;
-    }
-
-    public void setPreferredCommunicationLanguage(PreferredCommunicationLanguage preferredCommunicationLanguage){
-        this.preferredCommunicationLanguage = preferredCommunicationLanguage;
+    @Override
+    public String toString(){
+        return "CatOwnerRegistrationForm{" +
+                "amountOfKids=" + amountOfKids +
+                ", name='" + name + '\'' +
+                ", familyName='" + familyName + '\'' +
+                ", livingSpaceSquareMeters=" + livingSpaceSquareMeters +
+                ", ownerPersonsPhone='" + ownerPersonsPhone + '\'' +
+                ", photoOfOwnersIdCard='" + photoOfOwnersIdCard + '\'' +
+                ", smokesAtHome=" + smokesAtHome +
+                ", preferredCommunicationLanguage=" + preferredCommunicationLanguage +
+                '}';
     }
 }

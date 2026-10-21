@@ -1,48 +1,101 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Medication adding form</title>
+    <th:block th:replace="~{components/general-imports :: head-common(#{medication-adding-form.title})}" />
 </head>
-<body>
+<body class="bg-milk d-flex flex-column min-vh-100">
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
 
-<form th:action="@{/medications/add}" th:object="${medicationForm}" method="post" onsubmit="">
-    <label>Title</label>
-    <input type="text" th:field="*{title}" required>
+<main class="container flex-grow-1 py-5">
+    <div class="col-lg-8 mx-auto">
+        <h1 th:text="#{medication-adding-form.title}" class="display-6 fw-bold text-indigo-dark mb-4">Add medication</h1>
 
-    <label>Price</label>
-    <input type="number" th:field="*{price}" required>
+        <form th:action="@{/medications/new}" th:object="${medicationForm}" method="post"
+              class="card border-0 shadow rounded-4">
+            <div class="card-body p-4">
 
-    <label>Weeks after birth to start medication</label>
-    <input type="number" th:field="*{weeksAfterBirthToStartMedication}" required>
+                <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger rounded-3" role="alert">
+                    <ul class="mb-0">
+                        <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+                    </ul>
+                </div>
 
-    <label>Market release date</label>
-    <input type="date" th:field="*{marketReleaseDate}" required>
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label for="medication-form-title" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{medication-adding-form.medicationtitle}">Title</label>
+                        <input id="medication-form-title" type="text" th:field="*{title}"
+                               class="form-control" required/>
+                    </div>
 
+                    <div class="col-md-4">
+                        <label for="medication-form-price" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{medication-adding-form.price}">Price</label>
+                        <input id="medication-form-price" type="number" step="0.01" th:field="*{price}"
+                               class="form-control" required/>
+                    </div>
 
-    <label for="medicationType">Choose a Medication Type:</label>
-    <select id="medicationType" name="medicationType">
-        <option value="PILLS">Pills</option>
-        <option value="OINTMENT">Ointment</option>
-        <option value="DROPS">Drops</option>
-        <option value="SYRUP">Syrup</option>
-        <option value="POWDER">Powder</option>
-        <option value="INJECTION">Injection</option>
-    </select>
+                    <div class="col-md-6">
+                        <label for="medication-form-weeks-after-birth" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{medication-adding-form.weeksafterbirth}">Weeks after birth to start medication</label>
+                        <input id="medication-form-weeks-after-birth" type="number"
+                               th:field="*{weeksAfterBirthToStartMedication}"
+                               class="form-control" required/>
+                    </div>
 
-    <label>Is prescription needed</label>
-    <input type="checkbox" th:field="*{prescriptionNeeded}">
+                    <div class="col-md-6">
+                        <label for="medication-form-market-release-date" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{medication-adding-form.releasedate}">Market release date</label>
+                        <input id="medication-form-market-release-date" type="date" th:field="*{marketReleaseDate}"
+                               class="form-control" required/>
+                    </div>
 
-    <label>Can be gifted</label>
-    <input type="checkbox" th:field="*{canBeGiftedOnCatsBirthday}">
+                    <div class="col-12">
+                        <label for="medication-form-type" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{medication-adding-form.type}">Choose a Medication Type:</label>
+                        <select id="medication-form-type" th:field="*{medicationType}" class="form-select">
+                            <option th:each="type : ${medicationTypes}"
+                                    th:value="${type}"
+                                    th:text="${type.getDisplayName()}"></option>
+                        </select>
+                    </div>
 
-    <label>Photo (optional)</label>
-    <input type="url" th:field="*{photo}">
+                    <div class="col-12">
+                        <label for="medication-form-photo" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{medication-adding-form.photo}">Photo (optional)</label>
+                        <input id="medication-form-photo" type="url" th:field="*{photo}" class="form-control"/>
+                    </div>
 
-    <button type="submit">Add medication</button>
-</form>
+                    <div class="col-12">
+                        <div class="rounded-4 bg-soft-yellow p-3">
+                            <div class="form-check form-switch mb-2">
+                                <input id="medication-form-prescription-needed" type="checkbox"
+                                       th:field="*{prescriptionNeeded}" class="form-check-input"/>
+                                <label for="medication-form-prescription-needed"
+                                       class="form-check-label fw-bold text-indigo-dark"
+                                       th:text="#{medication-adding-form.prescription}">Is prescription needed</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input id="medication-form-can-be-gifted" type="checkbox"
+                                       th:field="*{canBeGiftedOnCatsBirthday}" class="form-check-input"/>
+                                <label for="medication-form-can-be-gifted"
+                                       class="form-check-label fw-bold text-indigo-dark"
+                                       th:text="#{medication-adding-form.gifted}">Can be gifted</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 text-end">
+                        <button type="submit"
+                                class="btn bg-soft-yellow text-indigo-dark fw-bold px-5 rounded-3 shadow-sm"
+                                th:text="#{medication-adding-form.submit}">Add medication</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
 </body>
 </html>
