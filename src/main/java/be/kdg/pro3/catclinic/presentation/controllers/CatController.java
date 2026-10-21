@@ -7,6 +7,7 @@ import be.kdg.pro3.catclinic.service.CatService;
 import be.kdg.pro3.catclinic.web.CatEditForm;
 import be.kdg.pro3.catclinic.web.CatSearchRequest;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,8 +20,8 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/cats")
+@Slf4j
 public class CatController{
-    private static Logger log = LoggerFactory.getLogger(CatController.class);
     private CatService catService;
 
     public CatController(CatService catService){
