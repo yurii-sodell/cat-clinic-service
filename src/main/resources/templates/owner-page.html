@@ -30,7 +30,6 @@
                 <tr>
                     <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.idcard}">ID card photo</th>
                     <td class="py-3 px-4">
-                        <!-- TODO: th:src, see note below -->
                         <img th:if="*{photoOfOwnersIdCard != null}"
                              th:text="*{photoOfOwnersIdCard}"
                              th:alt="#{owner-page.idcard}"
@@ -54,7 +53,7 @@
                     <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.language}">Preferred communication language</th>
                     <td class="py-3 px-4">
                         <span class="badge bg-soft-yellow text-indigo-dark fs-6 px-3 py-2 rounded-pill"
-                              th:text="*{preferredCommunicationLanguage}">Language</span>
+                              th:text="*{preferredCommunicationLanguage.getLanguageName()}">Language</span>
                     </td>
                 </tr>
                 </tbody>

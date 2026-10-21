@@ -1,12 +1,15 @@
 package be.kdg.pro3.catclinic.web;
 
-import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.Gender;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
+@Setter
+@Getter
 public class CatEditForm{
 
     @NotBlank(message = "Name cannot contains only blanks")
@@ -34,45 +37,5 @@ public class CatEditForm{
         this.keptGender = gender;
         this.keptWeightInKilos = weight;
         this.keptPhoto = photo;
-    }
-
-    public LocalDate getKeptDateOfBirth(){
-        return keptDateOfBirth;
-    }
-
-    public void setKeptDateOfBirth(LocalDate keptDateOfBirth){
-        this.keptDateOfBirth = keptDateOfBirth;
-    }
-
-    public Gender getKeptGender(){
-        return keptGender;
-    }
-
-    public void setKeptGender(Gender keptGender){
-        this.keptGender = keptGender;
-    }
-
-    public String getKeptName(){
-        return keptName;
-    }
-
-    public void setKeptName(String keptName){
-        this.keptName = keptName;
-    }
-
-    public String getKeptPhoto(){
-        return keptPhoto;
-    }
-
-    public void setKeptPhoto(String keptPhoto){
-        this.keptPhoto = keptPhoto;
-    }
-
-    public Double getKeptWeightInKilos(){
-        return keptWeightInKilos;
-    }
-
-    public void setKeptWeightInKilos(double keptWeightInKilos){
-        this.keptWeightInKilos = keptWeightInKilos;
     }
 }
