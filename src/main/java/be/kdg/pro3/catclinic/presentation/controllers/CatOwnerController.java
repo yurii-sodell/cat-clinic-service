@@ -7,8 +7,6 @@ import be.kdg.pro3.catclinic.service.CatOwnerService;
 import be.kdg.pro3.catclinic.web.CatOwnerRegistrationForm;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -72,8 +70,6 @@ public class CatOwnerController{
             log.error("The data in owner form where corrupted");
             return "cat-owner-registration-form";
         }
-
-
 
         service.registerNewOwner(
                 form.getName(),
