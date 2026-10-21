@@ -3,47 +3,99 @@
 <head>
     <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}" />
 </head>
-<body>
+<body class="bg-milk d-flex flex-column min-vh-100">
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
-<main>
-    <form th:action="@{/owners/new}" th:object="${ownerRegistrationForm}" method="post">
 
-        <label for="owner-form-name" th:text="#{cat-owner-registration-form.name}">Name</label>
-        <input id="owner-form-name" type="text" th:field="*{name}" required/>
+<main class="container flex-grow-1 py-5">
+    <div class="col-lg-8 mx-auto">
+        <h1 th:text="#{cat-owner-registration-form.title}" class="display-6 fw-bold text-indigo-dark mb-4">Register owner</h1>
 
-        <label for="owner-form-family-name" th:text="#{cat-owner-registration-form.familyname}">Family name</label>
-        <input id="owner-form-family-name" type="text" th:field="*{familyName}" required/>
+        <form th:action="@{/owners/new}" th:object="${ownerRegistrationForm}" method="post"
+              class="card border-0 shadow rounded-4">
+            <div class="card-body p-4">
 
-        <label for="owner-form-living-space" th:text="#{cat-owner-registration-form.livingspace}">Living space (square meters)</label>
-        <input id="owner-form-living-space" type="number" step="any" min="0" th:field="*{livingSpaceSquareMeters}" required/>
+                <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger rounded-3" role="alert">
+                    <ul class="mb-0">
+                        <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+                    </ul>
+                </div>
 
-        <label for="owner-form-amount-of-kids" th:text="#{cat-owner-registration-form.kids}">Amount of kids</label>
-        <input id="owner-form-amount-of-kids" type="number" min="0" th:field="*{amountOfKids}" required/>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="owner-form-name" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{cat-owner-registration-form.name}">Name</label>
+                        <input id="owner-form-name" type="text" th:field="*{name}"
+                               class="form-control" required/>
+                    </div>
 
-        <label for="owner-form-phone" th:text="#{cat-owner-registration-form.phone}">Phone</label>
-        <input id="owner-form-phone" type="tel" th:field="*{ownerPersonsPhone}" required/>
+                    <div class="col-md-6">
+                        <label for="owner-form-family-name" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{cat-owner-registration-form.familyname}">Family name</label>
+                        <input id="owner-form-family-name" type="text" th:field="*{familyName}"
+                               class="form-control" required/>
+                    </div>
 
-        <label for="owner-form-id-photo" th:text="#{cat-owner-registration-form.idphoto}">Photo of ID card</label>
-        <input id="owner-form-id-photo" type="url" th:field="*{photoOfOwnersIdCard}" required/>
+                    <div class="col-md-6">
+                        <label for="owner-form-living-space" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{cat-owner-registration-form.livingspace}">Living space (square meters)</label>
+                        <input id="owner-form-living-space" type="number" step="any" min="0"
+                               th:field="*{livingSpaceSquareMeters}" class="form-control" required/>
+                    </div>
 
-        <label for="owner-form-language" th:text="#{cat-owner-registration-form.language}">Choose a preferred communication language:</label>
-        <select id="owner-form-language" name="preferredCommunicationLanguages">
-            <option th:each="language : ${preferredCommunicationLanguages}"
-                    th:value="${language}"
-                    th:text="${language.getLanguageName()}">Language</option>
-        </select>
+                    <div class="col-md-6">
+                        <label for="owner-form-amount-of-kids" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{cat-owner-registration-form.kids}">Amount of kids</label>
+                        <input id="owner-form-amount-of-kids" type="number" min="0"
+                               th:field="*{amountOfKids}" class="form-control" required/>
+                    </div>
 
-        <label for="owner-form-smokes-at-home" th:text="#{cat-owner-registration-form.smokes}">Smokes at home</label>
-        <input id="owner-form-smokes-at-home" type="checkbox" th:field="*{smokesAtHome}"/>
+                    <div class="col-md-6">
+                        <label for="owner-form-phone" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{cat-owner-registration-form.phone}">Phone</label>
+                        <input id="owner-form-phone" type="tel" th:field="*{ownerPersonsPhone}"
+                               class="form-control" required/>
+                    </div>
 
-        <ul th:if="${#fields.hasAnyErrors()}">
-            <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
-        </ul>
+                    <div class="col-md-6">
+                        <label for="owner-form-language" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{cat-owner-registration-form.language}">Choose a preferred communication language:</label>
+                        <select id="owner-form-language" name="preferredCommunicationLanguages" class="form-select">
+                            <option th:each="language : ${preferredCommunicationLanguages}"
+                                    th:value="${language}"
+                                    th:text="${language.getLanguageName()}">Language</option>
+                        </select>
+                    </div>
 
-        <button type="submit" th:text="#{cat-owner-registration-form.submit}">Add owner</button>
-    </form>
+                    <div class="col-12">
+                        <label for="owner-form-id-photo" class="form-label fw-bold text-indigo-dark"
+                               th:text="#{cat-owner-registration-form.idphoto}">Photo of ID card</label>
+                        <input id="owner-form-id-photo" type="url" th:field="*{photoOfOwnersIdCard}"
+                               class="form-control" required/>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="rounded-4 bg-soft-yellow p-3">
+                            <div class="form-check form-switch">
+                                <input id="owner-form-smokes-at-home" type="checkbox"
+                                       th:field="*{smokesAtHome}" class="form-check-input"/>
+                                <label for="owner-form-smokes-at-home"
+                                       class="form-check-label fw-bold text-indigo-dark"
+                                       th:text="#{cat-owner-registration-form.smokes}">Smokes at home</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 text-end">
+                        <button type="submit"
+                                class="btn bg-soft-yellow text-indigo-dark fw-bold px-5 rounded-3 shadow-sm"
+                                th:text="#{cat-owner-registration-form.submit}">Add owner</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </main>
 </body>
 </html>

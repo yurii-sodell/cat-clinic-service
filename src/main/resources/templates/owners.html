@@ -3,32 +3,46 @@
 <head>
     <th:block th:replace="~{components/general-imports :: head-common(#{owners.title})}" />
 </head>
-<body>
+<body class="bg-milk d-flex flex-column min-vh-100">
 <header>
     <div th:replace="~{components/navigation :: navigation}"></div>
 </header>
-<main>
-    <h1 th:text="#{owners.heading}">Registered owners</h1>
-    <p th:if="${#lists.isEmpty(owners)}" th:text="#{owners.empty}">No owners found</p>
-    <table th:unless="${#lists.isEmpty(owners)}">
-        <thead>
-        <tr>
-            <th th:text="#{owners.tablename}">Name</th>
-            <th th:text="#{owners.tablefamilyname}">Family Name</th>
-            <th th:text="#{owners.tablecats}">Page</th>
-        </tr>
-        </thead>
-        <tbody th:each="owner : ${owners}">
-        <tr>
-            <td th:text="${owner.name}">Name</td>
-            <td th:text="${owner.familyName}">Family name</td>
-            <td>
-                <a th:action="g" th:href="@{/owners/{ownerId}(ownerId=${owner.ownerId})}" th:text="#{owners.enter}">View</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <a th:href="@{/owners/new}" th:text="#{owners.register}">Register new owner!</a>
+
+<main class="container flex-grow-1 py-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <h1 th:text="#{owners.heading}" class="display-6 fw-bold text-indigo-dark mb-0">Registered owners</h1>
+        <a th:href="@{/owners/new}" th:text="#{owners.register}"
+           class="btn bg-soft-yellow text-indigo-dark fw-bold px-4 rounded-3 shadow-sm">Register new owner!</a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(owners)}"
+         class="card border-0 rounded-4 bg-soft-yellow text-indigo-dark text-center">
+        <div class="card-body py-4">
+            <p class="h5 mb-0" th:text="#{owners.empty}">No owners found</p>
+        </div>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(owners)}" class="card border-0 shadow rounded-4 overflow-hidden">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4" th:text="#{owners.tablename}">Name</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4" th:text="#{owners.tablefamilyname}">Family Name</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4 text-end" th:text="#{owners.tablecats}">Page</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="owner : ${owners}">
+                <td class="py-3 px-4 fw-semibold text-indigo-dark" th:text="${owner.name}">Name</td>
+                <td class="py-3 px-4" th:text="${owner.familyName}">Family name</td>
+                <td class="py-3 px-4 text-end">
+                    <a th:href="@{/owners/{ownerId}(ownerId=${owner.ownerId})}" th:text="#{owners.enter}"
+                       class="btn btn-sm bg-soft-yellow text-indigo-dark fw-bold px-3 rounded-pill">View</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
 </html>
