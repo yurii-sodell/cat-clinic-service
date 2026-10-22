@@ -2,11 +2,15 @@ package be.kdg.pro3.catclinic.web;
 
 import be.kdg.pro3.catclinic.domain.MedicationType;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Getter
+@Setter
 public class MedicationRegistrationForm{
 
     @NotBlank(message = "Title cannot be empty")
@@ -34,69 +38,5 @@ public class MedicationRegistrationForm{
 
     public MedicationRegistrationForm(){
 
-    }
-
-    public boolean isCanBeGiftedOnCatsBirthday(){
-        return canBeGiftedOnCatsBirthday;
-    }
-
-    public void canBeGiftedOnCatsBirthday(boolean canBeGiftedOnCatsBirthday){
-        this.canBeGiftedOnCatsBirthday = canBeGiftedOnCatsBirthday;
-    }
-
-    public boolean isPrescriptionNeeded(){
-        return prescriptionNeeded;
-    }
-
-    public void setPrescriptionNeeded(boolean prescriptionNeeded){
-        this.prescriptionNeeded = prescriptionNeeded;
-    }
-
-    public LocalDate getMarketReleaseDate(){
-        return marketReleaseDate;
-    }
-
-    public void setMarketReleaseDate(LocalDate marketReleaseDate){
-        this.marketReleaseDate = marketReleaseDate;
-    }
-
-    public MedicationType getMedicationType(){
-        return medicationType;
-    }
-
-    public void setMedicationType(MedicationType medicationType){
-        this.medicationType = medicationType;
-    }
-
-    public String getPhoto(){
-        return photo;
-    }
-
-    public void setPhoto(String photo){
-        this.photo = photo;
-    }
-
-    public BigDecimal getPrice(){
-        return price;
-    }
-
-    public void setPrice(BigDecimal price){
-        this.price = price;
-    }
-
-    public String getTitle(){
-        return title;
-    }
-
-    public void setTitle(String title){
-        this.title = title;
-    }
-
-    public int getWeeksAfterBirthToStartMedication(){
-        return weeksAfterBirthToStartMedication;
-    }
-
-    public void setWeeksAfterBirthToStartMedication(int weeksAfterBirthToStartMedication){
-        this.weeksAfterBirthToStartMedication = weeksAfterBirthToStartMedication;
     }
 }
