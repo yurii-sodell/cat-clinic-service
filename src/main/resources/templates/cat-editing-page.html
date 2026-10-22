@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}" />
+    <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}"/>
     <script th:src="@{/js/cat-edit.js}" defer></script>
 </head>
 <body class="bg-milk d-flex flex-column min-vh-100">
@@ -69,7 +69,8 @@
 
                     <div class="col-12 text-end">
                         <button type="submit"
-                                class="btn bg-soft-yellow text-indigo-dark fw-bold px-5 rounded-3 shadow-sm">Save</button>
+                                class="btn bg-soft-yellow text-indigo-dark fw-bold px-5 rounded-3 shadow-sm">Save
+                        </button>
                     </div>
                 </div>
             </div>

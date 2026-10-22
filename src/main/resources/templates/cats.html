@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}" />
+    <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}"/>
 </head>
 <body class="bg-milk d-flex flex-column min-vh-100">
 <header>
@@ -11,49 +11,57 @@
 <main class="container flex-grow-1 py-5">
     <h1 th:text="#{cats.heading}" class="display-6 fw-bold text-indigo-dark mb-4">Registered cats</h1>
 
-    <form th:action="@{/cats}" th:object="${catSearchRequest}" th:method="get" id="search-bar"
-          class="card border-0 shadow rounded-4 mb-4">
+    <form th:action="@{/cats}" th:object="${catSearchRequest}" th:method="get">
+        <div class="card border-0 shadow rounded-4 mb-4">
         <div class="card-body p-4">
             <div class="row g-3">
                 <div class="col-12">
                     <label for="cat-search-name" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.searchname}">Cats name</label>
-                    <input id="cat-search-name" name="name" type="search" class="form-control"/>
+                    <input id="cat-search-name" name="name" type="search" class="form-control"
+                           th:field="*{catName}"/>
                 </div>
 
                 <div class="col-6 col-md-3">
                     <label for="cat-search-min-age" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.minage}">Min age</label>
                     <input id="cat-search-min-age" name="minAge" type="number" min="0" max="99"
-                           class="form-control"/>
+                           class="form-control" th:field="*{minAge}"/>
                 </div>
 
                 <div class="col-6 col-md-3">
                     <label for="cat-search-max-age" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.maxage}">Max age</label>
                     <input id="cat-search-max-age" name="maxAge" type="number" min="0" max="99"
-                           class="form-control"/>
+                           class="form-control" th:field="*{maxAge}"/>
                 </div>
 
                 <div class="col-6 col-md-3">
                     <label for="cat-search-min-weight" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.minweight}">Min weight</label>
                     <input id="cat-search-min-weight" name="minWeight" type="number" min="0" max="99"
-                           class="form-control"/>
+                           class="form-control" th:field="*{minWeight}"/>
                 </div>
 
                 <div class="col-6 col-md-3">
                     <label for="cat-search-max-weight" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.maxweight}">Max weight</label>
                     <input id="cat-search-max-weight" name="maxWeight" type="number" min="0" max="99"
-                           class="form-control"/>
+                           class="form-control" th:field="*{maxWeight}"/>
                 </div>
 
                 <div class="col-12 text-end">
                     <button type="submit" class="btn bg-indigo text-neutral fw-bold px-5 rounded-3"
-                            th:text="#{cats.submit}">Send</button>
+                            th:text="#{cats.submit}">Send
+                    </button>
                 </div>
             </div>
+        </div>
+        </div>
+        <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger rounded-3" role="alert">
+            <ul class="mb-0">
+                <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+            </ul>
         </div>
     </form>
 
@@ -64,22 +72,36 @@
         </div>
     </div>
 
-    <div th:unless="${#lists.isEmpty(cats)}" class="card border-0 shadow rounded-4 overflow-hidden">
-        <table class="table table-hover align-middle mb-0">
-            <thead>
-            <tr>
-                <th class="bg-indigo text-neutral fs-5 py-3 px-4" th:text="#{cats.tablename}">Name</th>
-                <th class="bg-indigo text-neutral fs-5 py-3 px-4" th:text="#{cats.tableage}">Age</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="cat : ${cats}">
-                <td class="py-3 px-4 fw-semibold text-indigo-dark" th:text="${cat.name}">Cats name</td>
-                <td class="py-3 px-4" th:text="${cat.age}">0</td>
-            </tr>
-            </tbody>
-        </table>
+    <div th:unless="${#lists.isEmpty(cats)}" class="container display-5">
+        <!--        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">-->
+        <div class="row row-cols-lg-4 row-cols-md-3 row-cols-md-2 g-4">
+            <div th:each="cat : ${cats}" th:unless="${cat == null}" class="col">
+                <div class="card border-0 shadow rounded-4">
+                    <div class="card-header ratio ratio-1x1">
+                        <img th:src="${cat.photo}"
+                             th:alt="${cat.photo}"
+                             class="img-fluid rounded-circle ratio ratio-1x1">
+                    </div>
+                    <div class="card-body">
+                        <p th:text="${cat.name}" class="text-center fs-2">Cats name</p>
+                    </div>
+                    <div class="card-footer d-flex flex-wrap justify-content-center align-items-center gap-2">
+                        <a th:text="#{cats.prescribe}"
+                           th:href="@{/prescriptions/new/{catId}(catId=${cat.catId})}"
+                           class="btn btn-sm flex-fill fw-bold rounded-3 bg-deep-green text-neutral">
+                            Prescribe
+                        </a>
+                        <a th:text="#{cats.edit}"
+                           th:href="@{/cats/edit/{catId}(catId=${cat.catId})}"
+                           class="btn btn-sm flex-fill fw-bold rounded-3 bg-soft-yellow text-neutral">
+                            Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </main>
 </body>
 </html>

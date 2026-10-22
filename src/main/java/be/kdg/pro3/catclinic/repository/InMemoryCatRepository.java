@@ -55,7 +55,7 @@ public class InMemoryCatRepository implements CatRepository{
                 .filter(cat -> maxAge == null || cat.getAge() <= maxAge)
                 .filter(cat -> minWeight == null || cat.getWeightInKilos() >= minWeight)
                 .filter(cat -> maxWeight == null || cat.getWeightInKilos() <= maxWeight)
-                .filter(cat -> catName == null || catName.isEmpty() || cat.getName().equalsIgnoreCase(catName))
+                .filter(cat -> catName == null || catName.isEmpty() || cat.getName().toLowerCase().contains(catName.toLowerCase()))
                 .sorted(Comparator.comparing(Cat::getName, String.CASE_INSENSITIVE_ORDER))
                 .toList();
     }
