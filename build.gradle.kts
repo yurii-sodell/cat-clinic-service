@@ -30,6 +30,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
     implementation("org.webjars:font-awesome:7.2.0")
+    implementation("org.webjars.npm:bootstrap-icons:1.11.3")
 }
 
 tasks.test {
