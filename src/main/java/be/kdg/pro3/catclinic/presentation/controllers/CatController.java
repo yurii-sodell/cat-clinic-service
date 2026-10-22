@@ -8,11 +8,12 @@ import be.kdg.pro3.catclinic.web.CatEditForm;
 import be.kdg.pro3.catclinic.web.CatSearchRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.UUID;
@@ -41,17 +42,18 @@ public class CatController{
 
     @GetMapping
     public String getCats(
-            @Valid @ModelAttribute("catSearchRequest") CatSearchRequest request,
+            @ModelAttribute("catSearchRequest") CatSearchRequest request,
             BindingResult bindingResult,
             Model model
     ){
-        log.info("Requested cats with searchParameters");
         if(bindingResult.hasErrors()){
             log.error("some request fields were corrupted");
             return "cats";
         }
-        log.info("\n Params: " + request);
 
+        log.info("Requested cats with searchParameters");
+
+        log.info("Params: " + request);
         List<Cat> cats = catService.getCatBySearchRequest(
                 request.getCatName(),
                 request.getMinAge(),
@@ -71,7 +73,7 @@ public class CatController{
     }
 
     @GetMapping("/edit/{catId}")
-    public String editCat(
+    public String getCatEditingPage(
             @PathVariable UUID catId,
             Model model
     ){
@@ -81,7 +83,7 @@ public class CatController{
             cat = catService.getCatById(catId);
         }catch (CatNotFoundException e) {
             log.error("Editing page: " + e.getMessage());
-            return "redirect:/error";
+            return "/error";
         }
 
         model.addAttribute("catEditForm",
@@ -97,27 +99,25 @@ public class CatController{
     }
 
     @PostMapping("/edit/{catId}")
-    public String editCat(@PathVariable UUID catId,
-                          @Valid @ModelAttribute("catEditForm") CatEditForm catEditForm,
-                          BindingResult bindingResult,
-                          Model model,
-                          RedirectAttributes redirectAttributes) {
-        log.info("The edit form was posted for id: " + catId.toString());
-        model.addAttribute("catBeingEdited", catId);
-
-        if (bindingResult.hasErrors()) {
-            log.error("Cat editing form was corrupted");
+    public String getCatEditingPage(
+            @PathVariable UUID catId,
+            @Valid @ModelAttribute("catEditForm") CatEditForm catEditForm,
+            BindingResult bindingResult
+    ){
+        log.info("Cat edit request entered");
+        if(bindingResult.hasErrors()){
+            log.error("Cat editing form were corrupted");
             return "cat-editing-page";
         }
 
         try{
             catService.updateCat(catId, catEditForm);
-            redirectAttributes.addFlashAttribute("successMessage", "Cat updated.");
-            log.info("Cat successfully updated");
-            return "redirect:/cats/edit/" + catId;
         }catch (CatNotFoundException | IllegalArgumentException e) {
             log.error("Error occurred while editing cat" + e.getMessage());
-            return "redirect:/error";
+            return "/error";
         }
+
+        log.info("Editing was done");
+        return "cat-editing-page";
     }
 }
