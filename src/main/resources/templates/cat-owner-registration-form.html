@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}" />
+    <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}"/>
 </head>
 <body class="bg-milk d-flex flex-column min-vh-100">
 <header>
@@ -10,7 +10,8 @@
 
 <main class="container flex-grow-1 py-5">
     <div class="col-lg-8 mx-auto">
-        <h1 th:text="#{cat-owner-registration-form.title}" class="display-6 fw-bold text-indigo-dark mb-4">Register owner</h1>
+        <h1 th:text="#{cat-owner-registration-form.title}" class="display-6 fw-bold text-indigo-dark mb-4">Register
+            owner</h1>
 
         <form th:action="@{/owners/new}" th:object="${ownerRegistrationForm}" method="post"
               class="card border-0 shadow rounded-4">
@@ -60,11 +61,14 @@
 
                     <div class="col-md-6">
                         <label for="owner-form-language" class="form-label fw-bold text-indigo-dark"
-                               th:text="#{cat-owner-registration-form.language}">Choose a preferred communication language:</label>
-                        <select id="owner-form-language" th:field="*{preferredCommunicationLanguage}" class="form-select">
+                               th:text="#{cat-owner-registration-form.language}">Choose a preferred communication
+                            language:</label>
+                        <select id="owner-form-language" th:field="*{preferredCommunicationLanguage}"
+                                class="form-select">
                             <option th:each="language : ${preferredCommunicationLanguages}"
                                     th:value="${language.name()}"
-                                    th:text="${language.getLanguageName()}">Language</option>
+                                    th:text="${language.getLanguageName()}">Language
+                            </option>
                         </select>
                     </div>
 
@@ -90,7 +94,8 @@
                     <div class="col-12 text-end">
                         <button type="submit"
                                 class="btn bg-soft-yellow text-indigo-dark fw-bold px-5 rounded-3 shadow-sm"
-                                th:text="#{cat-owner-registration-form.submit}">Add owner</button>
+                                th:text="#{cat-owner-registration-form.submit}">Add owner
+                        </button>
                     </div>
                 </div>
             </div>

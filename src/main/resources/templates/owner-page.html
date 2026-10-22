@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{components/general-imports :: head-common(#{owner-page.title})}" />
+    <th:block th:replace="~{components/general-imports :: head-common(#{owner-page.title})}"/>
 </head>
 <body class="bg-milk d-flex flex-column min-vh-100">
 <header>
@@ -9,57 +9,67 @@
 </header>
 
 <main class="container flex-grow-1 py-5">
-    <section th:object="${ownerOnPage}">
-        <h1 th:text="*{name + ' ' + familyName}" class="display-6 fw-bold text-indigo-dark mb-4">Name Family</h1>
+    <section th:object="${ownerOnPage}" th:unless="ownerOnPage == null">
 
-        <div class="card border-0 shadow rounded-4 overflow-hidden mb-5">
-            <table class="table align-middle mb-0">
-                <tbody>
-                <tr>
-                    <th class="py-3 px-4 text-indigo-dark w-50" th:text="#{owner-page.livingspace}">Living space (m²)</th>
-                    <td class="py-3 px-4" th:text="*{livingSpaceSquareMeters}">0</td>
-                </tr>
-                <tr>
-                    <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.kids}">Number of kids</th>
-                    <td class="py-3 px-4" th:text="*{amountOfKids}">0</td>
-                </tr>
-                <tr>
-                    <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.phone}">Phone</th>
-                    <td class="py-3 px-4" th:text="*{ownerPersonsPhone}">+99999999999</td>
-                </tr>
-                <tr>
-                    <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.idcard}">ID card photo</th>
-                    <td class="py-3 px-4">
-                        <img th:if="*{photoOfOwnersIdCard != null}"
-                             th:text="*{photoOfOwnersIdCard}"
-                             th:alt="#{owner-page.idcard}"
-                             class="img-fluid rounded-3 shadow-sm"
-                             width="200">
-                    </td>
-                </tr>
-                <tr>
-                    <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.registrationdate}">Registration date</th>
-                    <td class="py-3 px-4" th:text="*{#temporals.format(registrationDate, 'dd.MM.yyyy')}">01.01.2026</td>
-                </tr>
-                <tr>
-                    <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.smokes}">Smokes at home</th>
-                    <td class="py-3 px-4">
+        <div class="card mb-2">
+            <div class="card-header">
+                <img th:if="*{photoOfOwnersIdCard != null}"
+                     th:text="*{photoOfOwnersIdCard}"
+                     th:alt="#{owner-page.idcard}"
+                     class="img-fluid rounded-3 shadow-sm"
+                     width="200">
+            </div>
+            <div class="card-body border-0 shadow rounded-4 overflow-hidden">
+
+                <table class="table align-middle mb-0">
+                    <tbody>
+                    <tr>
+                        <th  class="py-3 px-4 text-indigo-dark w-50">Name Family</th>
+                        <td  class="py-3 px-4" th:text="*{name + ' ' + familyName}">Name</td>
+                    </tr>
+                    <tr>
+                        <th class="py-3 px-4 text-indigo-dark w-50" th:text="#{owner-page.livingspace}">Living space
+                            (m²)
+                        </th>
+                        <td class="py-3 px-4" th:text="*{livingSpaceSquareMeters}">0</td>
+                    </tr>
+                    <tr>
+                        <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.kids}">Number of kids</th>
+                        <td class="py-3 px-4" th:text="*{amountOfKids}">0</td>
+                    </tr>
+                    <tr>
+                        <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.phone}">Phone</th>
+                        <td class="py-3 px-4" th:text="*{ownerPersonsPhone}">+99999999999</td>
+                    </tr>
+                    <tr>
+                        <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.registrationdate}">Registration
+                            date
+                        </th>
+                        <td class="py-3 px-4" th:text="*{#temporals.format(registrationDate, 'dd.MM.yyyy')}">
+                            01.01.2026
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.smokes}">Smokes at home</th>
+                        <td class="py-3 px-4">
                         <span class="badge fs-6 px-3 py-2 rounded-pill"
                               th:classappend="*{smokesAtHome} ? 'bg-deep-green text-neutral' : 'bg-soft-yellow text-indigo-dark'"
                               th:text="*{smokesAtHome} ? #{owner-page.yes} : #{owner-page.no}">No</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.language}">Preferred communication language</th>
-                    <td class="py-3 px-4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="py-3 px-4 text-indigo-dark" th:text="#{owner-page.language}">Preferred communication
+                            language
+                        </th>
+                        <td class="py-3 px-4">
                         <span class="badge bg-soft-yellow text-indigo-dark fs-6 px-3 py-2 rounded-pill"
                               th:text="*{preferredCommunicationLanguage.getLanguageName()}">Language</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
         <h2 th:text="#{owner-page.cats}" class="h3 fw-bold text-indigo-dark mb-3">Cats</h2>
 
         <div th:if="*{cats.isEmpty()}"

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{components/general-imports :: head-common(#{medication-adding-form.title})}" />
+    <th:block th:replace="~{components/general-imports :: head-common(#{medication-adding-form.title})}"/>
 </head>
 <body class="bg-milk d-flex flex-column min-vh-100">
 <header>
@@ -10,7 +10,8 @@
 
 <main class="container flex-grow-1 py-5">
     <div class="col-lg-8 mx-auto">
-        <h1 th:text="#{medication-adding-form.title}" class="display-6 fw-bold text-indigo-dark mb-4">Add medication</h1>
+        <h1 th:text="#{medication-adding-form.title}" class="display-6 fw-bold text-indigo-dark mb-4">Add
+            medication</h1>
 
         <form th:action="@{/medications/new}" th:object="${medicationForm}" method="post"
               class="card border-0 shadow rounded-4">
@@ -39,7 +40,8 @@
 
                     <div class="col-md-6">
                         <label for="medication-form-weeks-after-birth" class="form-label fw-bold text-indigo-dark"
-                               th:text="#{medication-adding-form.weeksafterbirth}">Weeks after birth to start medication</label>
+                               th:text="#{medication-adding-form.weeksafterbirth}">Weeks after birth to start
+                            medication</label>
                         <input id="medication-form-weeks-after-birth" type="number"
                                th:field="*{weeksAfterBirthToStartMedication}"
                                class="form-control" required/>
@@ -90,7 +92,8 @@
                     <div class="col-12 text-end">
                         <button type="submit"
                                 class="btn bg-soft-yellow text-indigo-dark fw-bold px-5 rounded-3 shadow-sm"
-                                th:text="#{medication-adding-form.submit}">Add medication</button>
+                                th:text="#{medication-adding-form.submit}">Add medication
+                        </button>
                     </div>
                 </div>
             </div>
