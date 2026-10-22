@@ -41,18 +41,17 @@ public class CatController{
 
     @GetMapping
     public String getCats(
-            @ModelAttribute("catSearchRequest") CatSearchRequest request,
+            @Valid @ModelAttribute("catSearchRequest") CatSearchRequest request,
             BindingResult bindingResult,
             Model model
     ){
+        log.info("Requested cats with searchParameters");
         if(bindingResult.hasErrors()){
             log.error("some request fields were corrupted");
             return "cats";
         }
+        log.info("\n Params: " + request);
 
-        log.info("Requested cats with searchParameters");
-
-        log.info("Params: " + request);
         List<Cat> cats = catService.getCatBySearchRequest(
                 request.getCatName(),
                 request.getMinAge(),

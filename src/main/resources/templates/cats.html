@@ -11,8 +11,8 @@
 <main class="container flex-grow-1 py-5">
     <h1 th:text="#{cats.heading}" class="display-6 fw-bold text-indigo-dark mb-4">Registered cats</h1>
 
-    <form th:action="@{/cats}" th:object="${catSearchRequest}" th:method="get"
-          class="card border-0 shadow rounded-4 mb-4">
+    <form th:action="@{/cats}" th:object="${catSearchRequest}" th:method="get">
+        <div class="card border-0 shadow rounded-4 mb-4">
         <div class="card-body p-4">
             <div class="row g-3">
                 <div class="col-12">
@@ -56,6 +56,12 @@
                     </button>
                 </div>
             </div>
+        </div>
+        </div>
+        <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger rounded-3" role="alert">
+            <ul class="mb-0">
+                <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+            </ul>
         </div>
     </form>
 
