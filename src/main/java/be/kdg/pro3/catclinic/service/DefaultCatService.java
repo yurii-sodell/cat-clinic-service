@@ -55,7 +55,7 @@ public class DefaultCatService implements CatService{
             theCat.setDateOfBirth(catEditForm.getKeptDateOfBirth());
             theCat.setName(catEditForm.getKeptName());
             theCat.setPhoto(catEditForm.getKeptPhoto());
-            theCat.setWeightInKilos(catEditForm.getKeptWeightInKilos());
+            theCat.setWeightInKilos(catEditForm.getKeptWeightInKilos().doubleValue());
         }catch (IllegalArgumentException e) {
             throw e;
         }

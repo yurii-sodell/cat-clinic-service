@@ -41,7 +41,7 @@ public class CatController{
 
     @GetMapping
     public String getCats(
-            @Valid @ModelAttribute("catSearchRequest") CatSearchRequest request,
+            @Valid  @ModelAttribute("catSearchRequest") CatSearchRequest request,
             BindingResult bindingResult,
             Model model
     ){
