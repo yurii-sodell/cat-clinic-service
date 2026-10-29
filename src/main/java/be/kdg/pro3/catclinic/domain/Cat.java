@@ -19,7 +19,7 @@ public class Cat{
     @Getter private boolean isHospitalized;
     @Getter private String photo;
     @Getter private CatOwnerId BelongingOwnerId;
-    private List<Medication> medicationsThatWasAssignedToCat;
+    private List<MedicationId> medicationsThatWasAssignedToCat;
 
     public Cat(String name, LocalDate dateOfBirth, Gender gender, CatId catId,
                double weightInKilos, int visits, boolean isHospitalized,
@@ -70,7 +70,7 @@ public class Cat{
     }
 
     public void addMedicationsThatWasAssignedToCat(Medication medication){
-        this.medicationsThatWasAssignedToCat.add(medication);
+        this.medicationsThatWasAssignedToCat.add(medication.getProductId());
     }
 
     public int getAge(){
