@@ -18,7 +18,7 @@ public class CatOwner{
     private LocalDate registrationDate;
     private boolean smokesAtHome;
     private PreferredCommunicationLanguage preferredCommunicationLanguage;
-    private List<Cat> cats;
+    private List<CatId> cats;
 
     private CatOwner(){
 
@@ -106,7 +106,7 @@ public class CatOwner{
         return smokesAtHome;
     }
 
-    public List<Cat> getCats(){
+    public List<CatId> getCats(){
         return cats;
     }
 
