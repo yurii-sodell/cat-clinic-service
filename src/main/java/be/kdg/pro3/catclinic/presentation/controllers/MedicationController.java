@@ -4,7 +4,7 @@ import be.kdg.pro3.catclinic.domain.Medication;
 
 import be.kdg.pro3.catclinic.domain.MedicationType;
 import be.kdg.pro3.catclinic.service.MedicationService;
-import be.kdg.pro3.catclinic.web.MedicationRegistrationForm;
+import be.kdg.pro3.catclinic.presentation.web.MedicationRegistrationForm;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

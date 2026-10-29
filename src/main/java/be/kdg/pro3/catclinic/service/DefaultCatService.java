@@ -3,7 +3,7 @@ package be.kdg.pro3.catclinic.service;
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
 import be.kdg.pro3.catclinic.repository.CatRepository;
-import be.kdg.pro3.catclinic.web.CatEditForm;
+import be.kdg.pro3.catclinic.presentation.web.CatEditForm;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

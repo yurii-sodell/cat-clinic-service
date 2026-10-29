@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.web;
+package be.kdg.pro3.catclinic.presentation.web;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.PositiveOrZero;

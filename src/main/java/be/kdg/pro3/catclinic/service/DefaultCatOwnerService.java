@@ -1,12 +1,15 @@
 package be.kdg.pro3.catclinic.service;
 
+import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatOwner;
+import be.kdg.pro3.catclinic.domain.CatOwnerId;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
 import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,14 +53,21 @@ public class DefaultCatOwnerService implements CatOwnerService{
                                  String ownerPersonsPhone, String photoOfOwnersIdCard,
                                  PreferredCommunicationLanguage preferredCommunicationLanguage,
                                  boolean smokesAtHome){
-        catOwnerRepository.saveOwner(CatOwner.registerCatOwner(amountOfKids,
-                familyName,
-                livingSpaceSquareMeters,
-                name,
-                ownerPersonsPhone,
-                photoOfOwnersIdCard,
-                preferredCommunicationLanguage,
-                smokesAtHome));
+        catOwnerRepository.saveOwner(
+                new CatOwner(
+                        amountOfKids,
+                        familyName,
+                        livingSpaceSquareMeters,
+                        name,
+                        CatOwnerId.random(),
+                        ownerPersonsPhone,
+                        photoOfOwnersIdCard,
+                        preferredCommunicationLanguage,
+                        LocalDate.now(),
+                        smokesAtHome,
+                        new ArrayList<>()
+                ));
+
     }
 
     public CatOwner getCatOwnerById(UUID id) throws OwnerNotFoundException{

@@ -1,7 +1,7 @@
 package be.kdg.pro3.catclinic.service;
 
 import be.kdg.pro3.catclinic.domain.Cat;
-import be.kdg.pro3.catclinic.web.CatEditForm;
+import be.kdg.pro3.catclinic.presentation.web.CatEditForm;
 
 import java.util.List;
 import java.util.UUID;

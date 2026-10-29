@@ -1,6 +1,7 @@
 package be.kdg.pro3.catclinic.service;
 
 import be.kdg.pro3.catclinic.domain.Medication;
+import be.kdg.pro3.catclinic.domain.MedicationId;
 import be.kdg.pro3.catclinic.domain.MedicationType;
 import be.kdg.pro3.catclinic.repository.MedicationRepository;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class DefaultMedicationService implements MedicationService{
 
     @Override
     public void registerNewMedication(String title, BigDecimal price, int weeksAfterBirthToStartMedication, LocalDate marketReleaseDate, MedicationType medicationType, boolean isPrescriptionNeeded, boolean canBeGiftedOnCatsBirthday, String photo){
-        Medication medication = new Medication(title, price, UUID.randomUUID(), weeksAfterBirthToStartMedication, marketReleaseDate, medicationType, isPrescriptionNeeded, canBeGiftedOnCatsBirthday, photo);
+        Medication medication = new Medication(title, price, MedicationId.random(), weeksAfterBirthToStartMedication, marketReleaseDate, medicationType, isPrescriptionNeeded, canBeGiftedOnCatsBirthday, photo);
         medicationRepository.saveMedication(medication);
     }
 

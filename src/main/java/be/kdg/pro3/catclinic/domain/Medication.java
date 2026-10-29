@@ -1,26 +1,25 @@
 package be.kdg.pro3.catclinic.domain;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class Medication{
-    private String title;
-    private BigDecimal price;
-    private UUID productId;
-    private int weeksAfterBirthToStartMedication;
-    private LocalDate marketReleaseDate;
-    private MedicationType medicationType;
-    private boolean isPrescriptionNeeded;
-    private boolean canBeGiftedOnCatsBirthday;
-    private String photo;
-    private List<Cat> catsThatMedicationWasAssignedTo;
+    @Getter private String title;
+    @Getter private BigDecimal price;
+    @Getter private MedicationId productId;
+    @Getter private int weeksAfterBirthToStartMedication;
+    @Getter private LocalDate marketReleaseDate;
+    @Getter private MedicationType medicationType;
+    @Getter private boolean isPrescriptionNeeded;
+    @Getter private boolean canBeGiftedOnCatsBirthday;
+    @Getter private String photo;
+    private List<CatId> catsThatMedicationWasAssignedTo;
 
-    public Medication(String title, BigDecimal price, UUID productId,
+    public Medication(String title, BigDecimal price, MedicationId productId,
                       int weeksAfterBirthToStartMedication, LocalDate marketReleaseDate,
                       MedicationType medicationType, boolean isPrescriptionNeeded,
                       boolean canBeGiftedOnCatsBirthday, String photo){
@@ -36,52 +35,16 @@ public class Medication{
         this.catsThatMedicationWasAssignedTo = new ArrayList<>();
     }
 
-    public boolean isCanBeGiftedOnCatsBirthday(){
-        return canBeGiftedOnCatsBirthday;
-    }
-
-    public boolean isPrescriptionNeeded(){
-        return isPrescriptionNeeded;
-    }
-
-    public LocalDate getMarketReleaseDate(){
-        return marketReleaseDate;
-    }
-
-    public MedicationType getMedicationType(){
-        return medicationType;
-    }
-
-    public String getPhoto(){
-        return photo;
-    }
-
-    public BigDecimal getPrice(){
-        return price;
-    }
-
-    public UUID getProductId(){
-        return productId;
-    }
-
-    public String getTitle(){
-        return title;
-    }
-
-    public int getWeeksAfterBirthToStartMedication(){
-        return weeksAfterBirthToStartMedication;
-    }
-
     public void assignCatToMedication(Cat cat){
-        catsThatMedicationWasAssignedTo.add(cat);
+        catsThatMedicationWasAssignedTo.add(cat.getCatId());
     }
 
-    public List<Cat> getCatsThatMedicationWasAssignedTo(){
-        return catsThatMedicationWasAssignedTo;
+    public List<CatId> getCatsThatMedicationWasAssignedTo(){
+        return Collections.unmodifiableList(catsThatMedicationWasAssignedTo);
     }
 
     public void addCatsThatMedicationWasAssignedTo(Cat cat){
-        this.catsThatMedicationWasAssignedTo.add(cat);
+        this.catsThatMedicationWasAssignedTo.add(cat.getCatId());
     }
 
     @Override
@@ -89,7 +52,7 @@ public class Medication{
         DateTimeFormatter releaseFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
-                "\n%-20s | %-10s | %-8.2f | %-10s | %-6d | %-12s | %-13s | %-20s",
+                "%n%-20s | %-10s | %-8.2f | %-10s | %-6d | %-12s | %-13s | %-20s",
                 this.title,
                 this.productId,
                 this.price,
