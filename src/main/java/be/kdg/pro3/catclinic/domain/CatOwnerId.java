@@ -8,7 +8,7 @@ public record CatOwnerId(UUID id){
         Objects.requireNonNull(id);
     }
 
-    public static CatOwnerId of(String id){
+    public static CatOwnerId parse(String id){
         return new CatOwnerId(UUID.fromString(id));
     }
 

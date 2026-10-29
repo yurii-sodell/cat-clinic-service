@@ -11,4 +11,13 @@ public record CatId(UUID id){
     public static CatId random(){
         return new CatId(UUID.randomUUID());
     }
+
+    public static CatId parse(String value){
+        return new CatId(UUID.fromString(value));
+    }
+
+    @Override
+    public String toString(){
+        return id.toString();
+    }
 }

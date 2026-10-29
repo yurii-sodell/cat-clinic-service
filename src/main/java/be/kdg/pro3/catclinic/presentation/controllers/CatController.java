@@ -1,6 +1,7 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
 import be.kdg.pro3.catclinic.domain.Cat;
+import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Gender;
 import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
 import be.kdg.pro3.catclinic.service.CatService;
@@ -72,7 +73,7 @@ public class CatController{
 
     @GetMapping("/edit/{catId}")
     public String editCat(
-            @PathVariable UUID catId,
+            @PathVariable CatId catId,
             Model model
     ){
         log.info("Get editing form page for ID: + {} \n", catId);
@@ -97,7 +98,7 @@ public class CatController{
     }
 
     @PostMapping("/edit/{catId}")
-    public String editCat(@PathVariable UUID catId,
+    public String editCat(@PathVariable CatId catId,
                           @Valid @ModelAttribute("catEditForm") CatEditForm catEditForm,
                           BindingResult bindingResult,
                           Model model,
