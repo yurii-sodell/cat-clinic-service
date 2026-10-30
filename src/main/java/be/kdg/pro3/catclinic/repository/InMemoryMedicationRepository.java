@@ -1,6 +1,7 @@
 package be.kdg.pro3.catclinic.repository;
 
 import be.kdg.pro3.catclinic.domain.Medication;
+import be.kdg.pro3.catclinic.domain.MedicationId;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -40,6 +41,13 @@ public class InMemoryMedicationRepository implements MedicationRepository{
                         && medication.getPrice().compareTo(maxPrice) <= 0)
                 .sorted(Comparator.comparing(Medication::getPrice))
                 .toList();
+    }
+
+    @Override
+    public Optional<Medication> getMedicationIdByName(String name){
+        return medications.stream().filter(medication ->
+                medication.getTitle().equalsIgnoreCase(name))
+                .findAny();
     }
 
 }

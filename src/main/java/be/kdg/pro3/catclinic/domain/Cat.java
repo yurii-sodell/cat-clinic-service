@@ -30,6 +30,7 @@ public class Cat{
         this.catId = catId;
         this.visits = visits;
         this.isHospitalized = isHospitalized;
+        this.BelongingOwnerId = belongingOwnerId;
 
         setName(name);
         setDateOfBirth(dateOfBirth);

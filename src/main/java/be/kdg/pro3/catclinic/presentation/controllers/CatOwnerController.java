@@ -1,43 +1,46 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
-
+import be.kdg.pro3.catclinic.domain.CatOwnerId;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
 import be.kdg.pro3.catclinic.service.CatOwnerService;
-import be.kdg.pro3.catclinic.web.CatOwnerRegistrationForm;
+import be.kdg.pro3.catclinic.presentation.web.CatOwnerRegistrationForm;
+import be.kdg.pro3.catclinic.service.CatService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/owners")
 @Slf4j
 public class CatOwnerController{
-    private CatOwnerService service;
+    private CatOwnerService ownerService;
+    private CatService catService;
 
-    public CatOwnerController(CatOwnerService service){
-        this.service = service;
+    public CatOwnerController(CatOwnerService ownerService, CatService catService){
+        this.ownerService = ownerService;
+        this.catService = catService;
     }
 
     @GetMapping
     public String showOwners(Model model){
         log.info("Received request for all owners!");
-        model.addAttribute("owners", service.getAllOwners());
+        model.addAttribute("owners", ownerService.getAllOwners());
         log.info("All owners are returned!");
         return "owners";
     }
 
     @GetMapping("/{ownerId}")
     public String getOwnerPage(
-            @PathVariable UUID ownerId,
+            @PathVariable CatOwnerId ownerId,
             Model model){
         log.info("Received request to show certain owner page, id:  {}", ownerId.toString());
         try{
-            model.addAttribute("ownerOnPage", service.getCatOwnerById(ownerId));
+            model.addAttribute("ownerOnPage", ownerService.getCatOwnerById(ownerId));
+            model.addAttribute("catsOfOwnerOnPage", catService.getCatsForOwner(ownerId));
         }catch (OwnerNotFoundException e) {
             log.error(e.getMessage());
             model.addAttribute("errorMessage", e.getMessage());
@@ -71,7 +74,7 @@ public class CatOwnerController{
             return "cat-owner-registration-form";
         }
 
-        service.registerNewOwner(
+        ownerService.registerNewOwner(
                 form.getName(),
                 form.getFamilyName(),
                 form.getLivingSpaceSquareMeters(),
