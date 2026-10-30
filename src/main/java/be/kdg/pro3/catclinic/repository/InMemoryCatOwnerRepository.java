@@ -1,8 +1,6 @@
 package be.kdg.pro3.catclinic.repository;
 
-import be.kdg.pro3.catclinic.domain.Cat;
-import be.kdg.pro3.catclinic.domain.CatOwner;
-import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
+import be.kdg.pro3.catclinic.domain.*;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -30,9 +28,9 @@ public class InMemoryCatOwnerRepository implements CatOwnerRepository{
     }
 
     @Override
-    public List<CatOwner> getCatOwnerByCatsName(String name){
+    public List<CatOwner> getCatOwnerByCatsId(CatId id){
         Predicate<CatOwner> hasCat = owner -> owner.getCats().stream()
-                .anyMatch(cat -> cat.getName().equalsIgnoreCase(name));
+                .anyMatch(catId -> catId.equals(id));
 
         return catOwners.stream()
                 .filter(hasCat)
@@ -65,7 +63,7 @@ public class InMemoryCatOwnerRepository implements CatOwnerRepository{
     }
 
     @Override
-    public Optional<CatOwner> getCatOwnerById(UUID id){
+    public Optional<CatOwner> getCatOwnerById(CatOwnerId id){
         return catOwners.stream()
                 .filter(owner -> owner.getOwnerId().equals(id))
                 .findFirst();

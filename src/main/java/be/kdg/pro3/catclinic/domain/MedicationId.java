@@ -8,4 +8,12 @@ public record MedicationId(UUID uuid){
         Objects.requireNonNull(uuid, "UUID cannot be empty");
     }
 
+    public static MedicationId random(){
+        return new MedicationId(UUID.randomUUID());
+    }
+
+    public static MedicationId parse(String id){
+        return new MedicationId(UUID.fromString(id));
+    }
+
 }

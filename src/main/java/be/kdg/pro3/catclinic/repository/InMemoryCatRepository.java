@@ -2,6 +2,9 @@ package be.kdg.pro3.catclinic.repository;
 
 import be.kdg.pro3.catclinic.domain.Cat;
 
+import be.kdg.pro3.catclinic.domain.CatId;
+import be.kdg.pro3.catclinic.domain.CatOwnerId;
+import be.kdg.pro3.catclinic.domain.MedicationId;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -38,14 +41,8 @@ public class InMemoryCatRepository implements CatRepository{
     }
 
     @Override
-    public List<Cat> getCatsFilteredByMedicationName(String name){
-        Predicate<Cat> hasMedication = cat -> cat.getMedicationsThatWasAssignedToCat().stream()
-                .anyMatch(medication -> medication.getTitle().equalsIgnoreCase(name));
-
-        return cats.stream()
-                .filter(hasMedication)
-                .sorted(Comparator.comparing(Cat::getName, String.CASE_INSENSITIVE_ORDER))
-                .toList();
+    public List<Cat> getCatsFilteredByMedicationId(MedicationId medicationId){
+        return List.of();
     }
 
     @Override
@@ -61,10 +58,24 @@ public class InMemoryCatRepository implements CatRepository{
     }
 
     @Override
-    public Optional<Cat> getCatById(UUID uuid){
+    public Optional<Cat> getCatById(CatId id){
         return cats.stream()
-                .filter(cat -> cat.getCatId().equals(uuid))
+                .filter(cat -> cat.getCatId().equals(id))
                 .findAny();
+    }
+
+    @Override
+    public List<Cat> getCatByName(String name){
+        return cats.stream()
+                .filter(cat -> cat.getName().equalsIgnoreCase(name))
+                .toList();
+    }
+
+    @Override
+    public List<Cat> getCatByIdOfOwner(CatOwnerId id){
+        return cats.stream()
+                .filter(cat -> cat.getBelongingOwnerId().equals(id))
+                .toList();
     }
 
 }

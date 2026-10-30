@@ -36,7 +36,7 @@
                 <td class="py-3 px-4 fw-semibold text-indigo-dark" th:text="${owner.name}">Name</td>
                 <td class="py-3 px-4" th:text="${owner.familyName}">Family name</td>
                 <td class="py-3 px-4 text-end">
-                    <a th:href="@{/owners/{ownerId}(ownerId=${owner.ownerId})}" th:text="#{owners.enter}"
+                    <a th:href="@{/owners/{ownerId}(ownerId=${owner.ownerId.id})}" th:text="#{owners.enter}"
                        class="btn btn-sm bg-soft-yellow text-indigo-dark fw-bold px-3 rounded-pill">View</a>
                 </td>
             </tr>

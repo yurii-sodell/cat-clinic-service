@@ -1,6 +1,7 @@
 package be.kdg.pro3.catclinic.presentation.console;
 
 import be.kdg.pro3.catclinic.domain.*;
+import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
 import be.kdg.pro3.catclinic.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -173,12 +174,14 @@ public class Presenter implements CommandLineRunner{
             return;
         }
 
-        Consumer<CatOwner> printOwnerWithCats = owner -> {
-            view.show(owner);
-            view.show("Cat list:\n");
-            owner.getCats().forEach(cat -> view.show(cat.getName() + " | Photo: " + cat.getPhoto() + "\n"));
-        };
-        filtered.forEach(printOwnerWithCats);
+        catOwnerService.getCatOwnerByCatsName(catName).forEach(
+                owner -> {
+                    view.show(owner);
+                    view.show("Cat list:\n");
+                    owner.getCats().stream().map(catService::getCatById
+                    ).forEach(cat -> view.show(cat.getName() + " | " + cat.getGender()));
+                }
+        );
     }
 
     private void filterOwnersByRegistrationDate(){

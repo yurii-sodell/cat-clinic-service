@@ -2,13 +2,11 @@ package be.kdg.pro3.catclinic.domain;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 public class CatOwner{
-    private UUID ownerId;
+    private CatOwnerId ownerId;
     private String name;
     private String familyName;
     private double livingSpaceSquareMeters;
@@ -20,46 +18,22 @@ public class CatOwner{
     private PreferredCommunicationLanguage preferredCommunicationLanguage;
     private List<CatId> cats;
 
-    private CatOwner(){
-
-    }
-
-    public static CatOwner registerCatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
-                                            String ownerPersonsPhone, String photoOfOwnersIdCard,
-                                            PreferredCommunicationLanguage preferredCommunicationLanguage,
-                                            boolean smokesAtHome){
-        CatOwner catOwner = new CatOwner();
-        catOwner.amountOfKids = amountOfKids;
-        catOwner.familyName = familyName;
-        catOwner.livingSpaceSquareMeters = livingSpaceSquareMeters;
-        catOwner.name = name;
-        catOwner.ownerId = UUID.randomUUID();
-        catOwner.ownerPersonsPhone = ownerPersonsPhone;
-        catOwner.photoOfOwnersIdCard = photoOfOwnersIdCard;
-        catOwner.preferredCommunicationLanguage = preferredCommunicationLanguage;
-        catOwner.registrationDate = LocalDate.now();
-        catOwner.smokesAtHome = smokesAtHome;
-        catOwner.cats = new ArrayList<>();
-        return catOwner;
-    }
-
-    public static CatOwner retrievedCatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
-                                             UUID ownerId, String ownerPersonsPhone, String photoOfOwnersIdCard,
+    public CatOwner(int amountOfKids, String familyName, double livingSpaceSquareMeters, String name,
+                    CatOwnerId ownerId, String ownerPersonsPhone, String photoOfOwnersIdCard,
                                              PreferredCommunicationLanguage preferredCommunicationLanguage,
-                                             LocalDate registrationDate, boolean smokesAtHome){
-        CatOwner catOwner = new CatOwner();
-        catOwner.amountOfKids = amountOfKids;
-        catOwner.familyName = familyName;
-        catOwner.livingSpaceSquareMeters = livingSpaceSquareMeters;
-        catOwner.name = name;
-        catOwner.ownerId = ownerId;
-        catOwner.ownerPersonsPhone = ownerPersonsPhone;
-        catOwner.photoOfOwnersIdCard = photoOfOwnersIdCard;
-        catOwner.preferredCommunicationLanguage = preferredCommunicationLanguage;
-        catOwner.registrationDate = registrationDate;
-        catOwner.smokesAtHome = smokesAtHome;
-        catOwner.cats = new ArrayList<>();
-        return catOwner;
+                                             LocalDate registrationDate, boolean smokesAtHome, List<CatId> cats){
+
+        this.amountOfKids = amountOfKids;
+        this.familyName = familyName;
+        this.livingSpaceSquareMeters = livingSpaceSquareMeters;
+        this.name = name;
+        this.ownerId = ownerId;
+        this.ownerPersonsPhone = ownerPersonsPhone;
+        this.photoOfOwnersIdCard = photoOfOwnersIdCard;
+        this.preferredCommunicationLanguage = preferredCommunicationLanguage;
+        this.registrationDate = registrationDate;
+        this.smokesAtHome = smokesAtHome;
+        this.cats = cats;
     }
 
     public int getAmountOfKids(){
@@ -78,7 +52,7 @@ public class CatOwner{
         return name;
     }
 
-    public UUID getOwnerId(){
+    public CatOwnerId getOwnerId(){
         return ownerId;
     }
 
@@ -115,7 +89,7 @@ public class CatOwner{
         DateTimeFormatter registrationFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
-                "\n%-20s | %-15s | %-8.2f | %-6d | %-15s | %-10s | %-20s | %-15s",
+                "%n%-20s | %-15s | %-8.2f | %-6d | %-15s | %-10s | %-20s | %-15s",
                 this.name,
                 this.familyName,
                 this.livingSpaceSquareMeters,
