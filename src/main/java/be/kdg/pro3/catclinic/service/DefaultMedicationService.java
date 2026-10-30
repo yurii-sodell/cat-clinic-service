@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
-
 @Service
 public class DefaultMedicationService implements MedicationService{
     private final MedicationRepository medicationRepository;

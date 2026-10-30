@@ -1,7 +1,5 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
-
-import be.kdg.pro3.catclinic.domain.CatOwner;
 import be.kdg.pro3.catclinic.domain.CatOwnerId;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
 import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
@@ -41,9 +39,7 @@ public class CatOwnerController{
             Model model){
         log.info("Received request to show certain owner page, id:  {}", ownerId.toString());
         try{
-            CatOwner owner = ownerService.getCatOwnerById(ownerId);
-
-            model.addAttribute("ownerOnPage", owner);
+            model.addAttribute("ownerOnPage", ownerService.getCatOwnerById(ownerId));
             model.addAttribute("catsOfOwnerOnPage", catService.getCatsForOwner(ownerId));
         }catch (OwnerNotFoundException e) {
             log.error(e.getMessage());

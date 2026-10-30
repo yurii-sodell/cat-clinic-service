@@ -91,7 +91,7 @@
                 <tr th:each="cat : ${catsOfOwnerOnPage}">
                     <td class="py-3 px-4 fw-semibold text-indigo-dark" th:text="${cat.name}">Name</td>
                     <td class="py-3 px-4 text-end">
-                        <a th:href="@{/cats/edit/{catId}(catId=${cat})}" th:text="#{owner-page.catedit}"
+                        <a th:href="@{/cats/edit/{catId}(catId=${cat.getCatId()})}" th:text="#{owner-page.catedit}"
                            class="btn btn-sm bg-soft-yellow text-indigo-dark fw-bold px-3 rounded-pill">Edit</a>
                     </td>
                 </tr>

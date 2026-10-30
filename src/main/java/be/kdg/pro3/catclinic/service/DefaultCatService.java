@@ -62,17 +62,12 @@ public class DefaultCatService implements CatService{
     public void updateCat(CatId catsId, CatEditForm catEditForm) throws CatNotFoundException, IllegalArgumentException{
         Optional<Cat> found = catRepository.getCatById(catsId);
         if(found.isEmpty()) throw new CatNotFoundException();
-
         Cat theCat = found.get();
-        try{
-            theCat.setGender(catEditForm.getKeptGender());
-            theCat.setDateOfBirth(catEditForm.getKeptDateOfBirth());
-            theCat.setName(catEditForm.getKeptName());
-            theCat.setPhoto(catEditForm.getKeptPhoto());
-            theCat.setWeightInKilos(catEditForm.getKeptWeightInKilos().doubleValue());
-        }catch (IllegalArgumentException e) {
-            throw e;
-        }
+        theCat.setGender(catEditForm.getKeptGender());
+        theCat.setDateOfBirth(catEditForm.getKeptDateOfBirth());
+        theCat.setName(catEditForm.getKeptName());
+        theCat.setPhoto(catEditForm.getKeptPhoto());
+        theCat.setWeightInKilos(catEditForm.getKeptWeightInKilos());
         catRepository.saveCat(theCat);
     }
 
