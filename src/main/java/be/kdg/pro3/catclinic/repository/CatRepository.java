@@ -7,10 +7,9 @@ import be.kdg.pro3.catclinic.domain.MedicationId;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface CatRepository{
-    void saveCat(Cat cat);
+    void save(Cat cat);
     void saveCats(List<Cat> cats);
     List<Cat> getCats();
     List<Cat> getCatsFilteredByAgeAndByWeight(int minAge, int maxAge, int minWeight, int maxWeight);

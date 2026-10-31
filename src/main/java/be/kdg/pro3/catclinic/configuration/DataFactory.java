@@ -28,8 +28,8 @@ public class DataFactory{
     }
 
     private static void prescribe(Cat cat, Medication medication){
-        cat.addMedicationsThatWasAssignedToCat(medication);
-        medication.addCatsThatMedicationWasAssignedTo(cat);
+        cat.prescribe(medication.getProductId());
+        medication.prescribeTo(cat.getCatId());
     }
 
     @PostConstruct

@@ -1,5 +1,7 @@
 package be.kdg.pro3.catclinic.repository;
 
+import be.kdg.pro3.catclinic.domain.Cat;
+import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Medication;
 import be.kdg.pro3.catclinic.domain.MedicationId;
 import org.springframework.stereotype.Repository;
@@ -12,7 +14,7 @@ public class InMemoryMedicationRepository implements MedicationRepository{
     private static HashSet<Medication> medications = new HashSet<>();
 
     @Override
-    public void saveMedication(Medication medication){
+    public void save(Medication medication){
         medications.remove(medication);
         medications.add(medication);
     }
@@ -50,4 +52,17 @@ public class InMemoryMedicationRepository implements MedicationRepository{
                 .findAny();
     }
 
+    @Override
+    public List<Medication> getMedicationsByCatId(CatId catId){
+        return medications.stream()
+                .filter(medication -> medication.getCatsThatMedicationWasAssignedTo().contains(catId))
+                .toList();
+    }
+
+    @Override
+    public Optional<Medication> getMedicationIdById(MedicationId medicationId){
+        return medications.stream()
+                .filter(medication -> medication.getProductId().equals(medicationId))
+                .findAny();
+    }
 }

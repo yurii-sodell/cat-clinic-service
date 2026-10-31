@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+
 @Service
 public class DefaultMedicationService implements MedicationService{
     private final MedicationRepository medicationRepository;
@@ -35,7 +36,7 @@ public class DefaultMedicationService implements MedicationService{
     @Override
     public void registerNewMedication(String title, BigDecimal price, int weeksAfterBirthToStartMedication, LocalDate marketReleaseDate, MedicationType medicationType, boolean isPrescriptionNeeded, boolean canBeGiftedOnCatsBirthday, String photo){
         Medication medication = new Medication(title, price, MedicationId.random(), weeksAfterBirthToStartMedication, marketReleaseDate, medicationType, isPrescriptionNeeded, canBeGiftedOnCatsBirthday, photo);
-        medicationRepository.saveMedication(medication);
+        medicationRepository.save(medication);
     }
 
 }

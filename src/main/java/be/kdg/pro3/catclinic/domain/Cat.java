@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
 public class Cat{
     @Getter private String name;
     @Getter private LocalDate dateOfBirth;
@@ -70,8 +69,8 @@ public class Cat{
         this.weightInKilos = weightInKilos;
     }
 
-    public void addMedicationsThatWasAssignedToCat(Medication medication){
-        this.medicationsThatWasAssignedToCat.add(medication.getProductId());
+    public void prescribe(MedicationId medicationId ){
+        this.medicationsThatWasAssignedToCat.add(medicationId);
     }
 
     public int getAge(){
@@ -95,7 +94,7 @@ public class Cat{
         DateTimeFormatter birthdayFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
-                "\n%-20s | %-7s | %-12s | %-8.2f | %-6d | %-13s | %-20s | %-15s",
+                "%n%-20s | %-7s | %-12s | %-8.2f | %-6d | %-13s | %-20s | %-15s",
                 this.name,
                 this.gender.toString(),
                 birthdayFormat.format(this.dateOfBirth),

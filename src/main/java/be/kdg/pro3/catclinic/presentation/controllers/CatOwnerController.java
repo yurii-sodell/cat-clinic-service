@@ -2,7 +2,7 @@ package be.kdg.pro3.catclinic.presentation.controllers;
 
 import be.kdg.pro3.catclinic.domain.CatOwnerId;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
-import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
+import be.kdg.pro3.catclinic.service.exceptions.OwnerNotFoundException;
 import be.kdg.pro3.catclinic.service.CatOwnerService;
 import be.kdg.pro3.catclinic.presentation.web.CatOwnerRegistrationForm;
 import be.kdg.pro3.catclinic.service.CatService;

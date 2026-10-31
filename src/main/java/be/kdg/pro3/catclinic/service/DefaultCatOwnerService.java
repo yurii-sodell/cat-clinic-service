@@ -1,8 +1,8 @@
 package be.kdg.pro3.catclinic.service;
 
 import be.kdg.pro3.catclinic.domain.*;
-import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
-import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
+import be.kdg.pro3.catclinic.service.exceptions.CatNotFoundException;
+import be.kdg.pro3.catclinic.service.exceptions.OwnerNotFoundException;
 import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
 import be.kdg.pro3.catclinic.repository.CatRepository;
 import org.springframework.stereotype.Service;

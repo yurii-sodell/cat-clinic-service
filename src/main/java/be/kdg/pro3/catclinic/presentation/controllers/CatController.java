@@ -3,7 +3,7 @@ package be.kdg.pro3.catclinic.presentation.controllers;
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Gender;
-import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
+import be.kdg.pro3.catclinic.service.exceptions.CatNotFoundException;
 import be.kdg.pro3.catclinic.service.CatService;
 import be.kdg.pro3.catclinic.presentation.web.CatEditForm;
 import be.kdg.pro3.catclinic.presentation.web.CatSearchRequest;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/cats")

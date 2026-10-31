@@ -16,7 +16,7 @@ public class InMemoryCatRepository implements CatRepository{
     private static HashSet<Cat> cats = new HashSet<>();
 
     @Override
-    public void saveCat(Cat cat){
+    public void save(Cat cat){
         cats.remove(cat);
         cats.add(cat);
     }
