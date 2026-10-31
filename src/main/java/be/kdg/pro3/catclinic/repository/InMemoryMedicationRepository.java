@@ -53,13 +53,6 @@ public class InMemoryMedicationRepository implements MedicationRepository{
     }
 
     @Override
-    public List<Medication> getMedicationsByCatId(CatId catId){
-        return medications.stream()
-                .filter(medication -> medication.getCatsThatMedicationWasAssignedTo().contains(catId))
-                .toList();
-    }
-
-    @Override
     public Optional<Medication> getMedicationIdById(MedicationId medicationId){
         return medications.stream()
                 .filter(medication -> medication.getProductId().equals(medicationId))

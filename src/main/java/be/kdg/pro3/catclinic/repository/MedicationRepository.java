@@ -15,6 +15,5 @@ public interface MedicationRepository{
     List<Medication> getMedicationFilteredByPrescriptionNeed(boolean isPrescriptionNeeded);
     List<Medication> getMedicationFilteredByPrice(BigDecimal minPrice, BigDecimal maxPrice);
     Optional<Medication> getMedicationIdByName(String name);
-    List<Medication> getMedicationsByCatId(CatId catId);
     Optional<Medication> getMedicationIdById(MedicationId medicationId);
 }

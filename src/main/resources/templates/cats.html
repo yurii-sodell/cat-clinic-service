@@ -87,7 +87,7 @@
                     </div>
                     <div class="card-footer d-flex flex-wrap justify-content-center align-items-center gap-2">
                         <a th:text="#{cats.prescribe}"
-                           th:href="@{/prescriptions/new/{catId}(catId=${cat.catId})}"
+                           th:href="@{/prescriptions/{catId}(catId=${cat.catId})}"
                            class="btn btn-sm flex-fill fw-bold rounded-3 bg-deep-green text-neutral">
                             Prescribe
                         </a>

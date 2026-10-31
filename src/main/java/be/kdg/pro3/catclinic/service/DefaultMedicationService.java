@@ -4,11 +4,13 @@ import be.kdg.pro3.catclinic.domain.Medication;
 import be.kdg.pro3.catclinic.domain.MedicationId;
 import be.kdg.pro3.catclinic.domain.MedicationType;
 import be.kdg.pro3.catclinic.repository.MedicationRepository;
+import be.kdg.pro3.catclinic.service.exceptions.MedicationNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultMedicationService implements MedicationService{
@@ -21,6 +23,12 @@ public class DefaultMedicationService implements MedicationService{
     @Override
     public List<Medication> getAllMedications(){
         return medicationRepository.getMedications();
+    }
+
+    @Override
+    public Medication getMedicationById(MedicationId medicationId){
+        return medicationRepository.getMedicationIdById(medicationId)
+                .orElseThrow(MedicationNotFoundException::new);
     }
 
     @Override

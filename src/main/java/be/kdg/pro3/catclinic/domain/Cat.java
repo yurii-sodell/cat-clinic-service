@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -75,6 +76,10 @@ public class Cat{
 
     public int getAge(){
         return LocalDate.now().getYear() - this.dateOfBirth.getYear();
+    }
+
+    public List<MedicationId> getMedicationsThatWasAssignedToCat(){
+        return Collections.unmodifiableList(medicationsThatWasAssignedToCat);
     }
 
     @Override

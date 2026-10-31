@@ -138,7 +138,13 @@ public class DataFactory{
         prescribe(cat1, VitaminCatTreats);
         prescribe(cat2, VitaminCatTreats);
         prescribe(cat3, Metacam);
+
         prescribe(cat4, Panacur);
+        prescribe(cat4, Panacur); //twice to check
+        prescribe(cat4, Panacur); //twice to check
+        prescribe(cat4, Panacur); //twice to check
+        prescribe(cat4, Panacur); //twice to check
+
         prescribe(cat5, FrontlinePlus);
         prescribe(cat6, Amoxicillin);
         prescribe(cat7, ConvenIa);
