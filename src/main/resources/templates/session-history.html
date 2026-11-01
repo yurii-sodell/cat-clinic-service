@@ -2,19 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <th:block th:replace="~{components/general-imports :: head-common(#{cat})}"/>
     <title>History</title>
 </head>
 <body>
     <header>
         <block th:replace="~{components/navigation::navigation}"></block>
     </header>
-    <main>
-        <h1>Your actions:</h1>
-        <ol>
-            <li th:each="event : ${sessionHistory}">
-                <p th:text="${event}"></p>
+    <main class="container py-4">
+        <h1 class="mb-4 text-deep-green">Your actions</h1>
+
+        <ol class="list-group list-group-flush">
+            <li class="list-group-item m-1 border-soft-yellow border-4 shadow-sm" th:each="event : ${sessionHistory}" th:text="${event}">
             </li>
+
         </ol>
+
+        <p class="text-muted fst-italic" th:if="${#lists.isEmpty(sessionHistory)}">
+            No actions yet.
+        </p>
     </main>
 </body>
 </html>
