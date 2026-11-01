@@ -35,8 +35,4 @@ public class MedicationRegistrationForm{
     private boolean prescriptionNeeded;
     private boolean canBeGiftedOnCatsBirthday;
     private String photo;
-
-    public MedicationRegistrationForm(){
-
-    }
 }

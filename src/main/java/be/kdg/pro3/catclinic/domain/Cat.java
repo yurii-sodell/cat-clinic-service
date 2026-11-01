@@ -2,8 +2,10 @@ package be.kdg.pro3.catclinic.domain;
 
 import lombok.Getter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,8 +76,12 @@ public class Cat{
         this.medicationsThatWasAssignedToCat.add(medicationId);
     }
 
-    public int getAge(){
-        return LocalDate.now().getYear() - this.dateOfBirth.getYear();
+    public long getAge() {
+        return ChronoUnit.YEARS.between(this.dateOfBirth, LocalDate.now());
+    }
+
+    public long getAgeInWeeks() {
+        return ChronoUnit.WEEKS.between(this.dateOfBirth, LocalDate.now());
     }
 
     public List<MedicationId> getMedicationsThatWasAssignedToCat(){

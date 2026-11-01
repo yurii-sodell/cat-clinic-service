@@ -5,6 +5,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 
 import java.time.Instant;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +14,8 @@ import java.util.List;
 @Component
 @SessionScope
 public class SessionHistory{
-    private final DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+    private final DateTimeFormatter formatter =
+            DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.systemDefault());
     private List<String> history;
 
     public SessionHistory(){

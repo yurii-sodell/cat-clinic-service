@@ -5,10 +5,10 @@ import be.kdg.pro3.catclinic.domain.Medication;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PrescriptionEntity{
+public class PrescriptionResponseEntity{
     private final Map<Medication, Integer> medicationAndAmountPrescripted;
 
-    public PrescriptionEntity(){
+    public PrescriptionResponseEntity(){
         this.medicationAndAmountPrescripted = new HashMap<>();
     }
 

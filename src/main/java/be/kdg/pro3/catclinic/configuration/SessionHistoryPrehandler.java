@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.presentation.controllers;
+package be.kdg.pro3.catclinic.configuration;
 
 import be.kdg.pro3.catclinic.domain.SessionHistory;
 import jakarta.servlet.http.HttpServletRequest;
