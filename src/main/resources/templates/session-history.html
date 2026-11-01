@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>History</title>
+</head>
+<body>
+    <header>
+        <block th:replace="~{components/navigation::navigation}"></block>
+    </header>
+    <main>
+        <h1>Your actions:</h1>
+        <ol>
+            <li th:each="event : ${sessionHistory}">
+                <p th:text="${event}"></p>
+            </li>
+        </ol>
+    </main>
+</body>
+</html>
