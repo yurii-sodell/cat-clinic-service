@@ -2,11 +2,9 @@ package be.kdg.pro3.catclinic.service;
 import be.kdg.pro3.catclinic.domain.CatOwner;
 import be.kdg.pro3.catclinic.domain.CatOwnerId;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
-import be.kdg.pro3.catclinic.exceptions.OwnerNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 public interface CatOwnerService{
     List<CatOwner> getAllOwners();
@@ -19,5 +17,5 @@ public interface CatOwnerService{
                           String ownerPersonsPhone, String photoOfOwnersIdCard,
                           PreferredCommunicationLanguage preferredCommunicationLanguage,
                           boolean smokesAtHome);
-    public CatOwner getCatOwnerById(CatOwnerId id);
+    CatOwner getCatOwnerById(CatOwnerId id);
 }

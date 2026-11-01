@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <th:block th:replace="~{components/general-imports::head-common(#{cat})}"></th:block>
+    <th:block th:replace="~{components/general-imports :: head-common(#{cat})}"/>
 </head>
-<body>
+<body class="bg-milk d-flex flex-column min-vh-100">
+<header>
+    <div th:replace="~{components/navigation :: navigation}"></div>
+</header>
 
+<main class="container flex-grow-1 py-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <h1 class="display-6 fw-bold text-indigo-dark mb-0">Prescription for cat</h1>
+    </div>
+
+    <div th:if="${#lists.isEmpty(prescriptionForCurrentCat)}"
+         class="card border-0 rounded-4 bg-soft-yellow text-indigo-dark text-center">
+        <div class="card-body py-4">
+            <p class="h5 mb-0">No medications prescribed</p>
+        </div>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(prescriptionForCurrentCat)}"
+         class="card border-0 shadow rounded-4 overflow-hidden">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Quantity</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Title</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Market release date</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Price</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Weeks after birth allowed to start medication</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4 text-end">Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pair : ${prescriptionForCurrentCat.getMedicationAndAmountPrescripted()}">
+                <td class="py-3 px-4" th:text="${pair.getValue()}">0</td>
+                <td class="py-3 px-4 fw-semibold text-indigo-dark" th:text="${pair.getKey().title}">Medication</td>
+                <td class="py-3 px-4" th:text="${pair.getKey().marketReleaseDate}">2024-01-01</td>
+                <td class="py-3 px-4" th:text="${pair.getKey().price}">0</td>
+                <td class="py-3 px-4" th:text="${pair.getKey().weeksAfterBirthToStartMedication}">0</td>
+                <td class="py-3 px-4 text-end">
+                    <span class="badge bg-soft-yellow text-indigo-dark fs-6 px-3 py-2 rounded-pill"
+                          th:text="${pair.getKey().medicationType}">type</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 </body>
 </html>

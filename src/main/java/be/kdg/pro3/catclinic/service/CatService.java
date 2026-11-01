@@ -3,6 +3,7 @@ package be.kdg.pro3.catclinic.service;
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.CatOwnerId;
+import be.kdg.pro3.catclinic.domain.MedicationId;
 import be.kdg.pro3.catclinic.presentation.web.CatEditForm;
 
 import java.util.List;
