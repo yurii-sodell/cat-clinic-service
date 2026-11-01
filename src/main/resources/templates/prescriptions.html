@@ -49,6 +49,48 @@
             </tbody>
         </table>
     </div>
+
+
+    <h1 class="display-6 fw-bold text-deep-green mb-0">Can be prescribed:</h1>
+    <div th:if="${#lists.isEmpty(allowedToPrescribe)}"
+         class="card border-0 rounded-4 bg-soft-yellow text-indigo-dark text-center">
+        <div class="card-body py-4">
+            <p class="h5 mb-0">No medications can be prescribed yet</p>
+        </div>
+    </div>
+    <div th:unless="${#lists.isEmpty(allowedToPrescribe)}"
+         class="card border-0 shadow rounded-4 overflow-hidden">
+
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Title</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Market release date</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Price</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4">Weeks after birth allowed to start medication</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4 text-end">Type</th>
+                <th class="bg-indigo text-neutral fs-5 py-3 px-4"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="med : ${allowedToPrescribe}">
+                <td class="py-3 px-4 fw-semibold text-indigo-dark" th:text="${med.title}">Medication</td>
+                <td class="py-3 px-4" th:text="${med.marketReleaseDate}">2024-01-01</td>
+                <td class="py-3 px-4" th:text="${med.price}">0</td>
+                <td class="py-3 px-4" th:text="${med.weeksAfterBirthToStartMedication}">0</td>
+                <td>
+                    <form th:action="@{/prescriptions/{catId}(catId=${currentCat})}"
+                          th:object="${prescriptionRequest}"
+                          method="post">
+                        <input type="hidden" name="medicationId" th:value="${med.productId.uuid}">
+                        <button type="submit" class="btn text-deep-green">Prescribe</button>
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
 </html>

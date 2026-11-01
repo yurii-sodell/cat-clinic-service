@@ -58,4 +58,13 @@ public class InMemoryMedicationRepository implements MedicationRepository{
                 .filter(medication -> medication.getProductId().equals(medicationId))
                 .findAny();
     }
+
+    @Override
+    public List<Medication> getMedicationsByAgeAllowance(long catAgeInWeeks){
+        return medications.stream()
+                .filter(medication ->
+                                !medication.isPrescriptionNeeded() ||
+                        catAgeInWeeks > medication.getWeeksAfterBirthToStartMedication())
+                .toList();
+    }
 }

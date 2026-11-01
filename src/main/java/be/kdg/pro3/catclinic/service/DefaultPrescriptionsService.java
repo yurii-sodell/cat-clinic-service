@@ -4,7 +4,7 @@ import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Medication;
 import be.kdg.pro3.catclinic.domain.MedicationId;
-import be.kdg.pro3.catclinic.presentation.web.PrescriptionEntity;
+import be.kdg.pro3.catclinic.presentation.web.PrescriptionResponseEntity;
 import be.kdg.pro3.catclinic.repository.CatRepository;
 import be.kdg.pro3.catclinic.repository.MedicationRepository;
 import be.kdg.pro3.catclinic.service.exceptions.CatNotFoundException;
@@ -24,11 +24,11 @@ public class DefaultPrescriptionsService implements PrescriptionService{
 
     //still not the best solution, could be better with subtable
     @Override
-    public PrescriptionEntity getAllPrescriptionsFor(CatId catId){
+    public PrescriptionResponseEntity getAllPrescriptionsFor(CatId catId){
         Cat cat = catRepository.getCatById(catId)
                 .orElseThrow(CatNotFoundException::new);
 
-        PrescriptionEntity prescriptionEntity = new PrescriptionEntity();
+        PrescriptionResponseEntity prescriptionEntity = new PrescriptionResponseEntity();
 
         cat.getMedicationsThatWasAssignedToCat().stream()
                 .map(medicationRepository::getMedicationIdById)
@@ -52,5 +52,13 @@ public class DefaultPrescriptionsService implements PrescriptionService{
 
         medicationRepository.save(medication);
         catRepository.save(cat);
+    }
+
+    @Override
+    public List<Medication> getMedicationThatCanBePrescribedFor(CatId catId){
+        Cat cat = catRepository.getCatById(catId)
+                .orElseThrow(CatNotFoundException::new);
+
+        return medicationRepository.getMedicationsByAgeAllowance(cat.getAgeInWeeks());
     }
 }

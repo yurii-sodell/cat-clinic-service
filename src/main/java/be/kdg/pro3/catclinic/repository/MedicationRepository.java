@@ -16,4 +16,5 @@ public interface MedicationRepository{
     List<Medication> getMedicationFilteredByPrice(BigDecimal minPrice, BigDecimal maxPrice);
     Optional<Medication> getMedicationIdByName(String name);
     Optional<Medication> getMedicationIdById(MedicationId medicationId);
+    List<Medication> getMedicationsByAgeAllowance(long weeks);
 }
