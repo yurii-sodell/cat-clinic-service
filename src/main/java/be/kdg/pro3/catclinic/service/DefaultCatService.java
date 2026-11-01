@@ -4,8 +4,8 @@ import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.CatOwnerId;
 import be.kdg.pro3.catclinic.domain.Medication;
-import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
-import be.kdg.pro3.catclinic.exceptions.MedicationNotFoundException;
+import be.kdg.pro3.catclinic.service.exceptions.CatNotFoundException;
+import be.kdg.pro3.catclinic.service.exceptions.MedicationNotFoundException;
 import be.kdg.pro3.catclinic.repository.CatRepository;
 import be.kdg.pro3.catclinic.presentation.web.CatEditForm;
 import be.kdg.pro3.catclinic.repository.MedicationRepository;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class DefaultCatService implements CatService{
@@ -68,7 +67,7 @@ public class DefaultCatService implements CatService{
         theCat.setName(catEditForm.getKeptName());
         theCat.setPhoto(catEditForm.getKeptPhoto());
         theCat.setWeightInKilos(catEditForm.getKeptWeightInKilos());
-        catRepository.saveCat(theCat);
+        catRepository.save(theCat);
     }
 
 }

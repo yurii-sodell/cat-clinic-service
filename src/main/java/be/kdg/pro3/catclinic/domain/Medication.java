@@ -35,16 +35,12 @@ public class Medication{
         this.catsThatMedicationWasAssignedTo = new ArrayList<>();
     }
 
-    public void assignCatToMedication(Cat cat){
-        catsThatMedicationWasAssignedTo.add(cat.getCatId());
+    public void prescribeTo(CatId catId){
+        catsThatMedicationWasAssignedTo.add(catId);
     }
 
     public List<CatId> getCatsThatMedicationWasAssignedTo(){
         return Collections.unmodifiableList(catsThatMedicationWasAssignedTo);
-    }
-
-    public void addCatsThatMedicationWasAssignedTo(Cat cat){
-        this.catsThatMedicationWasAssignedTo.add(cat.getCatId());
     }
 
     @Override
