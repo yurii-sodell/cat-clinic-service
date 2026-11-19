@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{components/general-imports :: head-common(#{medications.title})}"/>
+    <th:block th:replace="~{components/general-imports :: head-common(#{medications.title})}" />
 </head>
 <body class="bg-milk d-flex flex-column min-vh-100">
 <header>
@@ -37,7 +37,7 @@
                 <td class="py-3 px-4" th:text="${medication.price}">0</td>
                 <td class="py-3 px-4 text-end">
                     <span class="badge bg-soft-yellow text-indigo-dark fs-6 px-3 py-2 rounded-pill"
-                          th:text="${medication.medicationType}">type</span>
+                          th:text="#{'medicationTypeEnum.' + ${medication.medicationType.displayName}}">type</span>
                 </td>
             </tr>
             </tbody>

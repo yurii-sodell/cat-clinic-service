@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.repository;
+package be.kdg.pro3.catclinic.presistence;
 
 import be.kdg.pro3.catclinic.domain.Cat;
 
@@ -8,7 +8,6 @@ import be.kdg.pro3.catclinic.domain.MedicationId;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 @Repository
 public class InMemoryCatRepository implements CatRepository{
@@ -52,7 +51,7 @@ public class InMemoryCatRepository implements CatRepository{
                 .filter(cat -> maxAge == null || cat.getAge() <= maxAge)
                 .filter(cat -> minWeight == null || cat.getWeightInKilos() >= minWeight)
                 .filter(cat -> maxWeight == null || cat.getWeightInKilos() <= maxWeight)
-                .filter(cat -> catName == null || catName.isEmpty() || cat.getName().toLowerCase().contains(catName.toLowerCase()))
+                .filter(cat -> catName == null || catName.isEmpty() || cat.getName().equalsIgnoreCase(catName))
                 .sorted(Comparator.comparing(Cat::getName, String.CASE_INSENSITIVE_ORDER))
                 .toList();
     }

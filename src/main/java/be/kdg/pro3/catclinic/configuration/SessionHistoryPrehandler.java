@@ -18,7 +18,8 @@ public class SessionHistoryPrehandler implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object Handler){
-        history.addLog(request.getRequestURL().toString());
+        if (request.getMethod().equalsIgnoreCase("GET"))
+            history.addLog(request.getRequestURL().toString());
         return true;
     }
 }

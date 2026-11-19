@@ -1,13 +1,10 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
 import be.kdg.pro3.catclinic.domain.CatId;
-import be.kdg.pro3.catclinic.domain.Medication;
-import be.kdg.pro3.catclinic.domain.MedicationId;
 import be.kdg.pro3.catclinic.presentation.web.PrescriptionCreationRequest;
-import be.kdg.pro3.catclinic.service.DefaultPrescriptionsService;
-import be.kdg.pro3.catclinic.service.PrescriptionService;
-import be.kdg.pro3.catclinic.service.exceptions.CatNotFoundException;
-import be.kdg.pro3.catclinic.service.exceptions.MedicationNotFoundException;
+import be.kdg.pro3.catclinic.application.PrescriptionService;
+import be.kdg.pro3.catclinic.application.exceptions.CatNotFoundException;
+import be.kdg.pro3.catclinic.application.exceptions.MedicationNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

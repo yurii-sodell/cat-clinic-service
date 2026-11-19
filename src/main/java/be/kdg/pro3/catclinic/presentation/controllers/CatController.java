@@ -3,17 +3,18 @@ package be.kdg.pro3.catclinic.presentation.controllers;
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Gender;
-import be.kdg.pro3.catclinic.service.exceptions.CatNotFoundException;
-import be.kdg.pro3.catclinic.service.CatService;
+import be.kdg.pro3.catclinic.application.exceptions.CatNotFoundException;
+import be.kdg.pro3.catclinic.application.CatService;
 import be.kdg.pro3.catclinic.presentation.web.CatEditForm;
 import be.kdg.pro3.catclinic.presentation.web.CatSearchRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -45,13 +46,14 @@ public class CatController{
             BindingResult bindingResult,
             Model model
     ){
-        log.info("Requested cats with searchParameters");
         if(bindingResult.hasErrors()){
             log.error("some request fields were corrupted");
             return "cats";
         }
-        log.info("\n Params: " + request);
 
+        log.info("Requested cats with searchParameters");
+
+        log.info("Params: " + request);
         List<Cat> cats = catService.getCatBySearchRequest(
                 request.getCatName(),
                 request.getMinAge(),
@@ -81,7 +83,7 @@ public class CatController{
             cat = catService.getCatById(catId);
         }catch (CatNotFoundException e) {
             log.error("Editing page: " + e.getMessage());
-            return "redirect:/error";
+            return "/error";
         }
 
         model.addAttribute("catEditForm",
@@ -112,12 +114,12 @@ public class CatController{
 
         try{
             catService.updateCat(catId, catEditForm);
-            redirectAttributes.addFlashAttribute("successMessage", "Cat updated.");
-            log.info("Cat successfully updated");
-            return "redirect:/cats/edit/" + catId;
         }catch (CatNotFoundException | IllegalArgumentException e) {
             log.error("Error occurred while editing cat" + e.getMessage());
-            return "redirect:/error";
+            return "/error";
         }
+
+        log.info("Editing was done");
+        return "cat-editing-page";
     }
 }

@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.presentation.web;
+package be.kdg.pro3.catclinic.application.dto;
 
 import be.kdg.pro3.catclinic.domain.Medication;
 

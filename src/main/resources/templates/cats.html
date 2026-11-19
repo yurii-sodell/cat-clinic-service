@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}"/>
+    <th:block th:replace="~{components/general-imports :: head-common(#{cat-owner-registration-form.title})}" />
 </head>
 <body class="bg-milk d-flex flex-column min-vh-100">
 <header>
@@ -11,57 +11,49 @@
 <main class="container flex-grow-1 py-5">
     <h1 th:text="#{cats.heading}" class="display-6 fw-bold text-indigo-dark mb-4">Registered cats</h1>
 
-    <form th:action="@{/cats}" th:object="${catSearchRequest}" th:method="get">
-        <div class="card border-0 shadow rounded-4 mb-4">
+    <form th:action="@{/cats}" th:object="${catSearchRequest}" th:method="get" id="search-bar"
+          class="card border-0 shadow rounded-4 mb-4">
         <div class="card-body p-4">
             <div class="row g-3">
                 <div class="col-12">
                     <label for="cat-search-name" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.searchname}">Cats name</label>
-                    <input id="cat-search-name" name="name" type="search" class="form-control"
-                           th:field="*{catName}"/>
+                    <input id="cat-search-name" name="name" type="search" class="form-control"/>
                 </div>
 
                 <div class="col-6 col-md-3">
                     <label for="cat-search-min-age" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.minage}">Min age</label>
                     <input id="cat-search-min-age" name="minAge" type="number" min="0" max="99"
-                           class="form-control" th:field="*{minAge}"/>
+                           class="form-control"/>
                 </div>
 
                 <div class="col-6 col-md-3">
                     <label for="cat-search-max-age" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.maxage}">Max age</label>
                     <input id="cat-search-max-age" name="maxAge" type="number" min="0" max="99"
-                           class="form-control" th:field="*{maxAge}"/>
+                           class="form-control"/>
                 </div>
 
                 <div class="col-6 col-md-3">
                     <label for="cat-search-min-weight" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.minweight}">Min weight</label>
                     <input id="cat-search-min-weight" name="minWeight" type="number" min="0" max="99"
-                           class="form-control" th:field="*{minWeight}"/>
+                           class="form-control"/>
                 </div>
 
                 <div class="col-6 col-md-3">
                     <label for="cat-search-max-weight" class="form-label fw-bold text-indigo-dark"
                            th:text="#{cats.maxweight}">Max weight</label>
                     <input id="cat-search-max-weight" name="maxWeight" type="number" min="0" max="99"
-                           class="form-control" th:field="*{maxWeight}"/>
+                           class="form-control"/>
                 </div>
 
                 <div class="col-12 text-end">
                     <button type="submit" class="btn bg-indigo text-neutral fw-bold px-5 rounded-3"
-                            th:text="#{cats.submit}">Send
-                    </button>
+                            th:text="#{cats.submit}">Send</button>
                 </div>
             </div>
-        </div>
-        </div>
-        <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger rounded-3" role="alert">
-            <ul class="mb-0">
-                <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
-            </ul>
         </div>
     </form>
 
@@ -100,7 +92,6 @@
             </div>
         </div>
     </div>
-
 </main>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.repository;
+package be.kdg.pro3.catclinic.presistence;
 
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatId;

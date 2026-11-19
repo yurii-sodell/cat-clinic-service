@@ -1,7 +1,7 @@
 package be.kdg.pro3.catclinic.presentation.console;
 
 import be.kdg.pro3.catclinic.domain.*;
-import be.kdg.pro3.catclinic.service.*;
+import be.kdg.pro3.catclinic.application.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;

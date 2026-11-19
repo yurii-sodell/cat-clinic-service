@@ -1,6 +1,5 @@
 package be.kdg.pro3.catclinic.configuration.converter;
 
-import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.MedicationId;
 import org.springframework.core.convert.converter.Converter;
 
