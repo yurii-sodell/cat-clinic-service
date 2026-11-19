@@ -60,7 +60,8 @@
                                 <div th:each="gender : ${genders}" class="form-check">
                                     <input type="radio" th:value="${gender}" th:field="*{keptGender}"
                                            class="form-check-input" required>
-                                    <label th:for="${#ids.prev('keptGender')}" th:text="${gender}"
+                                    <label th:for="${#ids.prev('keptGender')}"
+                                           th:text="#{'genderEnum.' + ${gender.genderName}}"
                                            class="form-check-label fw-bold text-indigo-dark"></label>
                                 </div>
                             </div>

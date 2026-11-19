@@ -60,7 +60,7 @@
                         <select id="medication-form-type" th:field="*{medicationType}" class="form-select">
                             <option th:each="type : ${medicationTypes}"
                                     th:value="${type}"
-                                    th:text="${type.getDisplayName()}"></option>
+                                    th:text="#{'medicationTypeEnum.' + ${type.displayName}}"></option>
                         </select>
                     </div>
 

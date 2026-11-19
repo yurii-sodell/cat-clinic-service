@@ -43,7 +43,7 @@
                 <td class="py-3 px-4" th:text="${pair.getKey().weeksAfterBirthToStartMedication}">0</td>
                 <td class="py-3 px-4 text-end">
                     <span class="badge bg-soft-yellow text-indigo-dark fs-6 px-3 py-2 rounded-pill"
-                          th:text="${pair.getKey().medicationType}">type</span>
+                          th:text="#{'medicationTypeEnum.' + ${pair.getKey().medicationType.displayName}}">type</span>
                 </td>
             </tr>
             </tbody>
