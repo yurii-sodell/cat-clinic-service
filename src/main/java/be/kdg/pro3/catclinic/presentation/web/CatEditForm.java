@@ -14,7 +14,6 @@ public class CatEditForm{
 
     @NotBlank(message = "Name cannot contains only blanks")
     @NotNull(message = "Name cannot be empty")
-    @Size(max = 100, message = "Cat name cannot be longer than 100 characters")
     private String keptName;
 
     @NotNull(message = "Date cannot be empty")

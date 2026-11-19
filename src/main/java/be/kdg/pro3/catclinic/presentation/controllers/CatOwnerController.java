@@ -8,6 +8,8 @@ import be.kdg.pro3.catclinic.presentation.web.CatOwnerRegistrationForm;
 import be.kdg.pro3.catclinic.application.CatService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
