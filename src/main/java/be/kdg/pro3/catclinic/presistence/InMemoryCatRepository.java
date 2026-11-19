@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.repository;
+package be.kdg.pro3.catclinic.presistence;
 
 import be.kdg.pro3.catclinic.domain.Cat;
 
@@ -8,7 +8,6 @@ import be.kdg.pro3.catclinic.domain.MedicationId;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 @Repository
 public class InMemoryCatRepository implements CatRepository{

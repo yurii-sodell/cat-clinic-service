@@ -1,9 +1,9 @@
 package be.kdg.pro3.catclinic.configuration;
 
 import be.kdg.pro3.catclinic.domain.*;
-import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
-import be.kdg.pro3.catclinic.repository.CatRepository;
-import be.kdg.pro3.catclinic.repository.MedicationRepository;
+import be.kdg.pro3.catclinic.presistence.CatOwnerRepository;
+import be.kdg.pro3.catclinic.presistence.CatRepository;
+import be.kdg.pro3.catclinic.presistence.MedicationRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;

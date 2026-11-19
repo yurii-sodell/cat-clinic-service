@@ -62,8 +62,7 @@
                             language
                         </th>
                         <td class="py-3 px-4">
-                        <span class="badge bg-soft-yellow text-indigo-dark fs-6 px-3 py-2 rounded-pill"
-                              th:text="*{preferredCommunicationLanguage.getLanguageName()}">Language</span>
+                            <span th:text="#{'owner-page.' + ${ownerOnPage.preferredCommunicationLanguage.languageName}}"></span>
                         </td>
                     </tr>
                     </tbody>

@@ -2,7 +2,6 @@ package be.kdg.pro3.catclinic.domain;
 
 import lombok.Getter;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;

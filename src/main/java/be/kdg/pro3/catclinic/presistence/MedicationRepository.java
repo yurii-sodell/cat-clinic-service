@@ -1,6 +1,5 @@
-package be.kdg.pro3.catclinic.repository;
+package be.kdg.pro3.catclinic.presistence;
 
-import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Medication;
 import be.kdg.pro3.catclinic.domain.MedicationId;
 

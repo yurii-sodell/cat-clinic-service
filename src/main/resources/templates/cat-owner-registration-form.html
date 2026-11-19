@@ -67,7 +67,7 @@
                                 class="form-select">
                             <option th:each="language : ${preferredCommunicationLanguages}"
                                     th:value="${language.name()}"
-                                    th:text="${language.getLanguageName()}">Language
+                                    th:text="#{'cat-owner-registration-form.' + ${language.languageName}}">Language
                             </option>
                         </select>
                     </div>

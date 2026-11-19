@@ -1,14 +1,14 @@
-package be.kdg.pro3.catclinic.service;
+package be.kdg.pro3.catclinic.application;
 
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Medication;
 import be.kdg.pro3.catclinic.domain.MedicationId;
-import be.kdg.pro3.catclinic.presentation.web.PrescriptionResponseEntity;
-import be.kdg.pro3.catclinic.repository.CatRepository;
-import be.kdg.pro3.catclinic.repository.MedicationRepository;
-import be.kdg.pro3.catclinic.service.exceptions.CatNotFoundException;
-import be.kdg.pro3.catclinic.service.exceptions.MedicationNotFoundException;
+import be.kdg.pro3.catclinic.application.dto.PrescriptionResponseEntity;
+import be.kdg.pro3.catclinic.presistence.CatRepository;
+import be.kdg.pro3.catclinic.presistence.MedicationRepository;
+import be.kdg.pro3.catclinic.application.exceptions.CatNotFoundException;
+import be.kdg.pro3.catclinic.application.exceptions.MedicationNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

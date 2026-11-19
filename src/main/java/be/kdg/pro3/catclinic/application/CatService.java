@@ -1,13 +1,11 @@
-package be.kdg.pro3.catclinic.service;
+package be.kdg.pro3.catclinic.application;
 
 import be.kdg.pro3.catclinic.domain.Cat;
 import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.CatOwnerId;
-import be.kdg.pro3.catclinic.domain.MedicationId;
 import be.kdg.pro3.catclinic.presentation.web.CatEditForm;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface CatService{
     List<Cat> getAllCats();

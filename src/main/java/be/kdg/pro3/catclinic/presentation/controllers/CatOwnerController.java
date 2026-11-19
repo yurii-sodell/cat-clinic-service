@@ -2,10 +2,10 @@ package be.kdg.pro3.catclinic.presentation.controllers;
 
 import be.kdg.pro3.catclinic.domain.CatOwnerId;
 import be.kdg.pro3.catclinic.domain.PreferredCommunicationLanguage;
-import be.kdg.pro3.catclinic.service.exceptions.OwnerNotFoundException;
-import be.kdg.pro3.catclinic.service.CatOwnerService;
+import be.kdg.pro3.catclinic.application.exceptions.OwnerNotFoundException;
+import be.kdg.pro3.catclinic.application.CatOwnerService;
 import be.kdg.pro3.catclinic.presentation.web.CatOwnerRegistrationForm;
-import be.kdg.pro3.catclinic.service.CatService;
+import be.kdg.pro3.catclinic.application.CatService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

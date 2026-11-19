@@ -1,4 +1,4 @@
-package be.kdg.pro3.catclinic.service.exceptions;
+package be.kdg.pro3.catclinic.application.exceptions;
 
 public class CatNotFoundException extends RuntimeException{
     public CatNotFoundException(){

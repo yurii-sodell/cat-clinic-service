@@ -1,9 +1,9 @@
-package be.kdg.pro3.catclinic.service;
+package be.kdg.pro3.catclinic.application;
 
 import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Medication;
 import be.kdg.pro3.catclinic.domain.MedicationId;
-import be.kdg.pro3.catclinic.presentation.web.PrescriptionResponseEntity;
+import be.kdg.pro3.catclinic.application.dto.PrescriptionResponseEntity;
 
 import java.util.List;
 

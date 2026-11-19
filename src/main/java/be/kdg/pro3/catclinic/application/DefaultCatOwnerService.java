@@ -1,10 +1,10 @@
-package be.kdg.pro3.catclinic.service;
+package be.kdg.pro3.catclinic.application;
 
 import be.kdg.pro3.catclinic.domain.*;
-import be.kdg.pro3.catclinic.service.exceptions.CatNotFoundException;
-import be.kdg.pro3.catclinic.service.exceptions.OwnerNotFoundException;
-import be.kdg.pro3.catclinic.repository.CatOwnerRepository;
-import be.kdg.pro3.catclinic.repository.CatRepository;
+import be.kdg.pro3.catclinic.application.exceptions.CatNotFoundException;
+import be.kdg.pro3.catclinic.application.exceptions.OwnerNotFoundException;
+import be.kdg.pro3.catclinic.presistence.CatOwnerRepository;
+import be.kdg.pro3.catclinic.presistence.CatRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
