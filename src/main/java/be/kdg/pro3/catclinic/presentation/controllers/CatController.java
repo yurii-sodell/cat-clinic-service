@@ -1,11 +1,12 @@
 package be.kdg.pro3.catclinic.presentation.controllers;
 
 import be.kdg.pro3.catclinic.domain.Cat;
+import be.kdg.pro3.catclinic.domain.CatId;
 import be.kdg.pro3.catclinic.domain.Gender;
-import be.kdg.pro3.catclinic.exceptions.CatNotFoundException;
-import be.kdg.pro3.catclinic.service.CatService;
-import be.kdg.pro3.catclinic.web.CatEditForm;
-import be.kdg.pro3.catclinic.web.CatSearchRequest;
+import be.kdg.pro3.catclinic.application.exceptions.CatNotFoundException;
+import be.kdg.pro3.catclinic.application.CatService;
+import be.kdg.pro3.catclinic.presentation.web.CatEditForm;
+import be.kdg.pro3.catclinic.presentation.web.CatSearchRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/cats")
@@ -41,18 +41,17 @@ public class CatController{
 
     @GetMapping
     public String getCats(
-            @ModelAttribute("catSearchRequest") CatSearchRequest request,
+            @Valid  @ModelAttribute("catSearchRequest") CatSearchRequest request,
             BindingResult bindingResult,
             Model model
     ){
+        log.info("Requested cats with searchParameters");
         if(bindingResult.hasErrors()){
             log.error("some request fields were corrupted");
             return "cats";
         }
+        log.info("\n Params: " + request);
 
-        log.info("Requested cats with searchParameters");
-
-        log.info("Params: " + request);
         List<Cat> cats = catService.getCatBySearchRequest(
                 request.getCatName(),
                 request.getMinAge(),
@@ -73,7 +72,7 @@ public class CatController{
 
     @GetMapping("/edit/{catId}")
     public String editCat(
-            @PathVariable UUID catId,
+            @PathVariable CatId catId,
             Model model
     ){
         log.info("Get editing form page for ID: + {} \n", catId);
@@ -98,7 +97,7 @@ public class CatController{
     }
 
     @PostMapping("/edit/{catId}")
-    public String editCat(@PathVariable UUID catId,
+    public String editCat(@PathVariable CatId catId,
                           @Valid @ModelAttribute("catEditForm") CatEditForm catEditForm,
                           BindingResult bindingResult,
                           Model model,

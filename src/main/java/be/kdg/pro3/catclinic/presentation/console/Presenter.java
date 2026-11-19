@@ -1,10 +1,9 @@
 package be.kdg.pro3.catclinic.presentation.console;
 
 import be.kdg.pro3.catclinic.domain.*;
-import be.kdg.pro3.catclinic.service.*;
+import be.kdg.pro3.catclinic.application.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -13,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Component
 @ConditionalOnProperty(name="control.cons", havingValue="true")
@@ -173,12 +171,14 @@ public class Presenter implements CommandLineRunner{
             return;
         }
 
-        Consumer<CatOwner> printOwnerWithCats = owner -> {
-            view.show(owner);
-            view.show("Cat list:\n");
-            owner.getCats().forEach(cat -> view.show(cat.getName() + " | Photo: " + cat.getPhoto() + "\n"));
-        };
-        filtered.forEach(printOwnerWithCats);
+        catOwnerService.getCatOwnerByCatsName(catName).forEach(
+                owner -> {
+                    view.show(owner);
+                    view.show("Cat list:\n");
+                    owner.getCats().stream().map(catService::getCatById
+                    ).forEach(cat -> view.show(cat.getName() + " | " + cat.getGender()));
+                }
+        );
     }
 
     private void filterOwnersByRegistrationDate(){

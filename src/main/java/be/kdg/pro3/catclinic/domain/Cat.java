@@ -1,50 +1,47 @@
 package be.kdg.pro3.catclinic.domain;
 
+import lombok.Getter;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 public class Cat{
-    private String name;
-    private LocalDate dateOfBirth;
-    private Gender gender;
-    private UUID catId;
-    private Double weightInKilos;
-    private int visits;
-    private boolean isHospitalized;
-    private String photo;
-    private String BelongingOwnerId;
-    private List<Medication> medicationsThatWasAssignedToCat;
+    @Getter private String name;
+    @Getter private LocalDate dateOfBirth;
+    @Getter private Gender gender;
+    @Getter private CatId catId;
+    @Getter private double weightInKilos;
+    @Getter private int visits;
+    @Getter private boolean isHospitalized;
+    @Getter private String photo;
+    @Getter private CatOwnerId BelongingOwnerId;
+    private List<MedicationId> medicationsThatWasAssignedToCat;
 
-    public Cat(String name, LocalDate dateOfBirth, Gender gender, UUID catId,
-               Double weightInKilos, int visits, boolean isHospitalized,
-               String photo, String BelongingOwnerId){
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
+    public Cat(String name, LocalDate dateOfBirth, Gender gender, CatId catId,
+               double weightInKilos, int visits, boolean isHospitalized,
+               String photo, CatOwnerId belongingOwnerId){
+        if(catId == null) throw new IllegalArgumentException("Cat id cannot be null");
+        if(belongingOwnerId == null) throw new IllegalArgumentException("Cat owners ids cannot be null");
+        if(visits < 0) throw new IllegalArgumentException("Visits cannot be less then null");
         this.catId = catId;
-        this.weightInKilos = weightInKilos;
         this.visits = visits;
         this.isHospitalized = isHospitalized;
-        this.photo = photo;
-        this.BelongingOwnerId = BelongingOwnerId;
+        this.BelongingOwnerId = belongingOwnerId;
+
+        setName(name);
+        setDateOfBirth(dateOfBirth);
+        setGender(gender);
+        setWeightInKilos(weightInKilos);
+        setPhoto(photo);
         this.medicationsThatWasAssignedToCat = new ArrayList<>();
     }
 
-    public String getBelongingOwnerId(){
-        return BelongingOwnerId;
-    }
 
-    public UUID getCatId(){
-        return catId;
-    }
-
-    public LocalDate getDateOfBirth(){
-        return dateOfBirth;
-    }
 
     public void setDateOfBirth(LocalDate dateOfBirth){
         if(dateOfBirth.isAfter(LocalDate.now()))
@@ -52,59 +49,42 @@ public class Cat{
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Gender getGender(){
-        return gender;
-    }
-
     public void setGender(Gender gender){
         if(gender == null) throw new IllegalArgumentException("Gender is not provided");
         this.gender = gender;
     }
 
-    public boolean isHospitalized(){
-        return isHospitalized;
-    }
 
-    public String getName(){
-        return name;
-    }
 
     public void setName(String name){
         if(name == null || name.isEmpty()) throw new IllegalArgumentException("name cannot be empty");
         this.name = name;
     }
 
-    public String getPhoto(){
-        return photo;
-    }
-
     public void setPhoto(String photo){
+        if(photo == null) photo = "";
         this.photo = photo;
     }
 
-    public Double getWeightInKilos(){
-        return weightInKilos;
-    }
-
-    public void setWeightInKilos(Double weightInKilos) throws IllegalArgumentException{
+    public void setWeightInKilos(double weightInKilos) throws IllegalArgumentException{
         if(weightInKilos < 0) throw new IllegalArgumentException("Weight cannot be less then 0");
         this.weightInKilos = weightInKilos;
     }
 
-    public int getVisits(){
-        return visits;
+    public void prescribe(MedicationId medicationId ){
+        this.medicationsThatWasAssignedToCat.add(medicationId);
     }
 
-    public List<Medication> getMedicationsThatWasAssignedToCat(){
-        return medicationsThatWasAssignedToCat;
+    public long getAge() {
+        return ChronoUnit.YEARS.between(this.dateOfBirth, LocalDate.now());
     }
 
-    public void addMedicationsThatWasAssignedToCat(Medication medication){
-        this.medicationsThatWasAssignedToCat.add(medication);
+    public long getAgeInWeeks() {
+        return ChronoUnit.WEEKS.between(this.dateOfBirth, LocalDate.now());
     }
 
-    public int getAge(){
-        return LocalDate.now().getYear() - this.dateOfBirth.getYear();
+    public List<MedicationId> getMedicationsThatWasAssignedToCat(){
+        return Collections.unmodifiableList(medicationsThatWasAssignedToCat);
     }
 
     @Override
@@ -124,7 +104,7 @@ public class Cat{
         DateTimeFormatter birthdayFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return String.format(
-                "\n%-20s | %-7s | %-12s | %-8.2f | %-6d | %-13s | %-20s | %-15s",
+                "%n%-20s | %-7s | %-12s | %-8.2f | %-6d | %-13s | %-20s | %-15s",
                 this.name,
                 this.gender.toString(),
                 birthdayFormat.format(this.dateOfBirth),
